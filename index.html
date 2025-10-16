@@ -444,15 +444,16 @@
 
 
     <!-- SEO a social meta tagy -->
-<meta name="description" content="Smart Digital – moderní marketingová agentura zaměřená na automotive, SEO, sociální sítě a online reklamu. Zvýšíme viditelnost vašeho autoservisu nebo dealera.">
-<meta name="keywords" content="marketing, online marketing, SEO, sociální sítě, reklama, automotive, Smart Digital, web design, kampaně">
-<meta name="author" content="Smart Digital">
-<meta name="robots" content="index, follow">
+    <meta name="description" content="Smart Digital – moderní marketingová agentura zaměřená na automotive, SEO, sociální sítě a online reklamu. Zvýšíme viditelnost vašeho autoservisu nebo dealera.">
+    <meta name="keywords" content="marketing, online marketing, SEO, sociální sítě, reklama, automotive, Smart Digital, web design, kampaně">
+    <meta name="author" content="Smart Digital">
+    <meta name="robots" content="index, follow">
 
 <!-- Open Graph pro Facebook, LinkedIn atd. -->
-<meta property="og:title" content="Marketingová digitální agentura Praha ">
-<meta property="og:description" content="Marketingová digitální agentura Praha | #SmartDigital | Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky, na kterých záleží.">
-<meta property="og:url" content="https://www.smartdigital.cz/">
+<meta property="og:title" content="Smart Digital – Online marketing pro firmy v automotive byznysu">
+<meta property="og:description" content="Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky, na kterých záleží.">
+<meta property="og:image" content="https://tvoje-domena.cz/og-image.png">
+<meta property="og:url" content="https://tvoje-domena.cz/">
 <meta property="og:type" content="website">
 
 <!-- Twitter Card -->
@@ -548,37 +549,7 @@ function enableAnalytics() {
     <!-- Hero Section -->
     <section class="relative min-h-screen overflow-hidden">
         <div class="absolute inset-0 gradient-hero"></div>
-        <!-- COOKIE BANNER -->
-   <div id="cookie-banner"
-    class="fixed bottom-[10px] right-[10px] w-[90%] sm:w-[300px] 
-           text-white rounded-2xl border border-white/20 
-           backdrop-blur-md bg-black/40 shadow-[0_0_25px_rgba(0,255,174,0.15)]
-           p-4 sm:p-6 z-[9999] opacity-100 translate-y-0 transition-all duration-700 ease-out">
-
-    <h3 class="text-lg sm:text-xl font-semibold mb-3 text-[#ffffff]">
-        Cookies & ochrana soukromí
-    </h3>
-
-    <p class="text-sm sm:text-base text-white/80 leading-relaxed mb-6">
-        Na našem webu používáme cookies, abychom zlepšili vaše uživatelské prostředí a analyzovali provoz.
-        <a href="cookies.html" class="text-[#C7F715] hover:underline">Více informací</a>.
-    </p>
-
-    <div class="flex flex-col sm:flex-row justify-end gap-3">
-        <button id="decline-cookies"
-            class="border border-[#C7F715]/70 text-[#C7F715] px-4 py-2 rounded-lg font-semibold text-sm 
-                   hover:bg-[#C7F715] hover:text-black transition-all duration-300">
-            Odmítnout
-        </button>
-
-        <button id="accept-cookies"
-            class="bg-[#C7F715] text-black font-semibold px-4 py-2 rounded-lg text-sm 
-                   hover:shadow-[0_0_20px_#00ffae] transition-all duration-300">
-            Souhlasím
-        </button>
-    </div>
-</div>
-
+       
 
 
 
@@ -1092,54 +1063,6 @@ function enableAnalytics() {
 const acceptBtn = document.getElementById("accept-cookies");
 const declineBtn = document.getElementById("decline-cookies");
 
-// Funkce pro skrytí banneru s animací
-function hideBanner() {
-    banner.classList.add("opacity-0", "translate-y-6");
-    setTimeout(() => {
-        banner.style.display = "none";
-    }, 700); // shodné s Tailwind transition duration
-}
-
-// Zobrazit banner jen pokud uživatel ještě nedal souhlas
-window.addEventListener("load", () => {
-    if (!localStorage.getItem("cookieConsent")) {
-        banner.classList.remove("opacity-0", "translate-y-6");
-        banner.classList.add("opacity-100", "translate-y-0");
-    } else {
-        banner.style.display = "none"; // pokud už souhlas je
-    }
-});
-
-// Kliknutí na Souhlasím
-acceptBtn.onclick = () => {
-    localStorage.setItem("cookieConsent", "accepted");
-    hideBanner();
-};
-
-// Kliknutí na Odmítnout
-declineBtn.onclick = () => {
-    localStorage.setItem("cookieConsent", "declined");
-    hideBanner();
-};
-
-(function(){
-    try {
-      var consent = localStorage.getItem('cookieConsent');
-      if (consent) {
-        // Pokud souhlas už existuje -> okamžitě skryjeme banner pomocí vloženého CSS
-        var style = document.createElement('style');
-        style.innerHTML = '#cookie-banner{display:none !important; opacity:0 !important; transform:translateY(1rem) !important;}';
-        document.head.appendChild(style);
-      }
-    } catch (e) {
-      // ignore (např. pokud localStorage není dostupné)
-    }
-  })();
-
-
-    declineBtn.onclick = () => {
-        console.log("Kliknuto na Odmítnout (zatím bez akce)");
-    };
         // Scroll Reveal on Scroll
         const observerOptions = {
             threshold: 0.1,
