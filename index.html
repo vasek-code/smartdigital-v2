@@ -3,14 +3,14 @@
 
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QN0WT540QY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-QN0WT540QY');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QN0WT540QY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QN0WT540QY');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Digital – Online marketing pro firmy v automotive byznysu</title>
@@ -35,81 +35,259 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: #f9f9f9;
+            background: #0a0a0a;
             color: #111;
+            overflow-x: hidden;
         }
 
-        /* Gradient Animation */
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+        }
+
+        .bg-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 600px;
+            height: 600px;
+            background: #8a0000;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: #6c05bc;
+            top: 60%;
+            right: 10%;
+            animation-delay: -7s;
+        }
+
+        .shape-3 {
+            width: 400px;
+            height: 400px;
+            background: #056dbc;
+            bottom: 10%;
+            left: 30%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(50px, -80px) scale(1.1);
+            }
+            66% {
+                transform: translate(-50px, 80px) scale(0.9);
+            }
+        }
+
+        /* Gradient Animation for Hero */
         .gradient-hero {
             background: linear-gradient(30deg, #8a0000, #6c05bc, #056dbc);
-            background-size: 200% 200%;
-            animation: gradient-shift 5s ease infinite;
+            background-size: 300% 300%;
+            animation: gradient-shift 8s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(199, 247, 21, 0.1), transparent 60%);
+            animation: pulse-glow 4s ease-in-out infinite;
         }
 
         @keyframes gradient-shift {
-
-            0%,
-            100% {
+            0%, 100% {
                 background-position: 0% 50%;
             }
-
             50% {
                 background-position: 100% 50%;
             }
         }
 
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Glass Morphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(199, 247, 21, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.98);
+            border-color: rgba(199, 247, 21, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.1),
+                0 0 60px rgba(199, 247, 21, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* Scroll Reveal Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Neon Glow */
+        .neon-glow {
+            box-shadow: 
+                0 0 20px rgba(199, 247, 21, 0.5),
+                0 0 40px rgba(199, 247, 21, 0.3),
+                inset 0 0 10px rgba(199, 247, 21, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-glow::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s ease;
+        }
+
+        .neon-glow:hover::before {
+            transform: scale(1);
+        }
+
+        .neon-glow:hover {
+            box-shadow: 
+                0 0 40px rgba(199, 247, 21, 0.8),
+                0 0 80px rgba(199, 247, 21, 0.5),
+                0 0 120px rgba(199, 247, 21, 0.3),
+                inset 0 0 20px rgba(199, 247, 21, 0.3);
+            transform: scale(1.05) translateY(-2px);
+        }
+
+        /* Animated Icons */
+        .icon-animate {
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .glass-card:hover .icon-animate {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 0 20px rgba(199, 247, 21, 0.6));
+        }
+
+        /* Enhanced Service Arrow */
+        .service-arrow {
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover .service-arrow {
+            gap: 1rem;
+            transform: translateX(8px);
+        }
+
+        .service-card:hover .service-arrow svg {
+            animation: arrow-bounce 0.6s ease infinite;
+        }
+
+        @keyframes arrow-bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        /* Glowing Border Animation */
+        @keyframes border-glow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 20px rgba(199, 247, 21, 0.3),
+                    inset 0 0 20px rgba(199, 247, 21, 0.1);
+            }
+            50% {
+                box-shadow: 
+                    0 0 40px rgba(199, 247, 21, 0.6),
+                    inset 0 0 30px rgba(199, 247, 21, 0.2);
+            }
+        }
+
+        .glass-card:hover {
+            animation: border-glow 2s ease-in-out infinite;
+        }
+
         /* Fade Up Animation */
         .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fade-up 0.6s ease-out forwards;
+            animation: fade-up 1s ease-out forwards;
         }
 
         @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Neon Glow Effect */
-        .neon-glow {
-            box-shadow: 0 0 20px rgba(199, 247, 21, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .neon-glow:hover {
-            box-shadow: 0 0 50px rgba(199, 247, 21, 0.6);
-            transform: scale(1.05);
-        }
-
-        /* Card Hover Effect */
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 20px rgba(199, 247, 21, 0.4);
-        }
-
-        /* Scroll to Top Button */
-        .scroll-top {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* FAQ Accordion */
+        /* FAQ Accordion Enhanced */
         .faq-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .faq-content.active {
@@ -117,14 +295,45 @@
         }
 
         .faq-icon {
-            transition: transform 0.3s;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         .faq-icon.rotated {
             transform: rotate(180deg);
         }
 
-        /* Primary Color */
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 0 30px rgba(199, 247, 21, 0.2);
+        }
+
+        /* Scroll to Top Enhanced */
+        .scroll-top {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform: scale(0.8);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .scroll-top:hover {
+            animation: bounce-top 0.6s ease infinite;
+        }
+
+        @keyframes bounce-top {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.1); }
+        }
+
+        /* Primary Colors */
         .bg-primary {
             background-color: #C7F715;
         }
@@ -137,25 +346,105 @@
             border-color: #C7F715;
         }
 
-        /* Highlighted Package */
-        .package-highlight {
-            transform: scale(1.05);
-        }
-
         /* Smooth Scroll */
         html {
             scroll-behavior: smooth;
+        }
+
+        /* Parallax Effect */
+        .parallax {
+            transform: translateZ(0);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Image Hover Glow */
+        .image-glow {
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .image-glow::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(199, 247, 21, 0.3), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .image-glow:hover::after {
+            opacity: 1;
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Mouse Scroll Indicator */
+        .scroll-indicator {
+            animation: scroll-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-bounce {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(10px);
+                opacity: 0.5;
+            }
+        }
+
+        /* Input Focus Glow */
+        input:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 20px rgba(199, 247, 21, 0.3);
+            border-color: #C7F715 !important;
+        }
+
+        /* Testimonial Quote Glow */
+        .quote-glow {
+            text-shadow: 0 0 20px rgba(199, 247, 21, 0.3);
+            transition: text-shadow 0.3s ease;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: rgba(249, 249, 249, 0.98);
+            position: relative;
         }
     </style>
 </head>
 
 <body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="relative min-h-screen overflow-hidden">
         <div class="absolute inset-0 gradient-hero"></div>
 
-        <!-- Hlavní obsah v levém dolním rohu -->
         <div class="absolute bottom-20 left-0 p-8 md:p-20 text-left max-w-6xl">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 fade-up">
                 Nastartujeme váš byznys na plné otáčky
@@ -176,26 +465,24 @@
             </button>
         </div>
 
-        <!-- Animovaný scroll down indikátor zůstává uprostřed spodní části -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator">
             <div class="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-                <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                <div class="w-1.5 h-1.5 bg-white rounded-full pulse-animation"></div>
             </div>
         </div>
     </section>
 
-
     <!-- Problem Solution Section -->
-    <section class="py-24 bg-gray-100">
+    <section class="py-24 content-section">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 scroll-reveal">
                 Jak posuneme váš byznys dál?
             </h2>
 
             <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- Card 1 -->
-                <div class="p-8 card-hover bg-white rounded-xl border-2 border-gray-200">
-                    <svg class="w-12 h-12 text-primary mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.1s">
+                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"></path>
                     </svg>
@@ -215,8 +502,8 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="p-8 card-hover bg-white rounded-xl border-2 border-gray-200">
-                    <svg class="w-12 h-12 text-primary mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.2s">
+                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
@@ -230,14 +517,14 @@
                         <div class="border-l-4 border-primary pl-4">
                             <p class="text-sm text-gray-500 font-medium mb-1">ŘEŠENÍ</p>
                             <h3 class="text-sm text-gray-400 font-regular">Postaráme se o jasný a jednoduchý přístup k
-                                vašim zákazníkům </h3>
+                                vašim zákazníkům</h3>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="p-8 card-hover bg-white rounded-xl border-2 border-gray-200">
-                    <svg class="w-12 h-12 text-primary mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.3s">
+                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                     </svg>
@@ -259,289 +546,112 @@
         </div>
     </section>
 
-        <!-- Service Packages Section -->
-    <section class="py-24 bg-white">
+    <!-- Services Section -->
+    <section class="py-24 content-section">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
-                Naše balíčky
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 scroll-reveal">
+                Naše služby
             </h2>
-            <p class="text-center text-gray-600 mb-16 text-lg">
-                Služby, co rozjedou váš byznys na plný plyn.
+            <p class="text-center text-gray-600 mb-16 text-lg scroll-reveal">
+                Komplexní řešení pro váš digitální marketing.
             </p>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-8xl mx-auto">
-                <!-- Launch Package -->
-                <div class="p-8 relative card-hover border-2 border-gray-200 bg-white rounded-xl">
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl font-bold mb-2">Launch🚀</h3>
-                        <!-- Nová vysvětlující sekce -->
-                        <p class="text-sm text-gray-600 max-w-md mx-auto">
-                            Chci, aby mě lidi snadno našli a bez překážek se objednali.
-                        </p>
-                    </div>
-
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Google business profile (optimalizace viditelnosti na google)</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Landing page (webové stránky na míru pro konverzi poptávky)</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Základní SEO optimalizace (struktura, rychlost)</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                        </li>
-                    </ul>
-
-                    <button onclick="scrollToContact()"
-                        class="w-full bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-lg font-semibold transition-colors cursor-pointer">
-                        Vybrat balíček
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Service 1: Web development -->
+                <div class="service-card p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.1s">
+                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-4">Web development</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Tvoříme moderní weby, které nejen dobře vypadají, ale hlavně fungují. Od návrhu designu až po samotné kódování a ladění detailů — postaráme se, aby váš web byl přehledný, rychlý a připravený růst s vaším byznysem.
+                    </p>
+                    <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center service-arrow gap-2">
+                        Zjistit více
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
                     </button>
                 </div>
 
-
-                <!-- Growth Package (Highlighted) -->
-                <div class="p-8 relative card-hover border-4 border-primary bg-white rounded-xl package-highlight">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <div
-                            class="bg-primary text-black px-4 py-1 rounded-full text-sm font-bold flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                </path>
-                            </svg>
-                            Nejoblíbenější
-                        </div>
-                    </div>
-
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl font-bold mb-2">Turbo📈</h3>
-                        <div class="text-center mb-6">
-                        <p class="text-sm text-gray-600 max-w-md mx-auto">
-                            Chci pravidelně získávat nové zákazníky a posunout svůj marketing na vyšší level.
-                        </p>
-                    </div>
-                    </div>
-
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Správa sociální sítě + integrace s webem (zaměření na
-                                generování poptávky)</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">15 příspěvků měsíčně (včetně krátkých videí/Reels/TikTok)</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Grafika + video obsah pro kampaně a web</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Správa reklamních kampaní (Facebook Ads, TikTok Ads, Google Ads) –
-                                strategie, tvorba obsahu, optimalizace funnelu</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Týdenní konzultace & reporting (návštěvnost, konverze, ROI, doporučení
-                                optimalizace)</span>
-                        </li>
-                        
-                    </ul>
-
-                    <button onclick="scrollToContact()"
-                        class="w-full neon-glow bg-primary hover:bg-primary text-black py-3 rounded-lg font-semibold cursor-pointer">
-                        Vybrat balíček
+                <!-- Service 2: Online dohledatelnost -->
+                <div class="service-card p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.2s">
+                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-4">Online dohledatelnost</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Pomáháme, aby vás lidé snadno našli. Vylepšíme vaši pozici ve vyhledávání, nastavíme SEO, optimalizujeme Google profil firmy a zajistíme, že budete vidět tam, kde vás zákazníci hledají nejčastěji.
+                    </p>
+                    <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center service-arrow gap-2">
+                        Zjistit více
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
                     </button>
                 </div>
 
-                <!-- Pro Cinematic Package -->
-                <div class="p-8 relative card-hover border-2 border-gray-200 bg-white rounded-xl">
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl font-bold mb-2">Performance🏎️</h3>
-                         <div class="text-center mb-6">
-                        <p class="text-sm text-gray-600 max-w-md mx-auto">
-                            Chci mít silnou značku, profesionální obsah a kampaně, které přinášejí výsledky.
-                        </p>
-                    </div>
-                    </div>
-
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Vše z Turbo balíčku – komplexní správa obsahu, reklamy, reporting,
-                                optimalizace, webové stránky.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Profesionální video produkce – tvorba delších promo videí, krátkých
-                                filmových spotů, Reels/TikTok kampaní a video reklam s vysokou vizuální kvalitou, které
-                                zaujmou a zapamatují se.</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Newslettery – pravidelný obsah pro udržení kontaktu se
-                                zákazníky</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Dlouhodobá content strategie a plánování obsahu</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Integrace kampaní napříč kanály pro maximální efekt a konverze</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Premium support a konzultace – rychlá a flexibilníkomunikace
-                                24/7</span>
-                            </li>
-                    </ul>
-
-                    <button onclick="scrollToContact()"
-                        class="w-full bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-lg font-semibold transition-colors cursor-pointer">
-                        Vybrat balíček
+                <!-- Service 3: Sociální sítě -->
+                <div class="service-card p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.3s">
+                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-4">Sociální sítě</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Budujeme značky, které lidé sledují. Tvoříme obsah, plánujeme strategie a staráme se o vaše profily na Instagramu, Facebooku, YouTube i TikToku — od postů po kampaně, které opravdu fungují.
+                    </p>
+                    <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center service-arrow gap-2">
+                        Zjistit více
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
                     </button>
                 </div>
 
-                <!-- Custom Package -->
-                <div class="p-8 relative card-hover border-2 border-gray-200 bg-white rounded-xl">
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl font-bold mb-2">Na míru🛠️</h3>
-                         <div class="text-center mb-6">
-                        <p class="text-sm text-gray-600 max-w-md mx-auto">
-                          Chci kompletní marketing, který přesně odpovídá mým cílům a možnostem.
-                        </p>
-                    </div>
-                    </div>
-
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Kompletní marketingový outsourcing dle vašich potřeb</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Tvorba webu, e-commerce řešení, landing pages, integrace do
-                                kampaní</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Strategie, obsah, reklamy, reporting – vše na míru</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-sm">Implementace specifických řešení a optimalizací podle cílů
-                                firmy</span>
-                        </li>
-                    </ul>
-
-                    <button onclick="scrollToContact()"
-                        class="w-full bg-gray-800 hover:bg-gray-700 text-white py-3 rounded-lg font-semibold transition-colors cursor-pointer">
-                        Vybrat balíček
+                <!-- Service 4: Online reklama -->
+                <div class="service-card p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.4s">
+                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                    </svg>
+                    <h3 class="text-2xl font-bold mb-4">Online reklama</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Zajišťujeme, aby vaše reklamy vydělávaly. Vytváříme vizuálně silné kampaně, spravujeme reklamy napříč platformami (Facebook, Google, TikTok) a průběžně je optimalizujeme pro co nejlepší výsledky a návratnost investic.
+                    </p>
+                    <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center service-arrow gap-2">
+                        Zjistit více
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
                     </button>
                 </div>
             </div>
+
+            <p class="text-center text-gray-400 text-sm mt-12 scroll-reveal">
+                Ceny jsou dělané na míru podle možností a potřeb klienta.
+            </p>
         </div>
-          <p class="text-center text-gray-400 mb-16 text-s mt-10">Ceny jsou dělané na míru podle možností a potřeb klienta.</p>
     </section>
 
     <!-- Portfolio Section -->
-    <section class="py-24 bg-gray-100">
+    <section class="py-24 content-section">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 scroll-reveal">
                 Naše reference
             </h2>
-            <p class="text-center text-gray-600 mb-16 text-lg">
+            <p class="text-center text-gray-600 mb-16 text-lg scroll-reveal">
                 Projekty, na kterých jsme pracovali.
             </p>
 
             <div class="grid md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
                 <!-- Project 1 -->
-                <a href="http://skimparkpraha.cz/" target="_blank" rel="noopener noreferrer" class="block">
-                    <div class="overflow-hidden card-hover group border-2 border-gray-200 bg-white rounded-xl">
-                        <div class="aspect-video bg-gray-200 relative overflow-hidden">
-                            <img src="skimpark.png" alt="">
+                <a href="http://skimparkpraha.cz/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.1s">
+                    <div class="overflow-hidden glass-card group rounded-xl">
+                        <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
+                            <img src="skimpark.png" alt="Skim Park Praha" class="w-full h-full object-cover">
                             <div
                                 class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
                                     </path>
@@ -561,13 +671,13 @@
                 </a>
 
                 <!-- Project 2 -->
-                <a href="https://www.bluehillspictures.com/" target="_blank" rel="noopener noreferrer" class="block">
-                    <div class="overflow-hidden card-hover group border-2 border-gray-200 bg-white rounded-xl">
-                        <div class="aspect-video bg-gray-200 relative overflow-hidden">
-                            <img src="bluehills.png" alt="">
+                <a href="https://www.bluehillspictures.com/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.2s">
+                    <div class="overflow-hidden glass-card group rounded-xl">
+                        <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
+                            <img src="bluehills.png" alt="Blue Hills Pictures" class="w-full h-full object-cover">
                             <div
                                 class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
                                     </path>
@@ -587,13 +697,13 @@
                 </a>
 
                 <!-- Project 3 -->
-                <a href="https://www.productionhub.cz/login" target="_blank" rel="noopener noreferrer" class="block">
-                    <div class="overflow-hidden card-hover group border-2 border-gray-200 bg-white rounded-xl">
-                        <div class="aspect-video bg-gray-200 relative overflow-hidden">
-                            <img src="productionhub.png" alt="">
+                <a href="https://www.productionhub.cz/login" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.3s">
+                    <div class="overflow-hidden glass-card group rounded-xl">
+                        <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
+                            <img src="productionhub.png" alt="Production Hub" class="w-full h-full object-cover">
                             <div
                                 class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
                                     </path>
@@ -614,9 +724,9 @@
             </div>
 
             <!-- Testimonial -->
-            <div class="p-8 bg-white border-2 border-gray-200 rounded-xl max-w-3xl mx-auto">
+            <div class="p-8 glass-card rounded-xl max-w-3xl mx-auto scroll-reveal">
                 <div class="flex items-start gap-4">
-                    <div class="text-6xl text-primary leading-none">"</div>
+                    <div class="text-6xl text-primary leading-none quote-glow">"</div>
                     <div>
                         <p class="text-lg italic mb-4">
                             "Spolupráce se Smart Digital byla opravdu příjemná. Oceňuju profesionální přístup,
@@ -631,52 +741,53 @@
     </section>
 
     <!-- Contact Form Section -->
-    <section id="contact" class="py-24 bg-white">
+    <section id="contact" class="py-24 content-section">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 scroll-reveal">
                     Zařadíme vyšší rychlost?🚀
                 </h2>
-                <p class="text-center text-gray-600 mb-12 text-lg">
+                <p class="text-center text-gray-600 mb-12 text-lg scroll-reveal">
                     Vyplňte formulář a domluvíme si online konzultaci.
                 </p>
 
-                <div class="p-8 border-2 border-gray-200 bg-white rounded-xl">
+                <div class="p-8 glass-card rounded-xl scroll-reveal">
                     <form id="contactForm" class="space-y-6">
                         <div>
                             <label for="name" class="block text-sm font-medium mb-2">Jméno a příjmení</label>
                             <input type="text" id="name" placeholder="Jan Novák" required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors" />
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-all" />
                         </div>
 
                         <div>
                             <label for="email" class="block text-sm font-medium mb-2">E-mail</label>
                             <input type="email" id="email" placeholder="jan@email.cz" required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors" />
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-all" />
                         </div>
 
                         <div>
                             <label for="phone" class="block text-sm font-medium mb-2">Telefon</label>
                             <input type="tel" id="phone" placeholder="+420 123 456 789" required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors" />
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-all" />
                         </div>
 
                         <div>
                             <label for="service" class="block text-sm font-medium mb-2">Zajímá mě</label>
                             <select id="service" required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors">
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-all">
                                 <option value="">Vyberte službu</option>
-                                <option value="launch">Launch balíček🚀</option>
-                                <option value="growth">Turbo balíček📈</option>
-                                <option value="pro">Performance balíček🏎️</option>
-                                <option value="custom">Služby na míru🛠️</option>
-                                <option value="other">Chci si ujasnit možnosti 🏁</option>
+                                <option value="web">Web development</option>
+                                <option value="seo">Online dohledatelnost</option>
+                                <option value="social">Sociální sítě</option>
+                                <option value="ads">Online reklama</option>
+                                <option value="custom">Služby na míru</option>
+                                <option value="other">Chci si ujasnit možnosti</option>
                             </select>
                         </div>
 
                         <button type="submit"
                             class="w-full neon-glow bg-primary hover:bg-primary text-black font-semibold text-lg py-4 rounded-lg inline-flex items-center justify-center gap-2 cursor-pointer">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-width="2"></rect>
                                 <line x1="16" y1="2" x2="16" y2="6" stroke-width="2"></line>
                                 <line x1="8" y1="2" x2="8" y2="6" stroke-width="2"></line>
@@ -695,19 +806,19 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-24 bg-gray-50">
+    <section class="py-24 content-section">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 scroll-reveal">
                     Časté otázky
                 </h2>
-                <p class="text-center text-gray-600 mb-12 text-lg">
+                <p class="text-center text-gray-600 mb-12 text-lg scroll-reveal">
                     Odpovědi na to, na co se klienti nejvíce ptají...
                 </p>
 
                 <div class="space-y-4">
                     <!-- FAQ Item 1 -->
-                    <div class="border-2 border-gray-200 rounded-lg bg-white overflow-hidden">
+                    <div class="faq-item glass-card rounded-lg overflow-hidden scroll-reveal" style="transition-delay: 0.1s">
                         <button onclick="toggleFaq(0)"
                             class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center hover:bg-gray-50 transition-colors">
                             <span class="font-bold text-lg pr-4">Jak dlouho je ideální spolupracovat se Smart Digital,
@@ -728,7 +839,7 @@
                     </div>
 
                     <!-- FAQ Item 2 -->
-                    <div class="border-2 border-gray-200 rounded-lg bg-white overflow-hidden">
+                    <div class="faq-item glass-card rounded-lg overflow-hidden scroll-reveal" style="transition-delay: 0.2s">
                         <button onclick="toggleFaq(1)"
                             class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center hover:bg-gray-50 transition-colors">
                             <span class="font-bold text-lg pr-4">Co když moje firma ještě nemá žádný obsah ani sociální
@@ -749,7 +860,7 @@
                     </div>
 
                     <!-- FAQ Item 3 -->
-                    <div class="border-2 border-gray-200 rounded-lg bg-white overflow-hidden">
+                    <div class="faq-item glass-card rounded-lg overflow-hidden scroll-reveal" style="transition-delay: 0.3s">
                         <button onclick="toggleFaq(2)"
                             class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center hover:bg-gray-50 transition-colors">
                             <span class="font-bold text-lg pr-4">Jak zjistím, že investice do marketingu opravdu
@@ -770,7 +881,7 @@
                     </div>
 
                     <!-- FAQ Item 4 -->
-                    <div class="border-2 border-gray-200 rounded-lg bg-white overflow-hidden">
+                    <div class="faq-item glass-card rounded-lg overflow-hidden scroll-reveal" style="transition-delay: 0.4s">
                         <button onclick="toggleFaq(3)"
                             class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center hover:bg-gray-50 transition-colors">
                             <span class="font-bold text-lg pr-4">Proč bych si měl vybrat Smart Digital?</span>
@@ -795,7 +906,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#111] text-white py-12">
+    <footer class="bg-[#111] text-white py-12 relative z-10">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="text-center md:text-left">
@@ -813,12 +924,11 @@
                                 info@smartdigital.cz
                             </a>
                         </div>
-                        <a href="tel:+420733220300">+420 733 220 300</a>
-                      <p class="text-xs text-gray-400/30">Founder & CEO: Julijan Laznik</p>
+                        <a href="tel:+420733220300" class="hover:text-primary transition-colors">+420 733 220 300</a>
+                        <p class="text-xs text-gray-400/30">Founder & CEO: Julijan Laznik</p>
                         <p class="text-xs text-gray-400/30">Co-founder: Matyáš Hartl</p>
                     </div>
                 </div>
-
 
                 <div class="flex gap-6 text-sm text-white/80">
                     <a href="#" class="hover:text-primary transition-colors">GDPR</a>
@@ -827,7 +937,7 @@
                 </div>
             </div>
 
-            <div class="mt-8 pt-8 border-t border-white/10 text-center text-m text-gray-400/30">
+            <div class="mt-8 pt-8 border-t border-white/10 text-center text-sm text-gray-400/30">
                 <p>© 2025 Smart Digital. Všechna práva vyhrazena.</p>
             </div>
         </div>
@@ -842,6 +952,41 @@
     </button>
 
     <script>
+        // Scroll Reveal on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax Effect
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const parallaxElements = document.querySelectorAll('.parallax');
+                    parallaxElements.forEach(el => {
+                        const speed = el.dataset.speed || 0.5;
+                        el.style.transform = `translateY(${scrolled * speed}px)`;
+                    });
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
         // Scroll to Contact Function
         function scrollToContact() {
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
@@ -874,9 +1019,23 @@
         // Contact Form Submission
         document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
-
             // Redirect to Calendly
             window.open('https://calendly.com/smartdigital-meeting/30min', '_blank');
+        });
+
+        // Add dynamic glow to cursor (optional advanced effect)
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                }
+            });
         });
     </script>
 
