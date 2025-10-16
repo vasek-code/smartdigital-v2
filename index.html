@@ -13,10 +13,9 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Digital – Online marketing pro firmy v automotive byznysu</title>
+    <title>Smart Digital – marketingová agentura, online reklama a sociální sítě</title>
     <link rel="icon" type="image/png" href="/favicon.png">
-    <meta name="description"
-        content="Tvoříme kampaně, weby a obsah na sociální sítě tak, aby všechno spolu fungovalo a přinášelo výsledky, na kterých záleží.">
+    <meta name="description" content="Smart Digital je moderní marketingová agentura zaměřená na online reklamu, sociální sítě, SEO a web design. Pomáháme firmám růst díky strategii, výkonu a kreativitě.">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -109,7 +108,7 @@
         .gradient-hero {
             background: linear-gradient(30deg, #8a0000, #6c05bc, #056dbc);
             background-size: 300% 300%;
-            animation: gradient-shift 8s ease infinite;
+            animation: gradient-shift 5s ease infinite;
             position: relative;
             overflow: hidden;
         }
@@ -268,20 +267,22 @@
         }
 
         /* Fade Up Animation */
-        .fade-up {
-            animation: fade-up 1s ease-out forwards;
-        }
+       .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp .6s ease-out forwards;
+            }
 
-        @keyframes fade-up {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+            @keyframes fadeUp {
+            0% {
+            opacity: 0;
+            transform: translateY(80px);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            100% {
+            opacity: 1;
+            transform: translateY(0);
             }
-        }
+    }
 
         /* FAQ Accordion Enhanced */
         .faq-content {
@@ -428,7 +429,54 @@
             background: rgba(249, 249, 249, 0.98);
             position: relative;
         }
+
+        .contact-glow {
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.contact-glow:hover {
+  color: #C7F715;
+  text-shadow: 0 0 0px #C7F715, 0 0 1px #C7F715, 0 0 1px #C7F715;
+}
+
     </style>
+
+
+    <!-- SEO a social meta tagy -->
+<meta name="keywords" content="marketing, online marketing, SEO, sociální sítě, reklama, automotive, Smart Digital, web design, kampaně">
+<meta name="author" content="Smart Digital">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph pro Facebook, LinkedIn atd. -->
+<meta property="og:title" content="Smart Digital – Online marketing pro firmy v automotive byznysu">
+<meta property="og:description" content="Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky, na kterých záleží.">
+<meta property="og:image" content="https://tvoje-domena.cz/og-image.png">
+<meta property="og:url" content="https://tvoje-domena.cz/">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Smart Digital – Online marketing pro firmy v automotive byznysu">
+<meta name="twitter:description" content="Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky, na kterých záleží.">
+<meta name="twitter:image" content="https://tvoje-domena.cz/og-image.png">
+
+<!-- Structured Data pro agenturu -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Smart Digital",
+  "url": "https://www.smartdigital.cz/",
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61580756979219",
+    "https://www.instagram.com/smart.dgtl/",
+    "https://www.linkedin.com/in/smart-digital-136aa238a/"
+  ],
+  "description": "Marketingová agentura zaměřená na automotive byznys – tvorba webů, kampaní, sociálních sítí a SEO."
+}
+</script>
+
 </head>
 
 <body>
@@ -444,19 +492,53 @@
     <!-- Hero Section -->
     <section class="relative min-h-screen overflow-hidden">
         <div class="absolute inset-0 gradient-hero"></div>
+        <!-- COOKIE BANNER -->
+   <div id="cookie-banner"
+    class="fixed bottom-[10px] right-[10px] w-[90%] sm:w-[300px] 
+           text-white rounded-2xl border border-white/20 
+           backdrop-blur-md bg-black/40 shadow-[0_0_25px_rgba(0,255,174,0.15)]
+           p-4 sm:p-6 z-[9999] opacity-100 translate-y-0 transition-all duration-700 ease-out">
+
+    <h3 class="text-lg sm:text-xl font-semibold mb-3 text-[#ffffff]">
+        Cookies & ochrana soukromí
+    </h3>
+
+    <p class="text-sm sm:text-base text-white/80 leading-relaxed mb-6">
+        Na našem webu používáme cookies, abychom zlepšili vaše uživatelské prostředí a analyzovali provoz.
+        <a href="cookies.html" class="text-[#C7F715] hover:underline">Více informací</a>.
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-end gap-3">
+        <button id="decline-cookies"
+            class="border border-[#C7F715]/70 text-[#C7F715] px-4 py-2 rounded-lg font-semibold text-sm 
+                   hover:bg-[#C7F715] hover:text-black transition-all duration-300">
+            Odmítnout
+        </button>
+
+        <button id="accept-cookies"
+            class="bg-[#C7F715] text-black font-semibold px-4 py-2 rounded-lg text-sm 
+                   hover:shadow-[0_0_20px_#00ffae] transition-all duration-300">
+            Souhlasím
+        </button>
+    </div>
+</div>
+
+
+
+
 
         <div class="absolute bottom-20 left-0 p-8 md:p-20 text-left max-w-6xl">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 fade-up">
                 Nastartujeme váš byznys na plné otáčky
             </h1>
 
-            <p class="text-base md:text-lg lg:text-xl text-white/60 mb-6 md:mb-8 fade-up" style="animation-delay: 0.3s">
+            <p class="text-base md:text-lg lg:text-xl text-white/60 mb-6 md:mb-8 fade-up" style="animation-delay: .4s">
                 Jsme partner pro růst, který posouvá podnikatele v automobilovém průmyslu.
             </p>
 
             <button onclick="scrollToContact()"
                 class="neon-glow bg-primary hover:bg-primary text-black font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-lg inline-flex items-center gap-2 fade-up cursor-pointer"
-                style="animation-delay: 0.4s">
+                style="animation-delay: .4s">
                 Zařadit vyšší rychlost
                 <svg class="w-4 md:w-5 h-4 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6">
@@ -648,7 +730,7 @@
                 <a href="http://skimparkpraha.cz/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.1s">
                     <div class="overflow-hidden glass-card group rounded-xl">
                         <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
-                            <img src="skimpark.png" alt="Skim Park Praha" class="w-full h-full object-cover">
+                            <img src="skimpark.png" alt="Web Skim Park Praha – online rezervační systém" class="w-full h-full object-cover">
                             <div
                                 class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -674,7 +756,7 @@
                 <a href="https://www.bluehillspictures.com/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.2s">
                     <div class="overflow-hidden glass-card group rounded-xl">
                         <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
-                            <img src="bluehills.png" alt="Blue Hills Pictures" class="w-full h-full object-cover">
+                            <img src="bluehills.png" alt="Blue Hills Pictures - webové stránky" class="w-full h-full object-cover">
                             <div
                                 class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -700,7 +782,7 @@
                 <a href="https://www.productionhub.cz/login" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.3s">
                     <div class="overflow-hidden glass-card group rounded-xl">
                         <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
-                            <img src="productionhub.png" alt="Production Hub" class="w-full h-full object-cover">
+                            <img src="productionhub.png" alt="Production Hub - webová aplikace pro filmaře" class="w-full h-full object-cover">
                             <div
                                 class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -906,42 +988,40 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#111] text-white py-12 relative z-10">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="text-center md:text-left">
-                    <h3 class="text-2xl font-bold mb-2">
-                        Smart <span class="text-primary">Digital</span>
-                    </h3>
-                    <div class="flex flex-col gap-2 justify-center md:justify-start text-white/80">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                            <a href="mailto:info@smartdigital.cz" class="hover:text-primary transition-colors">
-                                info@smartdigital.cz
-                            </a>
-                        </div>
-                        <a href="tel:+420733220300" class="hover:text-primary transition-colors">+420 733 220 300</a>
-                        <p class="text-xs text-gray-400/30">Founder & CEO: Julijan Laznik</p>
-                        <p class="text-xs text-gray-400/30">Co-founder: Matyáš Hartl</p>
+   <footer class="bg-[#111] text-white py-12 relative z-10">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <h3 class="text-2xl font-bold mb-2">
+                    Smart <span class="text-primary">Digital</span>
+                </h3>
+                <div class="flex flex-col gap-2 justify-center md:justify-start text-white/80">
+                    <div class="flex items-center gap-2">
+                        <a href="mailto:smdgtl.contact@gmail.com" class="contact-glow transition-all duration-300">
+                            smdgtl.contact@gmail.com
+                        </a>
                     </div>
-                </div>
-
-                <div class="flex gap-6 text-sm text-white/80">
-                    <a href="#" class="hover:text-primary transition-colors">GDPR</a>
-                    <a href="#" class="hover:text-primary transition-colors">Cookies</a>
-                    <a href="#" class="hover:text-primary transition-colors">Podmínky</a>
+                    <a href="tel:+420733220300" class="contact-glow transition-all duration-300">
+                        +420 733 220 300
+                    </a>
+                    <p class="text-xs text-gray-400/30">Founder & CEO: Julijan Laznik</p>
+                    <p class="text-xs text-gray-400/30">Co-founder: Matyáš Hartl</p>
                 </div>
             </div>
 
-            <div class="mt-8 pt-8 border-t border-white/10 text-center text-sm text-gray-400/30">
-                <p>© 2025 Smart Digital. Všechna práva vyhrazena.</p>
+            <div class="flex gap-6 text-sm text-white/80">
+                <a href="gdpr.html" class="hover:text-primary transition-colors">GDPR</a>
+                <a href="cookies.html" class="hover:text-primary transition-colors">Cookies</a>
+                <a href="podminky.html" class="hover:text-primary transition-colors">Podmínky</a>
             </div>
         </div>
-    </footer>
+
+        <div class="mt-8 pt-8 border-t border-white/10 text-center text-sm text-gray-400/30">
+            <p>© 2025 Smart Digital. Všechna práva vyhrazena.</p>
+        </div>
+    </div>
+</footer>
+
 
     <!-- Scroll to Top Button -->
     <button id="scrollTopBtn" onclick="scrollToTop()"
@@ -952,6 +1032,44 @@
     </button>
 
     <script>
+         const banner = document.getElementById("cookie-banner");
+const acceptBtn = document.getElementById("accept-cookies");
+const declineBtn = document.getElementById("decline-cookies");
+
+// Funkce pro skrytí banneru s animací
+function hideBanner() {
+    banner.classList.add("opacity-0", "translate-y-6");
+    setTimeout(() => {
+        banner.style.display = "none";
+    }, 700); // shodné s Tailwind transition duration
+}
+
+// Zobrazit banner jen pokud uživatel ještě nedal souhlas
+window.addEventListener("load", () => {
+    if (!localStorage.getItem("cookieConsent")) {
+        banner.classList.remove("opacity-0", "translate-y-6");
+        banner.classList.add("opacity-100", "translate-y-0");
+    } else {
+        banner.style.display = "none"; // pokud už souhlas je
+    }
+});
+
+// Kliknutí na Souhlasím
+acceptBtn.onclick = () => {
+    localStorage.setItem("cookieConsent", "accepted");
+    hideBanner();
+};
+
+// Kliknutí na Odmítnout
+declineBtn.onclick = () => {
+    localStorage.setItem("cookieConsent", "declined");
+    hideBanner();
+};
+
+
+    declineBtn.onclick = () => {
+        console.log("Kliknuto na Odmítnout (zatím bez akce)");
+    };
         // Scroll Reveal on Scroll
         const observerOptions = {
             threshold: 0.1,
