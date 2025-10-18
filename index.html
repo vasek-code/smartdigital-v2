@@ -1,1163 +1,787 @@
 <!DOCTYPE html>
 <html lang="cs">
-
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QN0WT540QY"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-QN0WT540QY');
-    </script>
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "trp4r87v81");
-</script>
-        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="017cf4e5-f7dc-492c-ae84-e9c54356fd8c" data-blockingmode="auto" type="text/javascript"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QN0WT540QY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-QN0WT540QY');
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "trp4r87v81");
+  </script>
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="017cf4e5-f7dc-492c-ae84-e9c54356fd8c" data-blockingmode="auto" type="text/javascript"></script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Digital – Jsme partner pro růst, který posouvá podnikatele v automobilovém průmyslu.</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <meta name="description" content="Smart Digital je moderní marketingová agentura zaměřená na online reklamu, sociální sítě, SEO a web design. Pomáháme firmám růst díky strategii, výkonu a kreativitě.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Digital – Jsme partner pro růst, který posouvá podnikatele v automobilovém průmyslu.</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="description" content="Smart Digital je moderní marketingová agentura zaměřená na online reklamu, sociální sítě, SEO a web design. Pomáháme firmám růst díky strategii, výkonu a kreativitě.">
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- (Optional) Inter as deep fallback when SF Pro not available -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    /* ===== Base / Theme ===== */
+    :root{ --sd-cta:#C7F715; --sd-fg:#ffffff; --sd-bg:#000000; }
+    *{ box-sizing:border-box }
+    html{ scroll-behavior:smooth }
+    body{ margin:0; font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji",Inter,sans-serif; background:var(--sd-bg); color:var(--sd-fg); overflow-x:hidden }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: #0a0a0a;
-            color: #111;
-            overflow-x: hidden;
-        }
+    /* ===== Background (blobs + canvas twinkle) ===== */
+    .animated-bg{ position:fixed; inset:0; z-index:-3; background: radial-gradient(1200px 800px at 20% -10%, rgba(199,247,21,.06), transparent 60%), radial-gradient(900px 700px at 120% 20%, rgba(199,247,21,.04), transparent 60%), #000; }
+    .bg-shapes{ position:absolute; inset:0; overflow:hidden }
+    .shape{ position:absolute; border-radius:50%; filter:blur(110px); opacity:.28; mix-blend-mode:screen; will-change:transform }
+    .shape-1{ width:58vmax; height:58vmax; background:radial-gradient(closest-side,#36ff8f,transparent 70%); top:10%; left:8%; animation:float1 22s ease-in-out infinite alternate }
+    .shape-2{ width:52vmax; height:52vmax; background:radial-gradient(closest-side,#C7F715,transparent 70%); top:55%; right:10%; animation:float2 26s ease-in-out infinite alternate }
+    .shape-3{ width:44vmax; height:44vmax; background:radial-gradient(closest-side,#b9ff3e,transparent 70%); bottom:6%; left:25%; animation:float3 28s ease-in-out infinite alternate }
+    @keyframes float1{0%{transform:translate(-10%,-8%) scale(1)}50%{transform:translate(6%,4%) scale(1.04)}100%{transform:translate(-8%,-6%) scale(1)}}
+    @keyframes float2{0%{transform:translate(8%,6%) scale(1)}50%{transform:translate(-6%,-8%) scale(1.05)}100%{transform:translate(6%,8%) scale(1)}}
+    @keyframes float3{0%{transform:translate(-8%,8%) scale(1)}50%{transform:translate(6%,-6%) scale(1.03)}100%{transform:translate(-6%,6%) scale(1)}}
 
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
-        }
+    /* ===== Hero overlay — pure black to match site ===== */
+    .gradient-hero{ position:relative; overflow:hidden; background:#000; }        /* sjednocená černá */
+    .gradient-hero::before,
+    .gradient-hero::after{ content:none !important; }                             /* zrušené přisvětlení/tint */
 
-        .bg-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+    /* ===== Liquid glass (dark) ===== */
+    .glass{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%); box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.22), inset 0 -60px 100px rgba(255,255,255,.04); border-radius:20px }
+    .glass-card{
+      --rx:0deg; --ry:0deg; --lift:0px;
+      transform: translate3d(calc(var(--tx,0px) + var(--txm,0px)), calc(var(--lift) + var(--ty,0px) + var(--revealY,0px) + var(--tym,0px)), 0)
+                 rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--scale,1));
+      will-change: transform;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%);
+      border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.35);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease
+    }
+    .glass-card:hover{ --lift:-10px;  box-shadow:0 28px 70px rgba(0,0,0,.5); border-color:rgba(199,247,21,.35) }
 
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
-        }
+    /* ===== Type & utilities ===== */
+    .text-primary{ color:var(--sd-cta) }
+    .bg-primary{ background-color:var(--sd-cta) }
+    .lead{ color:#dcdcdc }
+    .muted{ color:#c7c7c7 }
 
-        .shape-1 {
-            width: 600px;
-            height: 600px;
-            background: #8a0000;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
+    /* Content-section now transparent (dark theme) */
+    .content-section{ background:transparent }
 
-        .shape-2 {
-            width: 500px;
-            height: 500px;
-            background: #6c05bc;
-            top: 60%;
-            right: 10%;
-            animation-delay: -7s;
-        }
+    /* Tailwind overrides */
+    .content-section .text-gray-600{ color:#d0d0d0 !important }
+    .content-section .text-gray-500{ color:#cbcbcb !important }
+    .content-section .hover\:bg-gray-50:hover{ background:rgba(255,255,255,.06) !important }
 
-        .shape-3 {
-            width: 400px;
-            height: 400px;
-            background: #056dbc;
-            bottom: 10%;
-            left: 30%;
-            animation-delay: -14s;
-        }
+    /* Neon CTA feel + micro-magnet translate */
+    .neon-glow{ box-shadow:0 0 24px rgba(199,247,21,.5), 0 0 50px rgba(199,247,21,.25) }
+    .neon-glow:hover{ box-shadow:0 0 40px rgba(199,247,21,.8), 0 0 90px rgba(199,247,21,.45), 0 10px 30px rgba(0,0,0,.4); transform:translateY(-1px) }
+    .cta{ position:relative; overflow:hidden; translate: var(--cta-tx, 0px) var(--cta-ty, 0px); transition: translate .22s ease; will-change: translate; }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(50px, -80px) scale(1.1);
-            }
-            66% {
-                transform: translate(-50px, 80px) scale(0.9);
-            }
-        }
+    /* Scroll reveal (simple) */
+    .scroll-reveal{ opacity:0; transform:translateY(40px); transition: all .7s cubic-bezier(.4,0,.2,1) }
+    .scroll-reveal.revealed{ opacity:1; transform:translateY(0) }
 
-        /* Gradient Animation for Hero */
-        .gradient-hero {
-            background: linear-gradient(30deg, #8a0000, #6c05bc, #056dbc);
-            background-size: 300% 300%;
-            animation: gradient-shift 5s ease infinite;
-            position: relative;
-            overflow: hidden;
-        }
+    /* Inputs on dark */
+    input,select,textarea{ background:rgba(255,255,255,.04) !important; color:#fff !important; border:1px solid rgba(255,255,255,.18) !important }
+    input::placeholder, textarea::placeholder{ color:#bbb }
 
-        .gradient-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(199, 247, 21, 0.1), transparent 60%);
-            animation: pulse-glow 4s ease-in-out infinite;
-        }
-
-        @keyframes gradient-shift {
-            0%, 100% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.6;
-                transform: scale(1.1);
-            }
-        }
-
-        /* Glass Morphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 2px solid rgba(199, 247, 21, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.98);
-            border-color: rgba(199, 247, 21, 0.3);
-            transform: translateY(-8px);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.1),
-                0 0 60px rgba(199, 247, 21, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        }
-
-        /* Scroll Reveal Animation */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Enhanced Neon Glow */
-        .neon-glow {
-            box-shadow: 
-                0 0 20px rgba(199, 247, 21, 0.5),
-                0 0 40px rgba(199, 247, 21, 0.3),
-                inset 0 0 10px rgba(199, 247, 21, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .neon-glow::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-            transform: scale(0);
-            transition: transform 0.6s ease;
-        }
-
-        .neon-glow:hover::before {
-            transform: scale(1);
-        }
-
-        .neon-glow:hover {
-            box-shadow: 
-                0 0 40px rgba(199, 247, 21, 0.8),
-                0 0 80px rgba(199, 247, 21, 0.5),
-                0 0 120px rgba(199, 247, 21, 0.3),
-                inset 0 0 20px rgba(199, 247, 21, 0.3);
-            transform: scale(1.05) translateY(-2px);
-        }
-
-        /* Animated Icons */
-        .icon-animate {
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .glass-card:hover .icon-animate {
-            transform: scale(1.2) rotate(5deg);
-            filter: drop-shadow(0 0 20px rgba(199, 247, 21, 0.6));
-        }
-
-        /* Enhanced Service Arrow */
-        .service-arrow {
-            transition: all 0.4s ease;
-        }
-
-        .service-card:hover .service-arrow {
-            gap: 1rem;
-            transform: translateX(8px);
-        }
-
-        .service-card:hover .service-arrow svg {
-            animation: arrow-bounce 0.6s ease infinite;
-        }
-
-        @keyframes arrow-bounce {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(5px); }
-        }
-
-        /* Glowing Border Animation */
-        @keyframes border-glow {
-            0%, 100% {
-                box-shadow: 
-                    0 0 20px rgba(199, 247, 21, 0.3),
-                    inset 0 0 20px rgba(199, 247, 21, 0.1);
-            }
-            50% {
-                box-shadow: 
-                    0 0 40px rgba(199, 247, 21, 0.6),
-                    inset 0 0 30px rgba(199, 247, 21, 0.2);
-            }
-        }
-
-        .glass-card:hover {
-            animation: border-glow 2s ease-in-out infinite;
-        }
-
-        /* Fade Up Animation */
-       .fade-up {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp .6s ease-out forwards;
-            }
-
-            @keyframes fadeUp {
-            0% {
-            opacity: 0;
-            transform: translateY(80px);
-            }
-            100% {
-            opacity: 1;
-            transform: translateY(0);
-            }
+    /* Footer */
+    footer{ background:#0b0b0b }
+  
+    /* ===== HERO random shape field ===== */
+    .hero-field{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .hero-shape{position:absolute;left:0;top:0;width:var(--size,200px);height:var(--size,200px);
+      border-radius:42% 58% 38% 62% / 60% 40% 60% 40%;
+      background:radial-gradient(60% 60% at 30% 30%, hsla(var(--h,82),90%,65%,.40), hsla(var(--h,82),90%,35%,.12) 60%, transparent 74%);
+      filter:blur(30px) saturate(130%);opacity:.65;mix-blend-mode:screen;will-change:transform,border-radius}
+    .hero-shape{animation: blobMorph var(--morph,12s) ease-in-out infinite alternate}
+    @keyframes blobMorph{
+      0%{border-radius:42% 58% 38% 62% / 60% 40% 60% 40%}
+      33%{border-radius:58% 42% 62% 38% / 40% 60% 40% 60%}
+      66%{border-radius:45% 55% 48% 52% / 55% 45% 55% 45%}
+      100%{border-radius:42% 58% 38% 62% / 60% 40% 60% 40%}
     }
 
-        /* FAQ Accordion Enhanced */
-        .faq-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    /* ===== Liquid entry animation for glass cards ===== */
+    .glass-card{position:relative;overflow:hidden}
+    .glass-card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+      background:radial-gradient(160px 120px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.12), rgba(255,255,255,0) 60%);
+      opacity:0;transition:opacity .5s ease;mix-blend-mode:screen;filter:blur(14px)}
+    .glass-card::after{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+      background:conic-gradient(from var(--ang,0deg), rgba(199,247,21,.18), rgba(199,247,21,0) 25%, rgba(199,247,21,.12) 50%, rgba(199,247,21,0) 75%, rgba(199,247,21,.18));
+      opacity:0;filter:blur(12px);mix-blend-mode:screen}
+    .glass-card:hover::before{opacity:1}
+    .glass-card.inview{animation:cardEnter .7s cubic-bezier(.2,.6,.2,1) both}
+    .glass-card.inview::after{animation:liquidSheen 1.4s ease .2s both, spinAng 6s ease-in-out .2s infinite alternate;opacity:.9}
+    @keyframes cardEnter{from{transform:translateY(12px);opacity:.85}to{transform:translateY(0);opacity:1}}
+    @keyframes liquidSheen{0%{opacity:0}10%{opacity:.7}100%{opacity:0}}
+    @keyframes spinAng{0%{--ang:0deg}100%{--ang:360deg}}
 
-        .faq-content.active {
-            max-height: 500px;
-        }
+    /* ===== Cursor-following liquid blob (global) ===== */
+    .cursor-blob{ position:fixed; left:0; top:0; width:var(--cb-size,140px); height:var(--cb-size,140px);
+      border-radius:42% 58% 38% 62% / 60% 40% 60% 40%;
+      background:radial-gradient(60% 60% at 30% 30%, hsla(var(--cb-h,82),90%,65%,.38), hsla(var(--cb-h,82),90%,35%,.10) 60%, transparent 74%);
+      filter:blur(24px) saturate(130%); mix-blend-mode:screen; opacity:.62; pointer-events:none; z-index:999;
+      transform:translate3d(-50%, -50%, 0); will-change:transform,border-radius; animation:blobMorph 12s ease-in-out infinite alternate }
+    .cursor-blob.active{ opacity:.75; animation-duration:8s }
+    @media (pointer: coarse){ .cursor-blob{ display:none } }
+  
+    /* CTA sheen (hover only) */
+    .cta::after{ content:""; position:absolute; inset:-1px; background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.55) 50%, transparent 80%); transform:translateX(-140%); transition: transform .7s ease; mix-blend-mode:screen }
+    .cta:hover::after{ transform:translateX(120%) }
 
-        .faq-icon {
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
+    /* Scroll progress bar */
+    .scroll-progress{ position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, rgba(199,247,21,1), rgba(199,247,21,.6)); box-shadow:0 0 10px rgba(199,247,21,.6); z-index:1000; width:0 }
 
-        .faq-icon.rotated {
-            transform: rotate(180deg);
-        }
-
-        .faq-item {
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            box-shadow: 0 0 30px rgba(199, 247, 21, 0.2);
-        }
-
-        /* Scroll to Top Enhanced */
-        .scroll-top {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            transform: scale(0.8);
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
-
-        .scroll-top:hover {
-            animation: bounce-top 0.6s ease infinite;
-        }
-
-        @keyframes bounce-top {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.1); }
-        }
-
-        /* Primary Colors */
-        .bg-primary {
-            background-color: #C7F715;
-        }
-
-        .text-primary {
-            color: #C7F715;
-        }
-
-        .border-primary {
-            border-color: #C7F715;
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Parallax Effect */
-        .parallax {
-            transform: translateZ(0);
-            transition: transform 0.1s ease-out;
-        }
-
-        /* Image Hover Glow */
-        .image-glow {
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .image-glow::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(199, 247, 21, 0.3), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .image-glow:hover::after {
-            opacity: 1;
-        }
-
-        /* Pulse Animation */
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
-        }
-
-        .pulse-animation {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        /* Mouse Scroll Indicator */
-        .scroll-indicator {
-            animation: scroll-bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes scroll-bounce {
-            0%, 100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(10px);
-                opacity: 0.5;
-            }
-        }
-
-        /* Input Focus Glow */
-        input:focus, select:focus, textarea:focus {
-            box-shadow: 0 0 20px rgba(199, 247, 21, 0.3);
-            border-color: #C7F715 !important;
-        }
-
-        /* Testimonial Quote Glow */
-        .quote-glow {
-            text-shadow: 0 0 20px rgba(199, 247, 21, 0.3);
-            transition: text-shadow 0.3s ease;
-        }
-
-        /* Content Sections */
-        .content-section {
-            background: rgba(249, 249, 249, 0.98);
-            position: relative;
-        }
-
-        .contact-glow {
-  color: #ffffff;
-  transition: all 0.3s ease;
-}
-
-.contact-glow:hover {
-  color: #C7F715;
-  text-shadow: 0 0 0px #C7F715, 0 0 1px #C7F715, 0 0 1px #C7F715;
-}
-
-    </style>
-
-
-    <!-- SEO a social meta tagy -->
-    <meta name="description" content="Smart Digital – moderní marketingová agentura zaměřená na automotive, SEO, sociální sítě a online reklamu. Zvýšíme viditelnost vašeho autoservisu nebo dealera.">
-    <meta name="keywords" content="marketing, online marketing, SEO, sociální sítě, reklama, automotive, Smart Digital, web design, kampaně">
-    <meta name="author" content="Smart Digital">
-    <meta name="robots" content="index, follow">
-
-<!-- Open Graph pro Facebook, LinkedIn atd. -->
-<meta property="og:title" content="Smart Digital – Online marketing pro firmy v automotive byznysu">
-<meta property="og:description" content="Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky, na kterých záleží.">
-<meta property="og:image" content="https://tvoje-domena.cz/og-image.png">
-<meta property="og:url" content="https://tvoje-domena.cz/">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Smart Digital – Online marketing pro firmy v automotive byznysu">
-<meta name="twitter:description" content="Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky, na kterých záleží.">
-<meta name="twitter:image" content="https://tvoje-domena.cz/og-image.png">
-
-<!-- Structured Data pro agenturu -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Smart Digital",
-  "url": "https://www.smartdigital.cz/",
-  "sameAs": [
-    "https://www.facebook.com/profile.php?id=61580756979219",
-    "https://www.instagram.com/smart.dgtl/",
-    "https://www.linkedin.com/in/smart-digital-136aa238a/"
-  ],
-  "description": "Marketingová agentura zaměřená na automotive byznys – tvorba webů, kampaní, sociálních sítí a SEO."
-}
-// Funkce pro práci s cookies
-function setCookie(name, value, days) {
-    const d = new Date();
-    d.setTime(d.getTime() + (days*24*60*60*1000));
-    document.cookie = name + "=" + value + ";path=/;expires=" + d.toUTCString();
-}
-
-function getCookie(name) {
-    const cname = name + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(';');
-    for(let i=0; i<ca.length; i++) {
-        let c = ca[i].trim();
-        if (c.indexOf(cname) == 0) return c.substring(cname.length, c.length);
+    /* ===== Scroll arrow (hero) ===== */
+    .scroll-arrow{
+      position:absolute; left:50%; bottom:24px; transform:translateX(-50%);
+      width:44px; height:44px; display:grid; place-items:center;
+      color:#fff; opacity:.95; background:transparent; border:0; cursor:pointer;
+      border-radius:999px; outline:none; z-index:2;
+      animation: sd-arrow-bounce 1.6s ease-in-out infinite, sd-arrow-glow 2.6s ease-in-out infinite;
     }
-    return "";
-}
+    .scroll-arrow:hover{ opacity:1 }
+    .scroll-arrow svg{ width:28px; height:28px }
+    @keyframes sd-arrow-bounce{ 0%,100%{ transform:translate(-50%,0) } 50%{ transform:translate(-50%,10px) } }
+    @keyframes sd-arrow-glow{ 0%,100%{ filter: drop-shadow(0 0 0 rgba(199,247,21,0)) } 50%{ filter: drop-shadow(0 0 10px rgba(199,247,21,.55)) } }
 
-// Kontrola cookie při načtení
-window.addEventListener('DOMContentLoaded', () => {
-    const cookieBanner = document.getElementById('cookie-banner');
-    const acceptBtn = document.getElementById('accept-cookies');
-    const declineBtn = document.getElementById('decline-cookies');
+    /* ===== Card boost (stronger hover glow + border) ===== */
+    .card-boost{position:relative}
+    .card-boost::after{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s ease;mix-blend-mode:screen;background:radial-gradient(160px 120px at var(--mx,50%) var(--my,50%), rgba(199,247,21,.16), rgba(199,247,21,0) 60%), linear-gradient(180deg, rgba(199,247,21,.12), rgba(199,247,21,0))}
+    .card-boost:hover::after{opacity:.9}
+    .card-boost::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;opacity:0;transform:scale(.8);filter:blur(10px);background:radial-gradient(closest-side, rgba(199,247,21,.35), rgba(199,247,21,.10) 50%, transparent 65%)}
+    .card-boost:hover::before{animation:ringPulse 1s ease-out both}
+    .card-boost:hover::after{opacity:1}
+    @keyframes ringPulse{0%{opacity:0;transform:scale(.8)}25%{opacity:.9}100%{opacity:0;transform:scale(1.35)}}
+  </style>
 
-    const cookieConsent = getCookie('cookie_consent');
-    if(cookieConsent === 'accepted') {
-        cookieBanner.style.display = 'none';
-        enableAnalytics();
-    } else if(cookieConsent === 'declined') {
-        cookieBanner.style.display = 'none';
-    } else {
-        cookieBanner.style.display = 'block';
-    }
+  <!-- SEO & social (kept) -->
+  <meta name="keywords" content="marketing, online marketing, SEO, sociální sítě, reklama, automotive, Smart Digital, web design, kampaně">
+  <meta name="author" content="Smart Digital">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Smart Digital – Online marketing pro firmy v automotive byznysu">
+  <meta property="og:description" content="Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky.">
+  <meta property="og:image" content="https://tvoje-domena.cz/og-image.png">
+  <meta property="og:url" content="https://tvoje-domena.cz/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Smart Digital – Online marketing pro firmy v automotive byznysu">
+  <meta name="twitter:description" content="Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky.">
+  <meta name="twitter:image" content="https://tvoje-domena.cz/og-image.png">
 
-    acceptBtn.addEventListener('click', () => {
-        setCookie('cookie_consent', 'accepted', 365);
-        cookieBanner.style.display = 'none';
-        enableAnalytics();
+  <!-- Structured data (kept) -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Smart Digital","url":"https://www.smartdigital.cz/","sameAs":["https://www.facebook.com/profile.php?id=61580756979219","https://www.instagram.com/smart.dgtl/","https://www.linkedin.com/in/smart-digital-136aa238a/"],"description":"Marketingová agentura zaměřená na automotive byznys – tvorba webů, kampaní, sociálních sítí a SEO."}
+  </script>
+  <script>
+  // Redirect po odeslání formuláře na Cal.com
+  (function(){
+    const form = document.getElementById('contactForm');
+    if(!form) return;
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      // HTML5 validace (required, typy apod.)
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
+
+      // (volitelné) event do GA
+      try { gtag && gtag('event','generate_lead',{event_category:'Contact',event_label:'Contact form'}); } catch(_) {}
+
+      // Přesměrování
+      window.location.href = 'https://cal.com/smartdigital/15min';
+      // Pokud chceš otevřít v novém okně místo redirectu:
+      // window.open('https://cal.com/smartdigital/15min', '_blank');
     });
-
-    declineBtn.addEventListener('click', () => {
-        setCookie('cookie_consent', 'declined', 365);
-        cookieBanner.style.display = 'none';
-    });
-});
-
-// Funkce pro povolení Google Analytics až po souhlasu
-function enableAnalytics() {
-    if (!window.gaEnabled) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-QN0WT540QY');
-        window.gaEnabled = true;
-    }
-}
+  })();
 </script>
 
 </head>
-
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="bg-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-        </div>
+  <!-- Animated Background (blobs) -->
+  <div class="animated-bg">
+    <div class="bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="relative min-h-screen overflow-hidden" id="hero">
+    <div class="absolute inset-0 gradient-hero"></div>
+    <div id="heroField" class="hero-field"></div>
+
+    <div class="absolute bottom-20 left-0 p-8 md:p-20 text-left max-w-6xl z-10">
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 md:mb-6">Nastartujeme váš byznys na plné otáčky</h1>
+      <p class="text-base md:text-lg lg:text-xl text-white/70 mb-6 md:mb-8">Jsme partner pro růst, který posouvá podnikatele v automobilovém průmyslu.</p>
+      <button onclick="scrollToContact()" class="cta neon-glow bg-primary text-black font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-full inline-flex items-center gap-2 cursor-pointer">
+        Zařadit vyšší rychlost
+        <svg class="w-4 md:w-5 h-4 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+      </button>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen overflow-hidden">
-        <div class="absolute inset-0 gradient-hero"></div>
-       
-
-
-
-
-        <div class="absolute bottom-20 left-0 p-8 md:p-20 text-left max-w-6xl">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 fade-up">
-                Nastartujeme váš byznys na plné otáčky
-            </h1>
-
-            <p class="text-base md:text-lg lg:text-xl text-white/60 mb-6 md:mb-8 fade-up" style="animation-delay: .4s">
-                Jsme partner pro růst, který posouvá podnikatele v automobilovém průmyslu.
-            </p>
-
-            <button onclick="scrollToContact()"
-                class="neon-glow bg-primary hover:bg-primary text-black font-semibold text-base md:text-lg px-6 md:px-8 py-3 md:py-4 rounded-lg inline-flex items-center gap-2 fade-up cursor-pointer"
-                style="animation-delay: .4s">
-                Zařadit vyšší rychlost
-                <svg class="w-4 md:w-5 h-4 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6">
-                    </path>
-                </svg>
-            </button>
-        </div>
-
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator">
-            <div class="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
-                <div class="w-1.5 h-1.5 bg-white rounded-full pulse-animation"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem Solution Section -->
-    <section class="py-24 content-section">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 scroll-reveal">
-                Jak posuneme váš byznys dál?
-            </h2>
-
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Card 1 -->
-                <div class="p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.1s">
-                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"></path>
-                    </svg>
-
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium mb-1">PROBLÉM</p>
-                            <h3 class="text-xl font-bold">Zastaralá online prezentace</h3>
-                        </div>
-
-                        <div class="border-l-4 border-primary pl-4">
-                            <p class="text-sm text-gray-500 font-medium mb-1">ŘEŠENÍ</p>
-                            <h3 class="text-sm text-gray-400 font-regular">Obnoveníme a pravidelně spravujeme webové
-                                stránky a sociální sítě</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.2s">
-                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium mb-1">PROBLÉM</p>
-                            <h3 class="text-xl font-bold">Chaos v komunikaci</h3>
-                        </div>
-
-                        <div class="border-l-4 border-primary pl-4">
-                            <p class="text-sm text-gray-500 font-medium mb-1">ŘEŠENÍ</p>
-                            <h3 class="text-sm text-gray-400 font-regular">Postaráme se o jasný a jednoduchý přístup k
-                                vašim zákazníkům</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.3s">
-                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                    </svg>
-
-                    <div class="space-y-4">
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium mb-1">PROBLÉM</p>
-                            <h3 class="text-xl font-bold">Nedostatek poptávek</h3>
-                        </div>
-
-                        <div class="border-l-4 border-primary pl-4">
-                            <p class="text-sm text-gray-500 font-medium mb-1">ŘEŠENÍ</p>
-                            <h3 class="text-sm text-gray-400 font-regular">Silná online přítomnost a marketingová
-                                strategie</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="py-24 content-section">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 scroll-reveal">
-                Naše služby
-            </h2>
-            <p class="text-center text-gray-600 mb-16 text-lg scroll-reveal">
-                Komplexní řešení pro váš digitální marketing.
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                <!-- Service 1: Web development -->
-                <div class="service-card p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.1s">
-                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                    </svg>
-                    <h3 class="text-2xl font-bold mb-4">Web development</h3>
-                    <p class="text-gray-600 leading-relaxed mb-6">
-                        Tvoříme moderní weby, které nejen dobře vypadají, ale hlavně fungují. Od návrhu designu až po samotné kódování a ladění detailů — postaráme se, aby váš web byl přehledný, rychlý a připravený růst s vaším byznysem.
-                    </p>
-                    <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center service-arrow gap-2">
-                        Zjistit více
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Service 2: Online dohledatelnost -->
-                <div class="service-card p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.2s">
-                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <h3 class="text-2xl font-bold mb-4">Online dohledatelnost</h3>
-                    <p class="text-gray-600 leading-relaxed mb-6">
-                        Pomáháme, aby vás lidé snadno našli. Vylepšíme vaši pozici ve vyhledávání, nastavíme SEO, optimalizujeme Google profil firmy a zajistíme, že budete vidět tam, kde vás zákazníci hledají nejčastěji.
-                    </p>
-                    <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center service-arrow gap-2">
-                        Zjistit více
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Service 3: Sociální sítě -->
-                <div class="service-card p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.3s">
-                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                    </svg>
-                    <h3 class="text-2xl font-bold mb-4">Sociální sítě</h3>
-                    <p class="text-gray-600 leading-relaxed mb-6">
-                        Budujeme značky, které lidé sledují. Tvoříme obsah, plánujeme strategie a staráme se o vaše profily na Instagramu, Facebooku, YouTube i TikToku — od postů po kampaně, které opravdu fungují.
-                    </p>
-                    <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center service-arrow gap-2">
-                        Zjistit více
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Service 4: Online reklama -->
-                <div class="service-card p-8 glass-card rounded-xl scroll-reveal" style="transition-delay: 0.4s">
-                    <svg class="w-12 h-12 text-primary mb-6 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
-                    </svg>
-                    <h3 class="text-2xl font-bold mb-4">Online reklama</h3>
-                    <p class="text-gray-600 leading-relaxed mb-6">
-                        Zajišťujeme, aby vaše reklamy vydělávaly. Vytváříme vizuálně silné kampaně, spravujeme reklamy napříč platformami (Facebook, Google, TikTok) a průběžně je optimalizujeme pro co nejlepší výsledky a návratnost investic.
-                    </p>
-                    <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center service-arrow gap-2">
-                        Zjistit více
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <p class="text-center text-gray-400 text-sm mt-12 scroll-reveal">
-                Ceny jsou dělané na míru podle možností a potřeb klienta.
-            </p>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class="py-24 content-section">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 scroll-reveal">
-                Naše reference
-            </h2>
-            <p class="text-center text-gray-600 mb-16 text-lg scroll-reveal">
-                Projekty, na kterých jsme pracovali.
-            </p>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
-                <!-- Project 1 -->
-                <a href="http://skimparkpraha.cz/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.1s">
-                    <div class="overflow-hidden glass-card group rounded-xl">
-                        <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
-                            <img src="skimpark.png" alt="Web Skim Park Praha – online rezervační systém" class="w-full h-full object-cover">
-                            <div
-                                class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                                Skim Park Praha
-                            </h3>
-                            <p class="text-gray-600 text-sm">
-                                Moderní web pro skimpark s online rezervačním systémem
-                            </p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 2 -->
-                <a href="https://www.bluehillspictures.com/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.2s">
-                    <div class="overflow-hidden glass-card group rounded-xl">
-                        <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
-                            <img src="bluehills.png" alt="Blue Hills Pictures - webové stránky" class="w-full h-full object-cover">
-                            <div
-                                class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                                Blue Hills Pictures
-                            </h3>
-                            <p class="text-gray-600 text-sm">
-                                Portfolio web pro filmovou produkční společnost
-                            </p>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="https://www.productionhub.cz/login" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay: 0.3s">
-                    <div class="overflow-hidden glass-card group rounded-xl">
-                        <div class="aspect-video bg-gray-200 relative overflow-hidden image-glow">
-                            <img src="productionhub.png" alt="Production Hub - webová aplikace pro filmaře" class="w-full h-full object-cover">
-                            <div
-                                class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-white icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
-                                    </path>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                                Production Hub
-                            </h3>
-                            <p class="text-gray-600 text-sm">
-                                Platforma pro správu filmových projektů a týmů
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Testimonial -->
-            <div class="p-8 glass-card rounded-xl max-w-3xl mx-auto scroll-reveal">
-                <div class="flex items-start gap-4">
-                    <div class="text-6xl text-primary leading-none quote-glow">"</div>
-                    <div>
-                        <p class="text-lg italic mb-4">
-                            "Spolupráce se Smart Digital byla opravdu příjemná. Oceňuju profesionální přístup,
-                            kreativitu a hlavně to, jak dobře pochopili moji vizi. Určitě doporučuju!"
-                        </p>
-                        <p class="font-bold">Radovan Z.</p>
-                        <p class="text-sm text-gray-600">Skimparkpraha</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Form Section -->
-    <section id="contact" class="py-24 content-section">
-        <div class="container mx-auto px-4">
-            <div class="max-w-2xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 scroll-reveal">
-                    Zařadíme vyšší rychlost?🚀
-                </h2>
-                <p class="text-center text-gray-600 mb-12 text-lg scroll-reveal">
-                    Vyplňte formulář a domluvíme si online konzultaci.
-                </p>
-
-                <div class="p-8 glass-card rounded-xl scroll-reveal">
-                    <form id="contactForm" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-2">Jméno a příjmení</label>
-                            <input type="text" id="name" placeholder="Jan Novák" required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-all" />
-                        </div>
-
-                        <div>
-                            <label for="email" class="block text-sm font-medium mb-2">E-mail</label>
-                            <input type="email" id="email" placeholder="jan@email.cz" required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-all" />
-                        </div>
-
-                        <div>
-                            <label for="phone" class="block text-sm font-medium mb-2">Telefon</label>
-                            <input type="tel" id="phone" placeholder="+420 123 456 789" required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-all" />
-                        </div>
-
-                        <div>
-                            <label for="service" class="block text-sm font-medium mb-2">Zajímá mě</label>
-                            <select id="service" required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-all">
-                                <option value="">Vyberte službu</option>
-                                <option value="web">Web development</option>
-                                <option value="seo">Online dohledatelnost</option>
-                                <option value="social">Sociální sítě</option>
-                                <option value="ads">Online reklama</option>
-                                <option value="custom">Služby na míru</option>
-                                <option value="other">Chci si ujasnit možnosti</option>
-                            </select>
-                        </div>
-
-                        <button type="submit"
-                            class="w-full neon-glow bg-primary hover:bg-primary text-black font-semibold text-lg py-4 rounded-lg inline-flex items-center justify-center gap-2 cursor-pointer">
-                            <svg class="w-5 h-5 icon-animate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-width="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6" stroke-width="2"></line>
-                                <line x1="8" y1="2" x2="8" y2="6" stroke-width="2"></line>
-                                <line x1="3" y1="10" x2="21" y2="10" stroke-width="2"></line>
-                            </svg>
-                            Rezervovat konzultaci
-                        </button>
-
-                        <p class="text-sm text-gray-600 text-center">
-                            Po odeslání budete přesměrováni do Cal.com pro výběr termínu
-                        </p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-24 content-section">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 scroll-reveal">
-                    Časté otázky
-                </h2>
-                <p class="text-center text-gray-600 mb-12 text-lg scroll-reveal">
-                    Odpovědi na to, na co se klienti nejvíce ptají...
-                </p>
-
-                <div class="space-y-4">
-                    <!-- FAQ Item 1 -->
-                    <div class="faq-item glass-card rounded-lg overflow-hidden scroll-reveal" style="transition-delay: 0.1s">
-                        <button onclick="toggleFaq(0)"
-                            class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center hover:bg-gray-50 transition-colors">
-                            <span class="font-bold text-lg pr-4">Jak dlouho je ideální spolupracovat se Smart Digital,
-                                aby strategie a obsah přinesly maximální výsledky?</span>
-                            <svg class="faq-icon w-5 h-5 flex-shrink-0 transition-transform" id="icon-0" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-content px-6 pb-0" id="content-0">
-                            <p class="text-gray-600 pb-6 pl-4">
-                                Pro skutečný efekt našich kampaní a obsahové strategie doporučujeme spolupráci minimálně
-                                na 3 měsíce. Marketing je jako motor – potřebuje čas na rozběh, testování a
-                                optimalizaci, aby přinášel měřitelné výsledky a stabilní růst.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 2 -->
-                    <div class="faq-item glass-card rounded-lg overflow-hidden scroll-reveal" style="transition-delay: 0.2s">
-                        <button onclick="toggleFaq(1)"
-                            class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center hover:bg-gray-50 transition-colors">
-                            <span class="font-bold text-lg pr-4">Co když moje firma ještě nemá žádný obsah ani sociální
-                                sítě?</span>
-                            <svg class="faq-icon w-5 h-5 flex-shrink-0 transition-transform" id="icon-1" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-content px-6 pb-0" id="content-1">
-                            <p class="text-gray-600 pb-6 pl-4">
-                                To vůbec nevadí! Začneme od nuly – založíme profily, nastavíme web, připravíme strategii
-                                obsahu a vytvoříme obsah, který rezonuje s vašimi zákazníky. Naším cílem je, aby každý
-                                krok vedl k jasnému výsledku a generoval poptávku.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 3 -->
-                    <div class="faq-item glass-card rounded-lg overflow-hidden scroll-reveal" style="transition-delay: 0.3s">
-                        <button onclick="toggleFaq(2)"
-                            class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center hover:bg-gray-50 transition-colors">
-                            <span class="font-bold text-lg pr-4">Jak zjistím, že investice do marketingu opravdu
-                                funguje?</span>
-                            <svg class="faq-icon w-5 h-5 flex-shrink-0 transition-transform" id="icon-2" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-content px-6 pb-0" id="content-2">
-                            <p class="text-gray-600 pb-6 pl-4">
-                                Každý balíček zahrnuje reporting a analytiku. Sledujeme dosah, interakce, kliky,
-                                návštěvnost webu a konverze. Na základě dat pravidelně optimalizujeme kampaně, abyste
-                                měli jistotu, že každý investovaný prostředek přináší hodnotu.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 4 -->
-                    <div class="faq-item glass-card rounded-lg overflow-hidden scroll-reveal" style="transition-delay: 0.4s">
-                        <button onclick="toggleFaq(3)"
-                            class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center hover:bg-gray-50 transition-colors">
-                            <span class="font-bold text-lg pr-4">Proč bych si měl vybrat Smart Digital?</span>
-                            <svg class="faq-icon w-5 h-5 flex-shrink-0 transition-transform" id="icon-3" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-content px-6 pb-0" id="content-3">
-                            <p class="text-gray-600 pb-6 pl-4">
-                                Jsme mladý tým kluků, kteří rozumí současné době a digitálním trendům. Živíme se tím, co
-                                milujeme – tvorbou obsahu, kampaní a strategií, které opravdu fungují. Máme vášeň pro
-                                růst byznysů a děláme vše proto, aby vaše podnikání/dílna nejen byly vidět, ale také
-                                škálovaly a přinášely nové poptávky.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-   <footer class="bg-[#111] text-white py-12 relative z-10">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <h3 class="text-2xl font-bold mb-2">
-                    Smart <span class="text-primary">Digital</span>
-                </h3>
-                <div class="flex flex-col gap-2 justify-center md:justify-start text-white/80">
-                    <div class="flex items-center gap-2">
-                        <a href="mailto:smdgtl.contact@gmail.com" class="contact-glow transition-all duration-300">
-                            smdgtl.contact@gmail.com
-                        </a>
-                    </div>
-                    <a href="tel:+420733220300" class="contact-glow transition-all duration-300">
-                        +420 733 220 300
-                    </a>
-                    <p class="text-xs text-gray-400/30">Founder & CEO: Julijan Laznik</p>
-                    <p class="text-xs text-gray-400/30">Co-founder: Matyáš Hartl</p>
-                </div>
-            </div>
-
-            <div class="flex gap-6 text-sm text-white/80">
-                <a href="gdpr.html" class="hover:text-primary transition-colors">GDPR</a>
-                <a href="cookies.html" class="hover:text-primary transition-colors">Cookies</a>
-                <a href="podminky.html" class="hover:text-primary transition-colors">Podmínky</a>
-            </div>
-        </div>
-
-        <div class="mt-8 pt-8 border-t border-white/10 text-center text-sm text-gray-400/30">
-            <p>© 2025 Smart Digital. Všechna práva vyhrazena.</p>
-        </div>
-    </div>
-</footer>
-
-
-    <!-- Scroll to Top Button -->
-    <button id="scrollTopBtn" onclick="scrollToTop()"
-        class="scroll-top fixed bottom-8 right-8 z-50 neon-glow bg-primary hover:bg-primary text-black rounded-full w-12 h-12 flex items-center justify-center cursor-pointer">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
+    <!-- ŠIPKA DOLŮ -->
+    <button id="scrollArrow" class="scroll-arrow" aria-label="Scroll down">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
     </button>
+  </section>
 
-    <script>
-         const banner = document.getElementById("cookie-banner");
-const acceptBtn = document.getElementById("accept-cookies");
-const declineBtn = document.getElementById("decline-cookies");
+  <!-- Problem/Solution -->
+  <section class="py-24 content-section">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-16">Jak posuneme váš byznys dál?</h2>
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost">
+          <p class="text-sm text-gray-400 font-medium mb-1">PROBLÉM</p>
+          <h3 class="text-xl font-bold">Zastaralá online prezentace</h3>
+          <div class="border-l-4 border-primary pl-4 mt-5">
+            <p class="text-sm text-gray-400 font-medium mb-1">ŘEŠENÍ</p>
+            <p class="text-[15px] text-gray-300">Obnovíme a pravidelně budeme spravovat web a sociální sítě, aby vás zákazníci snadno našli a web rychle načítal.</p>
+          </div>
+        </div>
+        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost" style="transition-delay:.1s">
+          <p class="text-sm text-gray-400 font-medium mb-1">PROBLÉM</p>
+          <h3 class="text-xl font-bold">Chaos v komunikaci</h3>
+          <div class="border-l-4 border-primary pl-4 mt-5">
+            <p class="text-sm text-gray-400 font-medium mb-1">ŘEŠENÍ</p>
+            <p class="text-[15px] text-gray-300">Zjednodušíme sdělení i cestu: jasná nabídka, přehledná navigace, viditelné CTA a rychlý kontakt.</p>
+          </div>
+        </div>
+        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost" style="transition-delay:.2s">
+          <p class="text-sm text-gray-400 font-medium mb-1">PROBLÉM</p>
+          <h3 class="text-xl font-bold">Nedostatek poptávek</h3>
+          <div class="border-l-4 border-primary pl-4 mt-5">
+            <p class="text-sm text-gray-400 font-medium mb-1">ŘEŠENÍ</p>
+            <p class="text-[15px] text-gray-300">Nastavíme silnou online přítomnost a výkonové kampaně s průběžnou optimalizací na konverze.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Scroll Reveal on Scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+  <!-- Services -->
+  <section class="py-24 content-section">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Naše služby</h2>
+      <p class="text-center text-gray-300 mb-16 text-lg">Komplexní řešení pro váš digitální marketing.</p>
+      <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost">
+          <h3 class="text-2xl font-bold mb-4">Web development</h3>
+          <p class="text-gray-300 leading-relaxed mb-6">Moderní, rychlé a responzivní weby s důrazem na UX a SEO. Postaráme se o návrh, kódování i ladění, aby web přiváděl poptávky a rostl s vaším byznysem.</p>
+          <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center gap-2">Zjistit více <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></button>
+        </div>
+        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost" style="transition-delay:.1s">
+          <h3 class="text-2xl font-bold mb-4">Online dohledatelnost</h3>
+          <p class="text-gray-300 leading-relaxed mb-6">Zlepšíme pozice ve vyhledávačích, upravíme technické SEO, obsah i lokální viditelnost (Google profil), aby vás zákazníci našli tam, kde hledají.</p>
+          <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center gap-2">Zjistit více <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></button>
+        </div>
+        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost" style="transition-delay:.2s">
+          <h3 class="text-2xl font-bold mb-4">Sociální sítě</h3>
+          <p class="text-gray-300 leading-relaxed mb-6">Strategie, tvorba obsahu a správa profilů (Instagram, Facebook, YouTube, TikTok). Zaměřeno na růst dosahu, engagementu a poptávek.</p>
+          <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center gap-2">Zjistit více <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></button>
+        </div>
+        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost" style="transition-delay:.3s">
+          <h3 class="text-2xl font-bold mb-4">Online reklama</h3>
+          <p class="text-gray-300 leading-relaxed mb-6">Návrh a správa výkonových kampaní (Google Ads, Facebook Ads, TikTok Ads) s průběžnou optimalizací pro lepší návratnost investic.</p>
+          <button onclick="scrollToContact()" class="text-primary font-semibold inline-flex items-center gap-2">Zjistit více <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></button>
+        </div>
+      </div>
+      <p class="text-center text-gray-400 text-sm mt-12">Ceny jsou dělané na míru podle možností a potřeb klienta.</p>
+    </div>
+  </section>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, observerOptions);
+  <!-- Portfolio -->
+  <section class="py-24 content-section">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Naše reference</h2>
+      <p class="text-center text-gray-300 mb-16 text-lg">Projekty, na kterých jsme pracovali.</p>
 
-        document.querySelectorAll('.scroll-reveal').forEach(el => {
-            observer.observe(el);
+      <div class="grid md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
+        <a href="http://skimparkpraha.cz/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal">
+          <div class="overflow-hidden glass-card group rounded-2xl card-boost">
+            <div class="aspect-video bg-gray-800 relative overflow-hidden">
+              <img src="skimpark.png" alt="Web Skim Park Praha – online rezervační systém" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Skim Park Praha</h3>
+              <p class="text-gray-300 text-sm">Moderní web pro skimpark s online rezervačním systémem</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://www.bluehillspictures.com/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay:.1s">
+          <div class="overflow-hidden glass-card group rounded-2xl card-boost">
+            <div class="aspect-video bg-gray-800 relative overflow-hidden">
+              <img src="bluehills.png" alt="Blue Hills Pictures - webové stránky" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Blue Hills Pictures</h3>
+              <p class="text-gray-300 text-sm">Portfolio web pro filmovou produkční společnost</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://www.productionhub.cz/login" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay:.2s">
+          <div class="overflow-hidden glass-card group rounded-2xl card-boost">
+            <div class="aspect-video bg-gray-800 relative overflow-hidden">
+              <img src="productionhub.png" alt="Production Hub - webová aplikace pro filmaře" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Production Hub</h3>
+              <p class="text-gray-300 text-sm">Platforma pro správu filmových projektů a týmů</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="p-8 glass-card rounded-2xl max-w-3xl mx-auto scroll-reveal card-boost">
+        <div class="flex items-start gap-4">
+          <div class="text-6xl text-primary leading-none">"</div>
+          <div>
+            <p class="text-lg italic mb-4">"Spolupráce se Smart Digital byla opravdu příjemná. Oceňuju profesionální přístup, kreativitu a hlavně to, jak dobře pochopili moji vizi. Určitě doporučuju!"</p>
+            <p class="font-bold">Radovan Z.</p>
+            <p class="text-sm text-gray-400">Skimparkpraha</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-24 content-section">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Zařadíme vyšší rychlost?🚀</h2>
+        <p class="text-center text-gray-300 mb-12 text-lg">Vyplňte formulář a domluvíme si online konzultaci.</p>
+        <div class="p-8 glass-card rounded-2xl">
+          <form id="contactForm" class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium mb-2">Jméno a příjmení</label>
+              <input type="text" id="name" placeholder="Jan Novák" required class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">E-mail</label>
+              <input type="email" id="email" placeholder="jan@email.cz" required class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium mb-2">Telefon</label>
+              <input type="tel" id="phone" placeholder="+420 123 456 789" required class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
+            </div>
+            <div>
+              <label for="service" class="block text-sm font-medium mb-2">Zajímá mě</label>
+              <select id="service" required class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all">
+                <option value="">Vyberte službu</option>
+                <option value="web">Web development</option>
+                <option value="seo">Online dohledatelnost</option>
+                <option value="social">Sociální sítě</option>
+                <option value="ads">Online reklama</option>
+                <option value="custom">Služby na míru</option>
+                <option value="other">Chci si ujasnit možnosti</option>
+              </select>
+            </div>
+            <button type="submit" class="w-full neon-glow bg-primary text-black font-semibold text-lg py-4 rounded-full inline-flex items-center justify-center gap-2 cta">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-width="2"></rect><line x1="16" y1="2" x2="16" y2="6" stroke-width="2"></line><line x1="8" y1="2" x2="8" y2="6" stroke-width="2"></line><line x1="3" y1="10" x2="21" y2="10" stroke-width="2"></line></svg>
+              Rezervovat konzultaci
+            </button>
+            <p class="text-sm text-gray-400 text-center">Po odeslání budete přesměrováni do Cal.com pro výběr termínu</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 content-section">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Časté otázky</h2>
+        <p class="text-center text-gray-300 mb-12 text-lg">Odpovědi na to, na co se klienti nejvíce ptají...</p>
+        <div class="space-y-4">
+          <div class="faq-item glass-card rounded-xl overflow-hidden scroll-reveal card-boost">
+            <button onclick="toggleFaq(0)" class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center">
+              <span class="font-bold text-lg pr-4">Jak dlouho je ideální spolupracovat se Smart Digital, aby strategie a obsah přinesly maximální výsledky?</span>
+              <svg class="faq-icon w-5 h-5 flex-shrink-0" id="icon-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="faq-content px-6 pb-0" id="content-0"><p class="muted pb-6 pl-4">Pro skutečný efekt doporučujeme min. 3 měsíce – testování, optimalizace, škálování.</p></div>
+          </div>
+          <div class="faq-item glass-card rounded-xl overflow-hidden scroll-reveal card-boost" style="transition-delay:.1s">
+            <button onclick="toggleFaq(1)" class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center">
+              <span class="font-bold text-lg pr-4">Co když moje firma ještě nemá žádný obsah ani sociální sítě?</span>
+              <svg class="faq-icon w-5 h-5 flex-shrink-0" id="icon-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="faq-content px-6 pb-0" id="content-1"><p class="muted pb-6 pl-4">Začneme od nuly – založíme profily, nastavíme web, připravíme strategii a vytvoříme obsah, který rezonuje s vašimi zákazníky.</p></div>
+          </div>
+          <div class="faq-item glass-card rounded-xl overflow-hidden scroll-reveal card-boost" style="transition-delay:.2s">
+            <button onclick="toggleFaq(2)" class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center">
+              <span class="font-bold text-lg pr-4">Jak zjistím, že investice do marketingu opravdu funguje?</span>
+              <svg class="faq-icon w-5 h-5 flex-shrink-0" id="icon-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            <div class="faq-content px-6 pb-0" id="content-2"><p class="muted pb-6 pl-4">Sledujeme návštěvnost, interakce, kliky a hlavně konverze/poptávky. Reportujeme pravidelně a optimalizujeme podle dat.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (kept) -->
+  <footer class="bg-[#111] text-white py-12 relative z-10">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-center md:text-left">
+          <h3 class="text-2xl font-extrabold mb-2">Smart <span class="text-primary">Digital</span></h3>
+          <div class="flex flex-col gap-2 justify-center md:justify-start text-white/80">
+            <div class="flex items-center gap-2"><a href="mailto:smdgtl.contact@gmail.com" class="hover:text-primary transition-colors">smdgtl.contact@gmail.com</a></div>
+            <a href="tel:+420733220300" class="hover:text-primary transition-colors">+420 733 220 300</a>
+            <p class="text-xs text-gray-400/60">Founder & CEO: Julijan Laznik</p>
+            <p class="text-xs text-gray-400/60">Co-founder: Matyáš Hartl</p>
+          </div>
+        </div>
+        <div class="flex gap-6 text-sm text-white/80">
+          <a href="gdpr.html" class="hover:text-primary transition-colors">GDPR</a>
+          <a href="cookies.html" class="hover:text-primary transition-colors">Cookies</a>
+          <a href="podminky.html" class="hover:text-primary transition-colors">Podmínky</a>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t border-white/10 text-center text-sm text-gray-400/60">
+        <p>© 2025 Smart Digital. Všechna práva vyhrazena.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- UI: scroll-top button -->
+  <button id="scrollTopBtn" onclick="scrollToTop()" class="scroll-top fixed bottom-8 right-8 z-50 neon-glow bg-primary text-black rounded-full w-12 h-12 hidden items-center justify-center">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+  </button>
+
+  <script>
+    // Scroll reveal (simple)
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); } });
+    }, {threshold:0.1, rootMargin:'0px 0px -50px 0px'});
+    document.querySelectorAll('.scroll-reveal').forEach(el=>observer.observe(el));
+
+    // Smooth actions
+    function scrollToContact(){ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+    function scrollToTop(){ window.scrollTo({ top:0, behavior:'smooth' }); }
+    window.addEventListener('scroll', ()=>{
+      const b=document.getElementById('scrollTopBtn');
+      if(window.pageYOffset>300){ b.classList.remove('hidden'); b.classList.add('flex'); }
+      else { b.classList.add('hidden'); b.classList.remove('flex'); }
+    });
+
+    // FAQ
+    function toggleFaq(i){
+      const c=document.getElementById(`content-${i}`);
+      const ic=document.getElementById(`icon-${i}`);
+      c.classList.toggle('active');
+      ic.classList.toggle('rotated');
+    }
+    window.toggleFaq = toggleFaq;
+    window.scrollToContact = scrollToContact;
+    window.scrollToTop = scrollToTop;
+
+    // Scroll arrow click → first content section
+    (function(){
+      const btn = document.getElementById('scrollArrow');
+      if(!btn) return;
+      btn.addEventListener('click', ()=>{
+        const next = document.querySelector('section.content-section');
+        if(next) next.scrollIntoView({ behavior:'smooth' });
+      });
+    })();
+
+    /* ===== Canvas particles (green twinkle) – full 360° wandering ===== */
+    (function(){
+      const canvas = document.createElement('canvas');
+      canvas.id='bgfx'; canvas.style.cssText='position:fixed;inset:0;z-index:-4;pointer-events:none;';
+      document.body.prepend(canvas);
+      const ctx = canvas.getContext('2d');
+      let W,H,ps=[];
+
+      function R(a,b){ return Math.random()*(b-a)+a; }
+      function clamp(v,a,b){ return v<a?a:v>b?b:v; }
+
+      function size(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; init(); }
+      function init(){
+        const n = Math.min(160, Math.floor((W*H)/12000)); // trochu víc „kuliček“
+        ps = Array.from({length:n},()=>({
+          x:R(0,W), y:R(0,H),
+          a:R(0,Math.PI*2),                    // úhel pohybu
+          s:R(0.04,0.13),                      // rychlost
+          turn:R(-0.008,0.008),                // aktuální zatáčení
+          r:R(.7,2.2),                         // poloměr bodu
+          o:R(.035,.11),                       // opacity
+          jitter:R(0.0015,0.0045)              // jak rychle mění směr
+        }));
+      }
+
+      function step(){
+        ctx.clearRect(0,0,W,H);
+        ctx.globalCompositeOperation='lighter';
+        for(const p of ps){
+          // náhodné meandrování (hladké změny směru + rychlosti)
+          p.turn += R(-p.jitter,p.jitter);
+          p.turn = clamp(p.turn,-0.028,0.028);
+          p.a += p.turn;
+          p.s += R(-0.002,0.002);
+          p.s = clamp(p.s,0.03,0.14);
+
+          p.x += Math.cos(p.a)*p.s*60/100;  // 60/100 ~ jemné škálování pro FPS
+          p.y += Math.sin(p.a)*p.s*60/100;
+
+          // wrap-around (plynulý průchod přes hrany)
+          if(p.x < -10) p.x = W+10;
+          if(p.x > W+10) p.x = -10;
+          if(p.y < -10) p.y = H+10;
+          if(p.y > H+10) p.y = -10;
+
+          ctx.beginPath();
+          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle='rgba(199,247,21,'+p.o+')';
+          ctx.fill();
+        }
+        requestAnimationFrame(step);
+      }
+      window.addEventListener('resize', size); size(); step();
+    })();
+  </script>
+
+  <script>
+    (function(){
+      // HERO: physics-driven blobs with mouse repulsion
+      const field = document.getElementById('heroField');
+      (function(){
+        if(!field) return;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.innerWidth < 768;
+        const COUNT = reduce ? 0 : (isMobile ? 18 : 36);
+        const hues = [72,76,80,84,88,92];
+        function rand(a,b){ return Math.random()*(b-a)+a; }
+        field.innerHTML = '';
+        const blobs = [];
+        function rect(){ return field.getBoundingClientRect(); }
+        const r0 = rect();
+        for(let i=0;i<COUNT;i++){
+          const el = document.createElement('div');
+          el.className = 'hero-shape';
+          const s = Math.round(rand(isMobile?90:120, isMobile?160:220));
+          el.style.width = s+'px'; el.style.height = s+'px';
+          el.style.setProperty('--h', hues[Math.floor(Math.random()*hues.length)]);
+          el.style.setProperty('--morph', (8 + Math.random()*10).toFixed(2)+'s');
+          const br = `${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% / ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}%`;
+          el.style.borderRadius = br;
+          field.appendChild(el);
+          blobs.push({ el, s, x: rand(0, r0.width - s), y: rand(0, r0.height - s), vx: rand(-0.35,0.35), vy: rand(-0.35,0.35), wob: rand(0.5,1.5) });
+        }
+        let mouse = {x:0,y:0,active:false};
+        window.addEventListener('mousemove', (e)=>{
+          const r = rect();
+          mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+          mouse.active = mouse.x>=0 && mouse.x<=r.width && mouse.y>=0 && mouse.y<=r.height;
+        }, {passive:true});
+        window.addEventListener('resize', ()=>{
+          const r = rect();
+          blobs.forEach(b=>{ b.x = Math.min(Math.max(b.x,0), Math.max(0,r.width-b.s)); b.y = Math.min(Math.max(b.y,0), Math.max(0,r.height-b.s)); });
         });
-
-        // Parallax Effect
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const scrolled = window.pageYOffset;
-                    const parallaxElements = document.querySelectorAll('.parallax');
-                    parallaxElements.forEach(el => {
-                        const speed = el.dataset.speed || 0.5;
-                        el.style.transform = `translateY(${scrolled * speed}px)`;
-                    });
-                    ticking = false;
-                });
-                ticking = true;
+        const R = isMobile ? 120 : 200, F = 1.2, DAMP = 0.985, MAXV = 2.0;
+        function tick(t){
+          const r = rect();
+          for(const b of blobs){
+            b.vx += Math.sin((b.y + t*0.06)*0.003)*0.018*b.wob;
+            b.vy += Math.cos((b.x + t*0.05)*0.003)*0.018*b.wob;
+            if(mouse.active){
+              const cx = b.x + b.s/2, cy = b.y + b.s/2;
+              const dx = cx - mouse.x, dy = cy - mouse.y; const dist = Math.hypot(dx,dy);
+              if(dist < R && dist > 0.001){ const m = 1 - dist/R; const f = F*(m*m); b.vx += (dx/dist)*f; b.vy += (dy/dist)*f; }
             }
+            b.vx = Math.max(-MAXV, Math.min(MAXV, b.vx)) * DAMP;
+            b.vy = Math.max(-MAXV, Math.min(MAXV, b.vy)) * DAMP;
+            b.x += b.vx; b.y += b.vy;
+            if(b.x <= 0){ b.x=0; b.vx = Math.abs(b.vx)*0.8; }
+            if(b.y <= 0){ b.y=0; b.vy = Math.abs(b.vy)*0.8; }
+            if(b.x + b.s >= r.width){ b.x = r.width - b.s; b.vx = -Math.abs(b.vx)*0.8; }
+            if(b.y + b.s >= r.height){ b.y = r.height - b.s; b.vy = -Math.abs(b.vy)*0.8; }
+            b.el.style.transform = `translate3d(${b.x}px, ${b.y}px, 0)`;
+          }
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame((ts)=>tick(ts));
+      })();
+
+      // In-view trigger for liquid entry on cards
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('inview'); } });
+      }, { threshold: 0.25 });
+      document.querySelectorAll('.glass-card').forEach(el=>io.observe(el));
+
+      // Liquid cursor highlight center on cards (for ::before)
+      const cardsHi = document.querySelectorAll('.glass-card');
+      document.addEventListener('mousemove', (e)=>{
+        for(const c of cardsHi){
+          const r = c.getBoundingClientRect();
+          const x = e.clientX - r.left; const y = e.clientY - r.top;
+          if(x>=0 && y>=0 && x<=r.width && y<=r.height){
+            c.style.setProperty('--mx', x+'px');
+            c.style.setProperty('--my', y+'px');
+          }
+        }
+      }, {passive:true});
+    })();
+  </script>
+
+  <script>
+    // Global cursor-following liquid blob
+    (function(){
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const coarse = window.matchMedia('(pointer: coarse)').matches;
+      if(reduce || coarse) return;
+      const blob = document.createElement('div');
+      blob.className = 'cursor-blob';
+      document.body.appendChild(blob);
+      function sizeFromVW(){ return Math.min(180, Math.max(100, Math.floor(window.innerWidth*0.08))); }
+      blob.style.setProperty('--cb-size', sizeFromVW()+'px');
+      blob.style.setProperty('--cb-h', '82');
+      let x = window.innerWidth/2, y = window.innerHeight/2;
+      let tx = x, ty = y;
+      const TAU = 0.9; let last = performance.now();
+      function loop(now){
+        const dt = Math.max(0.001, (now - last) / 1000);
+        last = now;
+        const alpha = 1 - Math.exp(-dt / TAU);
+        x += (tx - x) * alpha;
+        y += (ty - y) * alpha;
+        blob.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        requestAnimationFrame(loop);
+      }
+      window.addEventListener('mousemove', e=>{ tx = e.clientX; ty = e.clientY; }, {passive:true});
+      window.addEventListener('mousedown', ()=> blob.classList.add('active'));
+      window.addEventListener('mouseup', ()=> blob.classList.remove('active'));
+      window.addEventListener('resize', ()=> blob.style.setProperty('--cb-size', sizeFromVW()+'px'));
+      document.addEventListener('mouseover', e=>{
+        if(e.target.closest('a,button,[role="button"],.cta')){ blob.style.opacity = .78; blob.style.setProperty('--cb-h','90'); }
+        else { blob.style.opacity = .62; blob.style.setProperty('--cb-h','82'); }
+      });
+      requestAnimationFrame(loop);
+    })();
+  </script>
+
+  <script>
+    // Card tilt (3D) + Scroll progress bar + Magnet effects (strong cards)
+    (function(){
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const coarse = window.matchMedia('(pointer: coarse)').matches;
+
+      if(!reduce && !coarse){
+        const els = document.querySelectorAll('.glass-card');
+        const items = Array.from(els).map(el=>({ el, rx:0, ry:0, tx:0, ty:0, txTarget:0, tyTarget:0 }));
+        function animateTilt(){
+          for(const it of items){
+            it.tx += (it.txTarget - it.tx)*0.15;
+            it.ty += (it.tyTarget - it.ty)*0.15;
+            it.el.style.setProperty('--tx', it.tx.toFixed(2)+'px');
+            it.el.style.setProperty('--ty', it.ty.toFixed(2)+'px');
+          }
+          requestAnimationFrame(animateTilt);
+        }
+        requestAnimationFrame(animateTilt);
+        items.forEach(it=>{
+          let raf; const el = it.el; el.style.perspective='800px';
+          el.addEventListener('pointermove', e=>{
+            const r = el.getBoundingClientRect();
+            const px = (e.clientX - r.left)/r.width - 0.5;
+            const py = (e.clientY - r.top)/r.height - 0.5;
+            const rx = (-py*6).toFixed(2)+'deg';
+            const ry = (px*8).toFixed(2)+'deg';
+            it.txTarget = px * -3;
+            it.tyTarget = py * -3;
+            if(raf) cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(()=>{ el.style.setProperty('--rx', rx); el.style.setProperty('--ry', ry); });
+          });
+          el.addEventListener('pointerleave', ()=>{ it.txTarget = 0; it.tyTarget = 0; el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg'); });
         });
 
-        // Scroll to Contact Function
-        function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({behavior: 'smooth' });
-        }
+        // Micro-magnet CTA + cards (stronger for cards)
+        const ctas = Array.from(document.querySelectorAll('.cta'));
+        const magCards = Array.from(document.querySelectorAll('.glass-card'));
+        let mx = 0, my = 0;
+        const CTA_R = 140, CTA_MAX = 6;
+        const CARD_R = 220, CARD_MAX = 12, CARD_EASE = 0.18;
+        const cardState = magCards.map(el=>({ el, mmx:0, mmy:0, mmxt:0, mmyt:0 }));
 
-        // Scroll to Top Function
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Show/Hide Scroll to Top Button
-        window.addEventListener('scroll', function () {
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
+        function updateTargets(){
+          for(const el of ctas){
+            const r = el.getBoundingClientRect();
+            const cx = r.left + r.width/2, cy = r.top + r.height/2;
+            const dx = mx - cx, dy = my - cy, d = Math.hypot(dx,dy);
+            if(d < CTA_R && d > 0.001){
+              const f = (1 - d/CTA_R); const m = f*f;
+              el.style.setProperty('--cta-tx', (dx/d * CTA_MAX * m).toFixed(2)+'px');
+              el.style.setProperty('--cta-ty', (dy/d * CTA_MAX * m).toFixed(2)+'px');
             } else {
-                scrollTopBtn.classList.remove('visible');
+              el.style.setProperty('--cta-tx','0px'); el.style.setProperty('--cta-ty','0px');
             }
-        });
-
-        // FAQ Toggle Function
-        function toggleFaq(index) {
-            const content = document.getElementById(`content-${index}`);
-            const icon = document.getElementById(`icon-${index}`);
-
-            content.classList.toggle('active');
-            icon.classList.toggle('rotated');
+          }
+          for(const s of cardState){
+            const r = s.el.getBoundingClientRect();
+            const cx = r.left + r.width/2, cy = r.top + r.height/2;
+            const dx = mx - cx, dy = my - cy, d = Math.hypot(dx,dy);
+            if(d < CARD_R && d > 0.001){
+              const f = (1 - d/CARD_R); const m = f*f;
+              s.mmxt = (dx/d * CARD_MAX * m);
+              s.mmyt = (dy/d * CARD_MAX * m);
+            } else {
+              s.mmxt = 0; s.mmyt = 0;
+            }
+          }
         }
+        function magnetLoop(){
+          for(const s of cardState){
+            s.mmx += (s.mmxt - s.mmx) * CARD_EASE;
+            s.mmy += (s.mmyt - s.mmy) * CARD_EASE;
+            s.el.style.setProperty('--txm', s.mmx.toFixed(2)+'px');
+            s.el.style.setProperty('--tym', s.mmy.toFixed(2)+'px');
+          }
+          requestAnimationFrame(magnetLoop);
+        }
+        requestAnimationFrame(magnetLoop);
 
-        // Contact Form Submission
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            // Redirect to Calendly
-            window.open('https://cal.com/smartdigital/15min', '_blank');
+        window.addEventListener('mousemove', (e)=>{ mx = e.clientX; my = e.clientY; updateTargets(); }, {passive:true});
+        window.addEventListener('mouseleave', ()=>{
+          ctas.forEach(el=>{ el.style.setProperty('--cta-tx','0px'); el.style.setProperty('--cta-ty','0px'); });
+          for(const s of cardState){ s.mmxt = 0; s.mmyt = 0; }
         });
+      }
 
-        // Add dynamic glow to cursor (optional advanced effect)
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.glass-card');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
-                }
-            });
-        });
-    </script>
-
+      // Scroll progress bar
+      const bar = document.createElement('div');
+      bar.className = 'scroll-progress';
+      document.body.appendChild(bar);
+      function update(){
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max>0 ? (h.scrollTop / max) : 0;
+        bar.style.width = (p*100).toFixed(2) + '%';
+      }
+      window.addEventListener('scroll', update, {passive:true});
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>
 </body>
-
 </html>
