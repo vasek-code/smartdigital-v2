@@ -12,6 +12,9 @@
 
   <!-- Preload hero poster -->
   <link rel="preload" as="image" href="/hero-poster.jpg" imagesrcset="/hero-poster-768.jpg 768w, /hero-poster.jpg 1920w" imagesizes="100vw" fetchpriority="high">
+  <!-- PRELOAD hero videa -->
+<link rel="preload" as="video" href="smart digital video background 1.webm" type="video/webm" media="(min-width: 768px)">
+<link rel="preload" as="video" href="smart digital video background 1-720.mp4" type="video/mp4" media="(max-width: 767px)">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -132,7 +135,15 @@
   <!-- Hero with VIDEO background -->
   <section class="relative h-[100svh] md:h-screen overflow-hidden" id="hero">
     <div class="hero-video-wrap" aria-hidden="true">
-      <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="none" poster="/hero-poster.jpg"></video>
+      <video id="heroVideo"
+       class="hero-video"
+       autoplay
+       muted
+       playsinline
+       loop
+       preload="metadata"
+       poster="/hero-poster.jpg"></video>
+
     </div>
 
     <div class="gradient-hero"></div>
@@ -393,64 +404,65 @@
   </script>
 
   <script>
-  // HERO video – iOS-safe fallback, zvládne i mezery v názvu
+  // HERO video – okamžitý start, iOS fallback, mobilní varianta
   document.addEventListener('DOMContentLoaded', function(){
     const v = document.getElementById('heroVideo');
     if(!v) return;
 
-    // iOS kompat: muted + (webkit-)playsinline + autoplay
+    // Bezpečné atributy i pro iOS
     v.muted = true;
     v.setAttribute('playsinline','');
     v.setAttribute('webkit-playsinline','');
-    v.setAttribute('autoplay','');
-    v.setAttribute('loop','');
+    v.autoplay = true;
+    v.loop = true;
 
-    // Název souboru přesně, jak ho máš vedle HTML
-    const baseName = 'smart digital video background 1';
-    const webm = './' + encodeURIComponent(baseName) + '.webm';
-    const mp4  = './' + encodeURIComponent(baseName) + '.mp4'; // přidej tenhle soubor na server
+    // Síť a velikost obrazovky
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const saveData = !!(conn && (conn.saveData || /(^|\b)(slow-2g|2g)\b/.test(conn.effectiveType||'')));
+    const fast = !!(conn && /(^|\b)4g\b/.test(conn.effectiveType||'')); // 4g ~ rychlejší
+    const small = matchMedia('(max-width: 767px)').matches;
+
+    // Volba souborů (přidej mobilní -720.mp4 na server)
+    const base = 'smart digital video background 1';
+    const pick = (ext, mob=false) => './' + encodeURIComponent(base + (mob ? '-720' : '')) + '.' + ext;
 
     // Detekce podpory
-    const canWebM = !!v.canPlayType && (
-      v.canPlayType('video/webm; codecs="vp9"') ||
-      v.canPlayType('video/webm; codecs="vp8, vorbis"') ||
-      v.canPlayType('video/webm')
-    );
-    const canMP4 = !!v.canPlayType && (
-      v.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') ||
-      v.canPlayType('video/mp4')
-    );
+    const canWebM = !!v.canPlayType && (v.canPlayType('video/webm; codecs="vp9"') || v.canPlayType('video/webm; codecs="vp8"') || v.canPlayType('video/webm'));
+    const canMP4  = !!v.canPlayType && (v.canPlayType('video/mp4; codecs="avc1.4d401e"') || v.canPlayType('video/mp4'));
 
-    // iOS Safari většinou => MP4, Chrome/Android => WebM
+    // Pořadí preferencí: desktop → WebM, iOS/mobil → MP4-720
     const sources = [];
-    if (canWebM) sources.push([webm, 'video/webm']);
-    if (canMP4) sources.push([mp4,  'video/mp4']);
+    if (small && canMP4) {
+      sources.push([pick('mp4', true), 'video/mp4']); // mobilní 720p
+      if (canWebM) sources.push([pick('webm', true), 'video/webm']); // kdybys měl i -720.webm
+    } else {
+      if (canWebM) sources.push([pick('webm', false), 'video/webm']);
+      if (canMP4)  sources.push([pick('mp4',  false), 'video/mp4']);
+    }
 
-    // Když neumí ani jedno, necháme poster (už je viditelný díky CSS)
-    if (!sources.length) {
-      console.warn('Prohlížeč neumí WebM/MP4 – zůstávám na posteru.');
+    if (!sources.length || saveData) {
+      // špatná síť / žádná podpora → zůstaneme na posteru
       return;
     }
 
-    // Připojit zdroje
-    for (const [src, type] of sources){
-      const s = document.createElement('source');
-      s.src = src; s.type = type;
-      v.appendChild(s);
-    }
+    // Nastav preload agresivněji na rychlé síti
+    v.preload = fast ? 'auto' : 'metadata';
 
-    // Zkusit přehrát hned + fallback po prvním tapu
-    const tryPlay = () => v.play().catch(()=>{});
+    // Připoj pouze první (nejlepší) zdroj, ať se nezačne tahat víc souborů
+    const [src, type] = sources[0];
+    const s = document.createElement('source');
+    s.src = src; s.type = type;
+    v.appendChild(s);
+
+    // Start co nejdřív – stačí první frame
+    const start = () => v.play().catch(()=>{});
+    v.addEventListener('loadeddata', start, { once:true });
     v.load();
-    tryPlay();
-    window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
-
-    // Když se něco nepodaří, aspoň lognout (poster zůstává vidět)
-    v.addEventListener('error', (e)=> {
-      console.warn('Hero video chyba:', e);
-    });
+    // pojistka: první tap (kdyby Safari brblal)
+    window.addEventListener('pointerdown', start, { once:true, passive:true });
   });
 </script>
+
 
 
   <script>
