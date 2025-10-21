@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QN0WT540QY"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-QN0WT540QY');
-  </script>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "trp4r87v81");
-  </script>
+  <!-- Cookiebot (consent first) -->
   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="017cf4e5-f7dc-492c-ae84-e9c54356fd8c" data-blockingmode="auto" type="text/javascript"></script>
 
   <meta charset="UTF-8" />
@@ -20,22 +10,33 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="description" content="Smart Digital je moderní marketingová agentura zaměřená na online reklamu, sociální sítě, SEO a web design. Pomáháme firmám růst díky strategii, výkonu a kreativitě.">
 
-  <!-- Tailwind CSS CDN -->
+  <!-- Preload hero poster pro rychlý první paint -->
+  <link rel="preload" as="image" href="/hero-poster.jpg" imagesrcset="/hero-poster-768.jpg 768w, /hero-poster.jpg 1920w" imagesizes="100vw" fetchpriority="high">
+
+  <!-- Tailwind CDN (rychlé řešení bez buildu) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- (Optional) Inter as deep fallback when SF Pro not available) -->
+  <!-- Fonty -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <!-- GA & Clarity až po souhlasu -->
+  <script type="text/plain" data-cookieconsent="statistics">
+    (function(w,d,s,u){var j=d.createElement(s);j.async=1;j.src=u;(d.head||d.body).appendChild(j);} )(window,document,'script','https://www.googletagmanager.com/gtag/js?id=G-QN0WT540QY');
+    window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);} gtag('js',new Date()); gtag('config','G-QN0WT540QY');
+  </script>
+  <script type="text/plain" data-cookieconsent="marketing">
+    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script','trp4r87v81');
+  </script>
+
   <style>
-    /* ===== Base / Theme ===== */
-    :root{ --sd-cta:#C7F715; --sd-fg:#ffffff; --sd-bg:#000000; --hero-overscan:1.14; }
+    :root{ --sd-cta:#C7F715; --sd-fg:#ffffff; --sd-bg:#000000; --hero-overscan:1.10; }
     *{ box-sizing:border-box }
     html{ scroll-behavior:smooth }
     body{ margin:0; font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji",Inter,sans-serif; background:var(--sd-bg); color:var(--sd-fg); overflow-x:hidden }
 
-    /* ===== Background (blobs + canvas twinkle) ===== */
+    /* Pozadí (vypnuto na mobilech / reduced motion) */
     .animated-bg{ position:fixed; inset:0; z-index:-3; background: radial-gradient(1200px 800px at 20% -10%, rgba(199,247,21,.06), transparent 60%), radial-gradient(900px 700px at 120% 20%, rgba(199,247,21,.04), transparent 60%), #000; }
     .bg-shapes{ position:absolute; inset:0; overflow:hidden }
     .shape{ position:absolute; border-radius:50%; filter:blur(110px); opacity:.28; mix-blend-mode:screen; will-change:transform }
@@ -45,70 +46,49 @@
     @keyframes float1{0%{transform:translate(-10%,-8%) scale(1)}50%{transform:translate(6%,4%) scale(1.04)}100%{transform:translate(-8%,-6%) scale(1)}}
     @keyframes float2{0%{transform:translate(8%,6%) scale(1)}50%{transform:translate(-6%,-8%) scale(1.05)}100%{transform:translate(6%,8%) scale(1)}}
     @keyframes float3{0%{transform:translate(-8%,8%) scale(1)}50%{transform:translate(6%,-6%) scale(1.03)}100%{transform:translate(-6%,6%) scale(1)}}
+    @media (max-width:1024px), (prefers-reduced-motion:reduce){ .animated-bg{ display:none!important } }
 
-    /* ===== HERO VIDEO (full-bleed) ===== */
-    /* Výška hero na všech zařízeních (svh + fallback) */
+    /* HERO video full-bleed */
     #hero{ height:calc(var(--vh, 1svh) * 100); }
-    @supports (-webkit-touch-callout:none){
-      #hero{ height:-webkit-fill-available; }
-    }
+    @supports (-webkit-touch-callout:none){ #hero{ height:-webkit-fill-available; } }
 
     .hero-video-wrap{position:absolute; inset:-1px; z-index:0; overflow:hidden;}
-    .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(105%); transform:translateZ(0) scale(var(--hero-overscan)); will-change:transform;}
+    .hero-video{
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; object-position:center;
+      filter:saturate(105%); transform:translateZ(0) scale(var(--hero-overscan));
+      will-change:transform; opacity:0; transition:opacity .45s ease;
+    }
+    .hero-video.ready{opacity:1}
 
-    /* Overlay above video for readability */
     .gradient-hero{ position:absolute; inset:0; z-index:1; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.65) 100%); }
 
-    /* Hide previous hero blob field */
     .hero-field{ display:none !important; }
 
-    /* ===== Liquid glass (dark) ===== */
+    /* Karty / UI */
     .glass{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%); box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.22), inset 0 -60px 100px rgba(255,255,255,.04); border-radius:20px }
-    .glass-card{
-      --rx:0deg; --ry:0deg; --lift:0px;
-      transform: translate3d(calc(var(--tx,0px) + var(--txm,0px)), calc(var(--lift) + var(--ty,0px) + var(--revealY,0px) + var(--tym,0px)), 0)
-                 rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--scale,1));
-      will-change: transform;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.14);
-      backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%);
-      border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.35);
-      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease
-    }
+    .glass-card{ --rx:0deg; --ry:0deg; --lift:0px; transform: translate3d(calc(var(--tx,0px) + var(--txm,0px)), calc(var(--lift) + var(--ty,0px) + var(--revealY,0px) + var(--tym,0px)), 0) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--scale,1)); will-change: transform; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.35); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease }
     .glass-card:hover{ --lift:-10px;  box-shadow:0 28px 70px rgba(0,0,0,.5); border-color:rgba(199,247,21,.35) }
 
-    /* ===== Type & utilities ===== */
     .text-primary{ color:var(--sd-cta) }
     .bg-primary{ background-color:var(--sd-cta) }
     .lead{ color:#dcdcdc }
     .muted{ color:#c7c7c7 }
-
-    /* Content-section now transparent (dark theme) */
     .content-section{ background:transparent }
-
-    /* Tailwind overrides */
     .content-section .text-gray-600{ color:#d0d0d0 !important }
     .content-section .text-gray-500{ color:#cbcbcb !important }
     .content-section .hover\:bg-gray-50:hover{ background:rgba(255,255,255,.06) !important }
-
-    /* Neon CTA feel + micro-magnet translate */
     .neon-glow{ box-shadow:0 0 24px rgba(199,247,21,.5), 0 0 50px rgba(199,247,21,.25) }
     .neon-glow:hover{ box-shadow:0 0 40px rgba(199,247,21,.8), 0 0 90px rgba(199,247,21,.45), 0 10px 30px rgba(0,0,0,.4); transform:translateY(-1px) }
     .cta{ position:relative; overflow:hidden; translate: var(--cta-tx, 0px) var(--cta-ty, 0px); transition: translate .22s ease; will-change: translate; }
-
-    /* Scroll reveal (simple) */
     .scroll-reveal{ opacity:0; transform:translateY(40px); transition: all .7s cubic-bezier(.4,0,.2,1) }
     .scroll-reveal.revealed{ opacity:1; transform:translateY(0) }
-
-    /* Inputs on dark */
     input,select,textarea{ background:rgba(255,255,255,.04) !important; color:#fff !important; border:1px solid rgba(255,255,255,.18) !important }
     input::placeholder, textarea::placeholder{ color:#bbb }
-
-    /* Footer */
     footer{ background:#0b0b0b }
   </style>
 
-  <!-- SEO & social (kept) -->
+  <!-- SEO & social -->
   <meta name="keywords" content="marketing, online marketing, SEO, sociální sítě, reklama, automotive, Smart Digital, web design, kampaně">
   <meta name="author" content="Smart Digital">
   <meta name="robots" content="index, follow">
@@ -122,36 +102,10 @@
   <meta name="twitter:description" content="Tvoříme kampaně, weby a obsah na sociální sítě, aby všechno spolu fungovalo a přinášelo výsledky.">
   <meta name="twitter:image" content="https://tvoje-domena.cz/og-image.png">
 
-  <!-- Structured data (kept) -->
+  <!-- Structured data -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"Smart Digital","url":"https://www.smartdigital.cz/","sameAs":["https://www.facebook.com/profile.php?id=61580756979219","https://www.instagram.com/smart.dgtl/","https://www.linkedin.com/in/smart-digital-136aa238a/"],"description":"Marketingová agentura zaměřená na automotive byznys – tvorba webů, kampaní, sociálních sítí a SEO."}
   </script>
-  <script>
-  // Redirect po odeslání formuláře na Cal.com
-  (function(){
-    const form = document.getElementById('contactForm');
-    if(!form) return;
-
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-
-      // HTML5 validace (required, typy apod.)
-      if(!form.checkValidity()){
-        form.reportValidity();
-        return;
-      }
-
-      // (volitelné) event do GA
-      try { gtag && gtag('event','generate_lead',{event_category:'Contact',event_label:'Contact form'}); } catch(_) {}
-
-      // Přesměrování
-      window.location.href = 'https://cal.com/smartdigital/15min';
-      // Pokud chceš otevřít v novém okně místo redirectu:
-      // window.open('https://cal.com/smartdigital/15min', '_blank');
-    });
-  })();
-</script>
-
 </head>
 <body>
   <!-- Animated Background (blobs) -->
@@ -167,18 +121,14 @@
   <section class="relative h-[100svh] md:h-screen overflow-hidden" id="hero">
     <!-- Video layer -->
     <div class="hero-video-wrap" aria-hidden="true">
-      <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="metadata" poster="/hero-poster.jpg">
-        <!-- Používej soubory bez mezer v názvu -->
-        <source src="/smart-digital-video-background.webm" type="video/webm" />
-        <source src="smart digital video background 1.mov"  type="video/mp4" />
-        Váš prohlížeč nepodporuje HTML5 video.
-      </video>
+      <!-- Zdroj(e) videa připojíme skriptem, ať se stránka vykreslí hned -->
+      <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="none" poster="/hero-poster.jpg"></video>
     </div>
 
-    <!-- Dark overlay above video -->
+    <!-- Overlay -->
     <div class="gradient-hero"></div>
 
-    <!-- (deaktivované) dekorativní blob pole -->
+    <!-- (skryto) dekorativní blob pole -->
     <div id="heroField" class="hero-field"></div>
 
     <!-- Content -->
@@ -193,8 +143,7 @@
 
     <!-- ŠIPKA DOLŮ -->
     <button id="scrollArrow" class="scroll-arrow" aria-label="Scroll down">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M6 9l6 6 6-6"/>
       </svg>
     </button>
@@ -274,7 +223,7 @@
         <a href="http://skimparkpraha.cz/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal">
           <div class="overflow-hidden glass-card group rounded-2xl card-boost">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
-              <img src="skimpark.png" alt="Web Skim Park Praha – online rezervační systém" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
+              <img src="skimpark.png" loading="lazy" decoding="async" alt="Web Skim Park Praha – online rezervační systém" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
             </div>
             <div class="p-6">
               <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Skim Park Praha</h3>
@@ -286,7 +235,7 @@
         <a href="https://www.bluehillspictures.com/" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay:.1s">
           <div class="overflow-hidden glass-card group rounded-2xl card-boost">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
-              <img src="bluehills.png" alt="Blue Hills Pictures - webové stránky" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
+              <img src="bluehills.png" loading="lazy" decoding="async" alt="Blue Hills Pictures - webové stránky" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
             </div>
             <div class="p-6">
               <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Blue Hills Pictures</h3>
@@ -298,7 +247,7 @@
         <a href="https://www.productionhub.cz/login" target="_blank" rel="noopener noreferrer" class="block scroll-reveal" style="transition-delay:.2s">
           <div class="overflow-hidden glass-card group rounded-2xl card-boost">
             <div class="aspect-video bg-gray-800 relative overflow-hidden">
-              <img src="productionhub.png" alt="Production Hub - webová aplikace pro filmaře" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
+              <img src="productionhub.png" loading="lazy" decoding="async" alt="Production Hub - webová aplikace pro filmaře" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"/>
             </div>
             <div class="p-6">
               <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Production Hub</h3>
@@ -364,40 +313,7 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="py-24 content-section">
-    <div class="container mx-auto px-4">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Časté otázky</h2>
-        <p class="text-center text-gray-300 mb-12 text-lg">Odpovědi na to, na co se klienti nejvíce ptají...</p>
-        <div class="space-y-4">
-          <div class="faq-item glass-card rounded-xl overflow-hidden scroll-reveal card-boost">
-            <button onclick="toggleFaq(0)" class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center">
-              <span class="font-bold text-lg pr-4">Jak dlouho je ideální spolupracovat se Smart Digital, aby strategie a obsah přinesly maximální výsledky?</span>
-              <svg class="faq-icon w-5 h-5 flex-shrink-0" id="icon-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </button>
-            <div class="faq-content px-6 pb-0" id="content-0"><p class="muted pb-6 pl-4">Pro skutečný efekt doporučujeme min. 3 měsíce – testování, optimalizace, škálování.</p></div>
-          </div>
-          <div class="faq-item glass-card rounded-xl overflow-hidden scroll-reveal card-boost" style="transition-delay:.1s">
-            <button onclick="toggleFaq(1)" class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center">
-              <span class="font-bold text-lg pr-4">Co když moje firma ještě nemá žádný obsah ani sociální sítě?</span>
-              <svg class="faq-icon w-5 h-5 flex-shrink-0" id="icon-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </button>
-            <div class="faq-content px-6 pb-0" id="content-1"><p class="muted pb-6 pl-4">Začneme od nuly – založíme profily, nastavíme web, připravíme strategii a vytvoříme obsah, který rezonuje s vašimi zákazníky.</p></div>
-          </div>
-          <div class="faq-item glass-card rounded-xl overflow-hidden scroll-reveal card-boost" style="transition-delay:.2s">
-            <button onclick="toggleFaq(2)" class="w-full text-left px-6 py-6 border-l-4 border-primary flex justify-between items-center">
-              <span class="font-bold text-lg pr-4">Jak zjistím, že investice do marketingu opravdu funguje?</span>
-              <svg class="faq-icon w-5 h-5 flex-shrink-0" id="icon-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </button>
-            <div class="faq-content px-6 pb-0" id="content-2"><p class="muted pb-6 pl-4">Sledujeme návštěvnost, interakce, kliky a hlavně konverze/poptávky. Reportujeme pravidelně a optimalizujeme podle dat.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer (kept) -->
+  <!-- Footer -->
   <footer class="bg-[#111] text-white py-12 relative z-10">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -422,19 +338,19 @@
     </div>
   </footer>
 
-  <!-- UI: scroll-top button -->
+  <!-- Scroll-top -->
   <button id="scrollTopBtn" onclick="scrollToTop()" class="scroll-top fixed bottom-8 right-8 z-50 neon-glow bg-primary text-black rounded-full w-12 h-12 hidden items-center justify-center">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
   </button>
 
   <script>
-    // Fix 100vh na mobilech (adresuje pruhy při zobrazení UI lišt)
+    // 100vh fix na mobilech
     const setVH=()=>document.documentElement.style.setProperty('--vh', (window.innerHeight*0.01)+'px');
     setVH(); addEventListener('resize', setVH);
   </script>
 
   <script>
-    // Scroll reveal (simple)
+    // Scroll reveal
     const observer = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); } });
     }, {threshold:0.1, rootMargin:'0px 0px -50px 0px'});
@@ -460,7 +376,7 @@
     window.scrollToContact = scrollToContact;
     window.scrollToTop = scrollToTop;
 
-    // Scroll arrow click → first content section
+    // Scroll arrow → první content sekce
     (function(){
       const btn = document.getElementById('scrollArrow');
       if(!btn) return;
@@ -471,25 +387,54 @@
     })();
   </script>
 
-  <!-- Removed canvas particles (they can compete with video for GPU/CPU) -->
-  <!-- If you want them back, re-add the script from your original file. -->
+  <script>
+    // HERO video – lazy připojení zdroje (používá tvůj název se mezerami)
+    (function(){
+      const v = document.getElementById('heroVideo');
+      if(!v) return;
+
+      // Respektuj "šetřit data" a pomalé sítě
+      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      const saveData = !!(conn && (conn.saveData || /(^|\b)(slow-2g|2g)\b/.test(conn.effectiveType||'')));
+      if(saveData){ v.removeAttribute('autoplay'); return; } // zůstane poster
+
+      // Primární zdroj – WEBM se zakódovanými mezerami (soubor leží vedle HTML)
+      const sources = [
+        ['./smart%20digital%20video%20background%201.webm','video/webm']
+      ];
+
+      // Pokud vyrobíš MP4 fallback (Safari), odkomentuj:
+      // if (v.canPlayType('video/mp4')) {
+      //   sources.push(['./smart%20digital%20video%20background%201.mp4','video/mp4']);
+      // }
+
+      function attach(){
+        for(const [src,type] of sources){
+          const s=document.createElement('source'); s.src=src; s.type=type; v.appendChild(s);
+        }
+        v.addEventListener('canplay', ()=>v.classList.add('ready'), {once:true});
+        v.load(); v.play().catch(()=>{});
+      }
+
+      if('requestIdleCallback' in window){ requestIdleCallback(attach, {timeout:1200}); }
+      else if(document.readyState==='complete'){ setTimeout(attach, 200); }
+      else { window.addEventListener('load', attach, {once:true}); }
+    })();
+  </script>
 
   <script>
-    // Card tilt (3D) + Scroll progress bar + Magnet effects (strong cards)
+    // 3D tilt + progress bar (omezíme na výkonná zařízení)
     (function(){
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const coarse = window.matchMedia('(pointer: coarse)').matches;
+      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      const saveDataFx = !!(conn && (conn.saveData || /(^|\b)(slow-2g|2g)\b/.test(conn.effectiveType||'')));
 
-      if(!reduce && !coarse){
+      if(!reduce && !coarse && !saveDataFx){
         const els = document.querySelectorAll('.glass-card');
         const items = Array.from(els).map(el=>({ el, rx:0, ry:0, tx:0, ty:0, txTarget:0, tyTarget:0 }));
         function animateTilt(){
-          for(const it of items){
-            it.tx += (it.txTarget - it.tx)*0.15;
-            it.ty += (it.tyTarget - it.ty)*0.15;
-            it.el.style.setProperty('--tx', it.tx.toFixed(2)+'px');
-            it.el.style.setProperty('--ty', it.ty.toFixed(2)+'px');
-          }
+          for(const it of items){ it.tx += (it.txTarget - it.tx)*0.15; it.ty += (it.tyTarget - it.ty)*0.15; it.el.style.setProperty('--tx', it.tx.toFixed(2)+'px'); it.el.style.setProperty('--ty', it.ty.toFixed(2)+'px'); }
           requestAnimationFrame(animateTilt);
         }
         requestAnimationFrame(animateTilt);
@@ -501,79 +446,60 @@
             const py = (e.clientY - r.top)/r.height - 0.5;
             const rx = (-py*6).toFixed(2)+'deg';
             const ry = (px*8).toFixed(2)+'deg';
-            it.txTarget = px * -3;
-            it.tyTarget = py * -3;
+            it.txTarget = px * -3; it.tyTarget = py * -3;
             if(raf) cancelAnimationFrame(raf);
             raf = requestAnimationFrame(()=>{ el.style.setProperty('--rx', rx); el.style.setProperty('--ry', ry); });
           });
           el.addEventListener('pointerleave', ()=>{ it.txTarget = 0; it.tyTarget = 0; el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg'); });
         });
 
-        // Micro-magnet CTA + cards (stronger for cards)
+        // Micro-magnet CTA + cards
         const ctas = Array.from(document.querySelectorAll('.cta'));
         const magCards = Array.from(document.querySelectorAll('.glass-card'));
         let mx = 0, my = 0;
         const CTA_R = 140, CTA_MAX = 6;
         const CARD_R = 220, CARD_MAX = 12, CARD_EASE = 0.18;
         const cardState = magCards.map(el=>({ el, mmx:0, mmy:0, mmxt:0, mmyt:0 }));
-
         function updateTargets(){
           for(const el of ctas){
             const r = el.getBoundingClientRect();
             const cx = r.left + r.width/2, cy = r.top + r.height/2;
             const dx = mx - cx, dy = my - cy, d = Math.hypot(dx,dy);
-            if(d < CTA_R && d > 0.001){
-              const f = (1 - d/CTA_R); const m = f*f;
-              el.style.setProperty('--cta-tx', (dx/d * CTA_MAX * m).toFixed(2)+'px');
-              el.style.setProperty('--cta-ty', (dy/d * CTA_MAX * m).toFixed(2)+'px');
-            } else {
-              el.style.setProperty('--cta-tx','0px'); el.style.setProperty('--cta-ty','0px');
-            }
+            if(d < CTA_R && d > 0.001){ const f = (1 - d/CTA_R); const m = f*f; el.style.setProperty('--cta-tx', (dx/d * CTA_MAX * m).toFixed(2)+'px'); el.style.setProperty('--cta-ty', (dy/d * CTA_MAX * m).toFixed(2)+'px'); }
+            else { el.style.setProperty('--cta-tx','0px'); el.style.setProperty('--cta-ty','0px'); }
           }
           for(const s of cardState){
             const r = s.el.getBoundingClientRect();
             const cx = r.left + r.width/2, cy = r.top + r.height/2;
             const dx = mx - cx, dy = my - cy, d = Math.hypot(dx,dy);
-            if(d < CARD_R && d > 0.001){
-              const f = (1 - d/CARD_R); const m = f*f;
-              s.mmxt = (dx/d * CARD_MAX * m);
-              s.mmyt = (dy/d * CARD_MAX * m);
-            } else {
-              s.mmxt = 0; s.mmyt = 0;
-            }
+            if(d < CARD_R && d > 0.001){ const f = (1 - d/CARD_R); const m = f*f; s.mmxt = (dx/d * CARD_MAX * m); s.mmyt = (dy/d * CARD_MAX * m); }
+            else { s.mmxt = 0; s.mmyt = 0; }
           }
         }
-        function magnetLoop(){
-          for(const s of cardState){
-            s.mmx += (s.mmxt - s.mmx) * CARD_EASE;
-            s.mmy += (s.mmyt - s.mmy) * CARD_EASE;
-            s.el.style.setProperty('--txm', s.mmx.toFixed(2)+'px');
-            s.el.style.setProperty('--tym', s.mmy.toFixed(2)+'px');
-          }
-          requestAnimationFrame(magnetLoop);
-        }
+        function magnetLoop(){ for(const s of cardState){ s.mmx += (s.mmxt - s.mmx) * CARD_EASE; s.mmy += (s.mmyt - s.mmy) * CARD_EASE; s.el.style.setProperty('--txm', s.mmx.toFixed(2)+'px'); s.el.style.setProperty('--tym', s.mmy.toFixed(2)+'px'); } requestAnimationFrame(magnetLoop); }
         requestAnimationFrame(magnetLoop);
-
         window.addEventListener('mousemove', (e)=>{ mx = e.clientX; my = e.clientY; updateTargets(); }, {passive:true});
-        window.addEventListener('mouseleave', ()=>{
-          ctas.forEach(el=>{ el.style.setProperty('--cta-tx','0px'); el.style.setProperty('--cta-ty','0px'); });
-          for(const s of cardState){ s.mmxt = 0; s.mmyt = 0; }
-        });
+        window.addEventListener('mouseleave', ()=>{ ctas.forEach(el=>{ el.style.setProperty('--cta-tx','0px'); el.style.setProperty('--cta-ty','0px'); }); for(const s of cardState){ s.mmxt = 0; s.mmyt = 0; } });
       }
 
       // Scroll progress bar
-      const bar = document.createElement('div');
-      bar.className = 'scroll-progress';
-      document.body.appendChild(bar);
-      function update(){
-        const h = document.documentElement;
-        const max = h.scrollHeight - h.clientHeight;
-        const p = max>0 ? (h.scrollTop / max) : 0;
-        bar.style.width = (p*100).toFixed(2) + '%';
-      }
-      window.addEventListener('scroll', update, {passive:true});
-      window.addEventListener('resize', update);
-      update();
+      const bar = document.createElement('div'); bar.className = 'scroll-progress'; document.body.appendChild(bar);
+      function update(){ const h=document.documentElement; const max=h.scrollHeight - h.clientHeight; const p=max>0 ? (h.scrollTop/max) : 0; bar.style.width=(p*100).toFixed(2)+'%'; }
+      window.addEventListener('scroll', update, {passive:true}); window.addEventListener('resize', update); update();
+    })();
+  </script>
+
+  <script>
+    // Redirect po odeslání formuláře na Cal.com
+    (function(){
+      const form = document.getElementById('contactForm');
+      if(!form) return;
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        if(!form.checkValidity()){ form.reportValidity(); return; }
+        try { window.gtag && gtag('event','generate_lead',{event_category:'Contact',event_label:'Contact form'}); } catch(_) {}
+        window.location.href = 'https://cal.com/smartdigital/15min';
+      });
     })();
   </script>
 </body>
