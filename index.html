@@ -61,14 +61,18 @@
     #hero{ height:calc(var(--vh, 1svh) * 100); }
     @supports (-webkit-touch-callout:none){ #hero{ height:-webkit-fill-available; } }
 
-    .hero-video-wrap{position:absolute; inset:-1px; z-index:0; overflow:hidden;}
-    .hero-video{
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; object-position:center;
-      filter:saturate(105%); transform:translateZ(0) scale(var(--hero-overscan));
-      will-change:transform; opacity:0; transition:opacity .45s ease;
-    }
-    .hero-video.ready{opacity:1}
+    /* HERO video */
+.hero-video-wrap{position:absolute; inset:-1px; z-index:0; overflow:hidden;}
+.hero-video{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  filter:saturate(105%);
+  transform:translateZ(0) scale(var(--hero-overscan,1.10));
+  will-change:transform;
+  /* DŮLEŽITÉ: video je viditelné už od začátku (kvůli posteru) */
+  opacity:1;
+}
+
 
     .gradient-hero{ position:absolute; inset:0; z-index:1; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.65) 100%); }
     .hero-field{ display:none !important; }
@@ -389,30 +393,65 @@
   </script>
 
   <script>
-    // HERO video – připojit zdroje rychle (DOM Ready) + fallback play po prvním tapu
-    document.addEventListener('DOMContentLoaded', function(){
-      const v = document.getElementById('heroVideo');
-      if(!v) return;
+  // HERO video – iOS-safe fallback, zvládne i mezery v názvu
+  document.addEventListener('DOMContentLoaded', function(){
+    const v = document.getElementById('heroVideo');
+    if(!v) return;
 
-      // zdroj s mezerami v názvu (vedle HTML)
-      const sources = [
-        ['./smart%20digital%20video%20background%201.webm','video/webm']
-      ];
-      // Pokud máš MP4 fallback (Safari), odkomentuj:
-      // sources.push(['./smart%20digital%20video%20background%201.mp4','video/mp4']);
+    // iOS kompat: muted + (webkit-)playsinline + autoplay
+    v.muted = true;
+    v.setAttribute('playsinline','');
+    v.setAttribute('webkit-playsinline','');
+    v.setAttribute('autoplay','');
+    v.setAttribute('loop','');
 
-      for(const [src,type] of sources){
-        const s=document.createElement('source'); s.src=src; s.type=type; v.appendChild(s);
-      }
+    // Název souboru přesně, jak ho máš vedle HTML
+    const baseName = 'smart digital video background 1';
+    const webm = './' + encodeURIComponent(baseName) + '.webm';
+    const mp4  = './' + encodeURIComponent(baseName) + '.mp4'; // přidej tenhle soubor na server
 
-      v.addEventListener('canplay', ()=>v.classList.add('ready'), {once:true});
-      v.load();
-      v.play().catch(()=>{ /* Autoplay blokováno – počkáme na první interakci */ });
+    // Detekce podpory
+    const canWebM = !!v.canPlayType && (
+      v.canPlayType('video/webm; codecs="vp9"') ||
+      v.canPlayType('video/webm; codecs="vp8, vorbis"') ||
+      v.canPlayType('video/webm')
+    );
+    const canMP4 = !!v.canPlayType && (
+      v.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') ||
+      v.canPlayType('video/mp4')
+    );
 
-      const tryPlay=()=>{ v.play().catch(()=>{}); window.removeEventListener('pointerdown', tryPlay); };
-      window.addEventListener('pointerdown', tryPlay, {passive:true});
+    // iOS Safari většinou => MP4, Chrome/Android => WebM
+    const sources = [];
+    if (canWebM) sources.push([webm, 'video/webm']);
+    if (canMP4) sources.push([mp4,  'video/mp4']);
+
+    // Když neumí ani jedno, necháme poster (už je viditelný díky CSS)
+    if (!sources.length) {
+      console.warn('Prohlížeč neumí WebM/MP4 – zůstávám na posteru.');
+      return;
+    }
+
+    // Připojit zdroje
+    for (const [src, type] of sources){
+      const s = document.createElement('source');
+      s.src = src; s.type = type;
+      v.appendChild(s);
+    }
+
+    // Zkusit přehrát hned + fallback po prvním tapu
+    const tryPlay = () => v.play().catch(()=>{});
+    v.load();
+    tryPlay();
+    window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+
+    // Když se něco nepodaří, aspoň lognout (poster zůstává vidět)
+    v.addEventListener('error', (e)=> {
+      console.warn('Hero video chyba:', e);
     });
-  </script>
+  });
+</script>
+
 
   <script>
     // 3D tilt + progress bar (omezíme na výkonná zařízení)
