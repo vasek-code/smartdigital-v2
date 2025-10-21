@@ -10,13 +10,13 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="description" content="Smart Digital je moderní marketingová agentura zaměřená na online reklamu, sociální sítě, SEO a web design. Pomáháme firmám růst díky strategii, výkonu a kreativitě.">
 
-  <!-- Preload hero poster pro rychlý první paint -->
+  <!-- Preload hero poster -->
   <link rel="preload" as="image" href="/hero-poster.jpg" imagesrcset="/hero-poster-768.jpg 768w, /hero-poster.jpg 1920w" imagesizes="100vw" fetchpriority="high">
 
-  <!-- Tailwind CDN (rychlé řešení bez buildu) -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonty -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -36,8 +36,10 @@
     html{ scroll-behavior:smooth }
     body{ margin:0; font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji",Inter,sans-serif; background:var(--sd-bg); color:var(--sd-fg); overflow-x:hidden }
 
-    /* Pozadí (vypnuto na mobilech / reduced motion) */
-    .animated-bg{ position:fixed; inset:0; z-index:-3; background: radial-gradient(1200px 800px at 20% -10%, rgba(199,247,21,.06), transparent 60%), radial-gradient(900px 700px at 120% 20%, rgba(199,247,21,.04), transparent 60%), #000; }
+    /* ===== Background (blobs) – ponecháno i na mobilech ===== */
+    .animated-bg{ position:fixed; inset:0; z-index:-3; background:
+      radial-gradient(1200px 800px at 20% -10%, rgba(199,247,21,.06), transparent 60%),
+      radial-gradient(900px 700px at 120% 20%, rgba(199,247,21,.04), transparent 60%), #000; }
     .bg-shapes{ position:absolute; inset:0; overflow:hidden }
     .shape{ position:absolute; border-radius:50%; filter:blur(110px); opacity:.28; mix-blend-mode:screen; will-change:transform }
     .shape-1{ width:58vmax; height:58vmax; background:radial-gradient(closest-side,#36ff8f,transparent 70%); top:10%; left:8%; animation:float1 22s ease-in-out infinite alternate }
@@ -46,9 +48,16 @@
     @keyframes float1{0%{transform:translate(-10%,-8%) scale(1)}50%{transform:translate(6%,4%) scale(1.04)}100%{transform:translate(-8%,-6%) scale(1)}}
     @keyframes float2{0%{transform:translate(8%,6%) scale(1)}50%{transform:translate(-6%,-8%) scale(1.05)}100%{transform:translate(6%,8%) scale(1)}}
     @keyframes float3{0%{transform:translate(-8%,8%) scale(1)}50%{transform:translate(6%,-6%) scale(1.03)}100%{transform:translate(-6%,6%) scale(1)}}
-    @media (max-width:1024px), (prefers-reduced-motion:reduce){ .animated-bg{ display:none!important } }
+    /* Jemnější na malých displejích (lepší FPS) */
+    @media (max-width: 768px){
+      .shape{ filter:blur(80px); opacity:.22 }
+    }
+    /* Vypnout jen když uživatel požádá o snížení pohybu */
+    @media (prefers-reduced-motion: reduce){
+      .animated-bg *{ animation:none !important }
+    }
 
-    /* HERO video full-bleed */
+    /* ===== HERO VIDEO full-bleed ===== */
     #hero{ height:calc(var(--vh, 1svh) * 100); }
     @supports (-webkit-touch-callout:none){ #hero{ height:-webkit-fill-available; } }
 
@@ -62,10 +71,9 @@
     .hero-video.ready{opacity:1}
 
     .gradient-hero{ position:absolute; inset:0; z-index:1; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.65) 100%); }
-
     .hero-field{ display:none !important; }
 
-    /* Karty / UI */
+    /* ===== Cards/UI ===== */
     .glass{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%); box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.22), inset 0 -60px 100px rgba(255,255,255,.04); border-radius:20px }
     .glass-card{ --rx:0deg; --ry:0deg; --lift:0px; transform: translate3d(calc(var(--tx,0px) + var(--txm,0px)), calc(var(--lift) + var(--ty,0px) + var(--revealY,0px) + var(--tym,0px)), 0) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--scale,1)); will-change: transform; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(16px) saturate(140%); -webkit-backdrop-filter:blur(16px) saturate(140%); border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.35); transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease }
     .glass-card:hover{ --lift:-10px;  box-shadow:0 28px 70px rgba(0,0,0,.5); border-color:rgba(199,247,21,.35) }
@@ -119,19 +127,13 @@
 
   <!-- Hero with VIDEO background -->
   <section class="relative h-[100svh] md:h-screen overflow-hidden" id="hero">
-    <!-- Video layer -->
     <div class="hero-video-wrap" aria-hidden="true">
-      <!-- Zdroj(e) videa připojíme skriptem, ať se stránka vykreslí hned -->
       <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="none" poster="/hero-poster.jpg"></video>
     </div>
 
-    <!-- Overlay -->
     <div class="gradient-hero"></div>
-
-    <!-- (skryto) dekorativní blob pole -->
     <div id="heroField" class="hero-field"></div>
 
-    <!-- Content -->
     <div class="absolute bottom-20 left-0 p-8 md:p-20 text-left max-w-6xl z-10">
       <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 md:mb-6">Nastartujeme váš byznys na plné otáčky</h1>
       <p class="text-base md:text-lg lg:text-xl text-white/70 mb-6 md:mb-8">Jsme partner pro růst, který posouvá podnikatele v automobilovém průmyslu.</p>
@@ -141,7 +143,6 @@
       </button>
     </div>
 
-    <!-- ŠIPKA DOLŮ -->
     <button id="scrollArrow" class="scroll-arrow" aria-label="Scroll down">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M6 9l6 6 6-6"/>
@@ -170,7 +171,7 @@
             <p class="text-[15px] text-gray-300">Zjednodušíme sdělení i cestu: jasná nabídka, přehledná navigace, viditelné CTA a rychlý kontakt.</p>
           </div>
         </div>
-        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost" style="transition-delay:.2s">
+        <div class="p-8 glass-card rounded-2xl scroll-reveal card-boost" style="transition-delay:.2s)">
           <p class="text-sm text-gray-400 font-medium mb-1">PROBLÉM</p>
           <h3 class="text-xl font-bold">Nedostatek poptávek</h3>
           <div class="border-l-4 border-primary pl-4 mt-5">
@@ -388,38 +389,29 @@
   </script>
 
   <script>
-    // HERO video – lazy připojení zdroje (používá tvůj název se mezerami)
-    (function(){
+    // HERO video – připojit zdroje rychle (DOM Ready) + fallback play po prvním tapu
+    document.addEventListener('DOMContentLoaded', function(){
       const v = document.getElementById('heroVideo');
       if(!v) return;
 
-      // Respektuj "šetřit data" a pomalé sítě
-      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-      const saveData = !!(conn && (conn.saveData || /(^|\b)(slow-2g|2g)\b/.test(conn.effectiveType||'')));
-      if(saveData){ v.removeAttribute('autoplay'); return; } // zůstane poster
-
-      // Primární zdroj – WEBM se zakódovanými mezerami (soubor leží vedle HTML)
+      // zdroj s mezerami v názvu (vedle HTML)
       const sources = [
         ['./smart%20digital%20video%20background%201.webm','video/webm']
       ];
+      // Pokud máš MP4 fallback (Safari), odkomentuj:
+      // sources.push(['./smart%20digital%20video%20background%201.mp4','video/mp4']);
 
-      // Pokud vyrobíš MP4 fallback (Safari), odkomentuj:
-      // if (v.canPlayType('video/mp4')) {
-      //   sources.push(['./smart%20digital%20video%20background%201.mp4','video/mp4']);
-      // }
-
-      function attach(){
-        for(const [src,type] of sources){
-          const s=document.createElement('source'); s.src=src; s.type=type; v.appendChild(s);
-        }
-        v.addEventListener('canplay', ()=>v.classList.add('ready'), {once:true});
-        v.load(); v.play().catch(()=>{});
+      for(const [src,type] of sources){
+        const s=document.createElement('source'); s.src=src; s.type=type; v.appendChild(s);
       }
 
-      if('requestIdleCallback' in window){ requestIdleCallback(attach, {timeout:1200}); }
-      else if(document.readyState==='complete'){ setTimeout(attach, 200); }
-      else { window.addEventListener('load', attach, {once:true}); }
-    })();
+      v.addEventListener('canplay', ()=>v.classList.add('ready'), {once:true});
+      v.load();
+      v.play().catch(()=>{ /* Autoplay blokováno – počkáme na první interakci */ });
+
+      const tryPlay=()=>{ v.play().catch(()=>{}); window.removeEventListener('pointerdown', tryPlay); };
+      window.addEventListener('pointerdown', tryPlay, {passive:true});
+    });
   </script>
 
   <script>
@@ -427,10 +419,8 @@
     (function(){
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const coarse = window.matchMedia('(pointer: coarse)').matches;
-      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-      const saveDataFx = !!(conn && (conn.saveData || /(^|\b)(slow-2g|2g)\b/.test(conn.effectiveType||'')));
 
-      if(!reduce && !coarse && !saveDataFx){
+      if(!reduce && !coarse){
         const els = document.querySelectorAll('.glass-card');
         const items = Array.from(els).map(el=>({ el, rx:0, ry:0, tx:0, ty:0, txTarget:0, tyTarget:0 }));
         function animateTilt(){
@@ -453,39 +443,11 @@
           el.addEventListener('pointerleave', ()=>{ it.txTarget = 0; it.tyTarget = 0; el.style.setProperty('--rx','0deg'); el.style.setProperty('--ry','0deg'); });
         });
 
-        // Micro-magnet CTA + cards
-        const ctas = Array.from(document.querySelectorAll('.cta'));
-        const magCards = Array.from(document.querySelectorAll('.glass-card'));
-        let mx = 0, my = 0;
-        const CTA_R = 140, CTA_MAX = 6;
-        const CARD_R = 220, CARD_MAX = 12, CARD_EASE = 0.18;
-        const cardState = magCards.map(el=>({ el, mmx:0, mmy:0, mmxt:0, mmyt:0 }));
-        function updateTargets(){
-          for(const el of ctas){
-            const r = el.getBoundingClientRect();
-            const cx = r.left + r.width/2, cy = r.top + r.height/2;
-            const dx = mx - cx, dy = my - cy, d = Math.hypot(dx,dy);
-            if(d < CTA_R && d > 0.001){ const f = (1 - d/CTA_R); const m = f*f; el.style.setProperty('--cta-tx', (dx/d * CTA_MAX * m).toFixed(2)+'px'); el.style.setProperty('--cta-ty', (dy/d * CTA_MAX * m).toFixed(2)+'px'); }
-            else { el.style.setProperty('--cta-tx','0px'); el.style.setProperty('--cta-ty','0px'); }
-          }
-          for(const s of cardState){
-            const r = s.el.getBoundingClientRect();
-            const cx = r.left + r.width/2, cy = r.top + r.height/2;
-            const dx = mx - cx, dy = my - cy, d = Math.hypot(dx,dy);
-            if(d < CARD_R && d > 0.001){ const f = (1 - d/CARD_R); const m = f*f; s.mmxt = (dx/d * CARD_MAX * m); s.mmyt = (dy/d * CARD_MAX * m); }
-            else { s.mmxt = 0; s.mmyt = 0; }
-          }
-        }
-        function magnetLoop(){ for(const s of cardState){ s.mmx += (s.mmxt - s.mmx) * CARD_EASE; s.mmy += (s.mmyt - s.mmy) * CARD_EASE; s.el.style.setProperty('--txm', s.mmx.toFixed(2)+'px'); s.el.style.setProperty('--tym', s.mmy.toFixed(2)+'px'); } requestAnimationFrame(magnetLoop); }
-        requestAnimationFrame(magnetLoop);
-        window.addEventListener('mousemove', (e)=>{ mx = e.clientX; my = e.clientY; updateTargets(); }, {passive:true});
-        window.addEventListener('mouseleave', ()=>{ ctas.forEach(el=>{ el.style.setProperty('--cta-tx','0px'); el.style.setProperty('--cta-ty','0px'); }); for(const s of cardState){ s.mmxt = 0; s.mmyt = 0; } });
+        // Scroll progress bar
+        const bar = document.createElement('div'); bar.className = 'scroll-progress'; document.body.appendChild(bar);
+        function update(){ const h=document.documentElement; const max=h.scrollHeight - h.clientHeight; const p=max>0 ? (h.scrollTop/max) : 0; bar.style.width=(p*100).toFixed(2)+'%'; }
+        window.addEventListener('scroll', update, {passive:true}); window.addEventListener('resize', update); update();
       }
-
-      // Scroll progress bar
-      const bar = document.createElement('div'); bar.className = 'scroll-progress'; document.body.appendChild(bar);
-      function update(){ const h=document.documentElement; const max=h.scrollHeight - h.clientHeight; const p=max>0 ? (h.scrollTop/max) : 0; bar.style.width=(p*100).toFixed(2)+'%'; }
-      window.addEventListener('scroll', update, {passive:true}); window.addEventListener('resize', update); update();
     })();
   </script>
 
