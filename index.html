@@ -23,14 +23,14 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- (Optional) Inter as deep fallback when SF Pro not available -->
+  <!-- (Optional) Inter as deep fallback when SF Pro not available) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ===== Base / Theme ===== */
-    :root{ --sd-cta:#C7F715; --sd-fg:#ffffff; --sd-bg:#000000; }
+    :root{ --sd-cta:#C7F715; --sd-fg:#ffffff; --sd-bg:#000000; --hero-overscan:1.14; }
     *{ box-sizing:border-box }
     html{ scroll-behavior:smooth }
     body{ margin:0; font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji",Inter,sans-serif; background:var(--sd-bg); color:var(--sd-fg); overflow-x:hidden }
@@ -46,10 +46,21 @@
     @keyframes float2{0%{transform:translate(8%,6%) scale(1)}50%{transform:translate(-6%,-8%) scale(1.05)}100%{transform:translate(6%,8%) scale(1)}}
     @keyframes float3{0%{transform:translate(-8%,8%) scale(1)}50%{transform:translate(6%,-6%) scale(1.03)}100%{transform:translate(-6%,6%) scale(1)}}
 
-    /* ===== Hero overlay — pure black to match site ===== */
-    .gradient-hero{ position:relative; overflow:hidden; background:#000; }        /* sjednocená černá */
-    .gradient-hero::before,
-    .gradient-hero::after{ content:none !important; }                             /* zrušené přisvětlení/tint */
+    /* ===== HERO VIDEO (full-bleed) ===== */
+    /* Výška hero na všech zařízeních (svh + fallback) */
+    #hero{ height:calc(var(--vh, 1svh) * 100); }
+    @supports (-webkit-touch-callout:none){
+      #hero{ height:-webkit-fill-available; }
+    }
+
+    .hero-video-wrap{position:absolute; inset:-1px; z-index:0; overflow:hidden;}
+    .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; filter:saturate(105%); transform:translateZ(0) scale(var(--hero-overscan)); will-change:transform;}
+
+    /* Overlay above video for readability */
+    .gradient-hero{ position:absolute; inset:0; z-index:1; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.65) 100%); }
+
+    /* Hide previous hero blob field */
+    .hero-field{ display:none !important; }
 
     /* ===== Liquid glass (dark) ===== */
     .glass{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); backdrop-filter:blur(18px) saturate(140%); -webkit-backdrop-filter:blur(18px) saturate(140%); box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.22), inset 0 -60px 100px rgba(255,255,255,.04); border-radius:20px }
@@ -95,73 +106,6 @@
 
     /* Footer */
     footer{ background:#0b0b0b }
-  
-    /* ===== HERO random shape field ===== */
-    .hero-field{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-    .hero-shape{position:absolute;left:0;top:0;width:var(--size,200px);height:var(--size,200px);
-      border-radius:42% 58% 38% 62% / 60% 40% 60% 40%;
-      background:radial-gradient(60% 60% at 30% 30%, hsla(var(--h,82),90%,65%,.40), hsla(var(--h,82),90%,35%,.12) 60%, transparent 74%);
-      filter:blur(30px) saturate(130%);opacity:.65;mix-blend-mode:screen;will-change:transform,border-radius}
-    .hero-shape{animation: blobMorph var(--morph,12s) ease-in-out infinite alternate}
-    @keyframes blobMorph{
-      0%{border-radius:42% 58% 38% 62% / 60% 40% 60% 40%}
-      33%{border-radius:58% 42% 62% 38% / 40% 60% 40% 60%}
-      66%{border-radius:45% 55% 48% 52% / 55% 45% 55% 45%}
-      100%{border-radius:42% 58% 38% 62% / 60% 40% 60% 40%}
-    }
-
-    /* ===== Liquid entry animation for glass cards ===== */
-    .glass-card{position:relative;overflow:hidden}
-    .glass-card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
-      background:radial-gradient(160px 120px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.12), rgba(255,255,255,0) 60%);
-      opacity:0;transition:opacity .5s ease;mix-blend-mode:screen;filter:blur(14px)}
-    .glass-card::after{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
-      background:conic-gradient(from var(--ang,0deg), rgba(199,247,21,.18), rgba(199,247,21,0) 25%, rgba(199,247,21,.12) 50%, rgba(199,247,21,0) 75%, rgba(199,247,21,.18));
-      opacity:0;filter:blur(12px);mix-blend-mode:screen}
-    .glass-card:hover::before{opacity:1}
-    .glass-card.inview{animation:cardEnter .7s cubic-bezier(.2,.6,.2,1) both}
-    .glass-card.inview::after{animation:liquidSheen 1.4s ease .2s both, spinAng 6s ease-in-out .2s infinite alternate;opacity:.9}
-    @keyframes cardEnter{from{transform:translateY(12px);opacity:.85}to{transform:translateY(0);opacity:1}}
-    @keyframes liquidSheen{0%{opacity:0}10%{opacity:.7}100%{opacity:0}}
-    @keyframes spinAng{0%{--ang:0deg}100%{--ang:360deg}}
-
-    /* ===== Cursor-following liquid blob (global) ===== */
-    .cursor-blob{ position:fixed; left:0; top:0; width:var(--cb-size,140px); height:var(--cb-size,140px);
-      border-radius:42% 58% 38% 62% / 60% 40% 60% 40%;
-      background:radial-gradient(60% 60% at 30% 30%, hsla(var(--cb-h,82),90%,65%,.38), hsla(var(--cb-h,82),90%,35%,.10) 60%, transparent 74%);
-      filter:blur(24px) saturate(130%); mix-blend-mode:screen; opacity:.62; pointer-events:none; z-index:999;
-      transform:translate3d(-50%, -50%, 0); will-change:transform,border-radius; animation:blobMorph 12s ease-in-out infinite alternate }
-    .cursor-blob.active{ opacity:.75; animation-duration:8s }
-    @media (pointer: coarse){ .cursor-blob{ display:none } }
-  
-    /* CTA sheen (hover only) */
-    .cta::after{ content:""; position:absolute; inset:-1px; background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.55) 50%, transparent 80%); transform:translateX(-140%); transition: transform .7s ease; mix-blend-mode:screen }
-    .cta:hover::after{ transform:translateX(120%) }
-
-    /* Scroll progress bar */
-    .scroll-progress{ position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, rgba(199,247,21,1), rgba(199,247,21,.6)); box-shadow:0 0 10px rgba(199,247,21,.6); z-index:1000; width:0 }
-
-    /* ===== Scroll arrow (hero) ===== */
-    .scroll-arrow{
-      position:absolute; left:50%; bottom:24px; transform:translateX(-50%);
-      width:44px; height:44px; display:grid; place-items:center;
-      color:#fff; opacity:.95; background:transparent; border:0; cursor:pointer;
-      border-radius:999px; outline:none; z-index:2;
-      animation: sd-arrow-bounce 1.6s ease-in-out infinite, sd-arrow-glow 2.6s ease-in-out infinite;
-    }
-    .scroll-arrow:hover{ opacity:1 }
-    .scroll-arrow svg{ width:28px; height:28px }
-    @keyframes sd-arrow-bounce{ 0%,100%{ transform:translate(-50%,0) } 50%{ transform:translate(-50%,10px) } }
-    @keyframes sd-arrow-glow{ 0%,100%{ filter: drop-shadow(0 0 0 rgba(199,247,21,0)) } 50%{ filter: drop-shadow(0 0 10px rgba(199,247,21,.55)) } }
-
-    /* ===== Card boost (stronger hover glow + border) ===== */
-    .card-boost{position:relative}
-    .card-boost::after{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s ease;mix-blend-mode:screen;background:radial-gradient(160px 120px at var(--mx,50%) var(--my,50%), rgba(199,247,21,.16), rgba(199,247,21,0) 60%), linear-gradient(180deg, rgba(199,247,21,.12), rgba(199,247,21,0))}
-    .card-boost:hover::after{opacity:.9}
-    .card-boost::before{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;opacity:0;transform:scale(.8);filter:blur(10px);background:radial-gradient(closest-side, rgba(199,247,21,.35), rgba(199,247,21,.10) 50%, transparent 65%)}
-    .card-boost:hover::before{animation:ringPulse 1s ease-out both}
-    .card-boost:hover::after{opacity:1}
-    @keyframes ringPulse{0%{opacity:0;transform:scale(.8)}25%{opacity:.9}100%{opacity:0;transform:scale(1.35)}}
   </style>
 
   <!-- SEO & social (kept) -->
@@ -219,11 +163,25 @@
     </div>
   </div>
 
-  <!-- Hero -->
-  <section class="relative min-h-screen overflow-hidden" id="hero">
-    <div class="absolute inset-0 gradient-hero"></div>
+  <!-- Hero with VIDEO background -->
+  <section class="relative h-[100svh] md:h-screen overflow-hidden" id="hero">
+    <!-- Video layer -->
+    <div class="hero-video-wrap" aria-hidden="true">
+      <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="metadata" poster="/hero-poster.jpg">
+        <!-- Používej soubory bez mezer v názvu -->
+        <source src="/smart-digital-video-background.webm" type="video/webm" />
+        <source src="smart digital video background 1.mov"  type="video/mp4" />
+        Váš prohlížeč nepodporuje HTML5 video.
+      </video>
+    </div>
+
+    <!-- Dark overlay above video -->
+    <div class="gradient-hero"></div>
+
+    <!-- (deaktivované) dekorativní blob pole -->
     <div id="heroField" class="hero-field"></div>
 
+    <!-- Content -->
     <div class="absolute bottom-20 left-0 p-8 md:p-20 text-left max-w-6xl z-10">
       <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 md:mb-6">Nastartujeme váš byznys na plné otáčky</h1>
       <p class="text-base md:text-lg lg:text-xl text-white/70 mb-6 md:mb-8">Jsme partner pro růst, který posouvá podnikatele v automobilovém průmyslu.</p>
@@ -367,8 +325,8 @@
   <section id="contact" class="py-24 content-section">
     <div class="container mx-auto px-4">
       <div class="max-w-2xl mx-auto">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">My jsme ready, jste Vy?🚀</h2>
-        <p class="text-center text-gray-300 mb-12 text-lg">Vyplňte formulář a domluvíme si konzultaci.</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Zařadíme vyšší rychlost?🚀</h2>
+        <p class="text-center text-gray-300 mb-12 text-lg">Vyplňte formulář a domluvíme si online konzultaci.</p>
         <div class="p-8 glass-card rounded-2xl">
           <form id="contactForm" class="space-y-6">
             <div>
@@ -448,8 +406,8 @@
           <div class="flex flex-col gap-2 justify-center md:justify-start text-white/80">
             <div class="flex items-center gap-2"><a href="mailto:smdgtl.contact@gmail.com" class="hover:text-primary transition-colors">smdgtl.contact@gmail.com</a></div>
             <a href="tel:+420733220300" class="hover:text-primary transition-colors">+420 733 220 300</a>
-            <p class="text-xs text-gray-400/60">Founder: Julijan Laznik</p>
-            <p class="text-xs text-gray-400/60">Employee: Matyáš Hartl</p>
+            <p class="text-xs text-gray-400/60">Founder & CEO: Julijan Laznik</p>
+            <p class="text-xs text-gray-400/60">Co-founder: Matyáš Hartl</p>
           </div>
         </div>
         <div class="flex gap-6 text-sm text-white/80">
@@ -468,6 +426,12 @@
   <button id="scrollTopBtn" onclick="scrollToTop()" class="scroll-top fixed bottom-8 right-8 z-50 neon-glow bg-primary text-black rounded-full w-12 h-12 hidden items-center justify-center">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
   </button>
+
+  <script>
+    // Fix 100vh na mobilech (adresuje pruhy při zobrazení UI lišt)
+    const setVH=()=>document.documentElement.style.setProperty('--vh', (window.innerHeight*0.01)+'px');
+    setVH(); addEventListener('resize', setVH);
+  </script>
 
   <script>
     // Scroll reveal (simple)
@@ -505,181 +469,10 @@
         if(next) next.scrollIntoView({ behavior:'smooth' });
       });
     })();
-
-    /* ===== Canvas particles (green twinkle) – full 360° wandering ===== */
-    (function(){
-      const canvas = document.createElement('canvas');
-      canvas.id='bgfx'; canvas.style.cssText='position:fixed;inset:0;z-index:-4;pointer-events:none;';
-      document.body.prepend(canvas);
-      const ctx = canvas.getContext('2d');
-      let W,H,ps=[];
-
-      function R(a,b){ return Math.random()*(b-a)+a; }
-      function clamp(v,a,b){ return v<a?a:v>b?b:v; }
-
-      function size(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; init(); }
-      function init(){
-        const n = Math.min(160, Math.floor((W*H)/12000)); // trochu víc „kuliček“
-        ps = Array.from({length:n},()=>({
-          x:R(0,W), y:R(0,H),
-          a:R(0,Math.PI*2),                    // úhel pohybu
-          s:R(0.04,0.13),                      // rychlost
-          turn:R(-0.008,0.008),                // aktuální zatáčení
-          r:R(.7,2.2),                         // poloměr bodu
-          o:R(.035,.11),                       // opacity
-          jitter:R(0.0015,0.0045)              // jak rychle mění směr
-        }));
-      }
-
-      function step(){
-        ctx.clearRect(0,0,W,H);
-        ctx.globalCompositeOperation='lighter';
-        for(const p of ps){
-          // náhodné meandrování (hladké změny směru + rychlosti)
-          p.turn += R(-p.jitter,p.jitter);
-          p.turn = clamp(p.turn,-0.028,0.028);
-          p.a += p.turn;
-          p.s += R(-0.002,0.002);
-          p.s = clamp(p.s,0.03,0.14);
-
-          p.x += Math.cos(p.a)*p.s*60/100;  // 60/100 ~ jemné škálování pro FPS
-          p.y += Math.sin(p.a)*p.s*60/100;
-
-          // wrap-around (plynulý průchod přes hrany)
-          if(p.x < -10) p.x = W+10;
-          if(p.x > W+10) p.x = -10;
-          if(p.y < -10) p.y = H+10;
-          if(p.y > H+10) p.y = -10;
-
-          ctx.beginPath();
-          ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-          ctx.fillStyle='rgba(199,247,21,'+p.o+')';
-          ctx.fill();
-        }
-        requestAnimationFrame(step);
-      }
-      window.addEventListener('resize', size); size(); step();
-    })();
   </script>
 
-  <script>
-    (function(){
-      // HERO: physics-driven blobs with mouse repulsion
-      const field = document.getElementById('heroField');
-      (function(){
-        if(!field) return;
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const isMobile = window.innerWidth < 768;
-        const COUNT = reduce ? 0 : (isMobile ? 18 : 36);
-        const hues = [72,76,80,84,88,92];
-        function rand(a,b){ return Math.random()*(b-a)+a; }
-        field.innerHTML = '';
-        const blobs = [];
-        function rect(){ return field.getBoundingClientRect(); }
-        const r0 = rect();
-        for(let i=0;i<COUNT;i++){
-          const el = document.createElement('div');
-          el.className = 'hero-shape';
-          const s = Math.round(rand(isMobile?90:120, isMobile?160:220));
-          el.style.width = s+'px'; el.style.height = s+'px';
-          el.style.setProperty('--h', hues[Math.floor(Math.random()*hues.length)]);
-          el.style.setProperty('--morph', (8 + Math.random()*10).toFixed(2)+'s');
-          const br = `${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% / ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}% ${Math.round(rand(35,65))}%`;
-          el.style.borderRadius = br;
-          field.appendChild(el);
-          blobs.push({ el, s, x: rand(0, r0.width - s), y: rand(0, r0.height - s), vx: rand(-0.35,0.35), vy: rand(-0.35,0.35), wob: rand(0.5,1.5) });
-        }
-        let mouse = {x:0,y:0,active:false};
-        window.addEventListener('mousemove', (e)=>{
-          const r = rect();
-          mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
-          mouse.active = mouse.x>=0 && mouse.x<=r.width && mouse.y>=0 && mouse.y<=r.height;
-        }, {passive:true});
-        window.addEventListener('resize', ()=>{
-          const r = rect();
-          blobs.forEach(b=>{ b.x = Math.min(Math.max(b.x,0), Math.max(0,r.width-b.s)); b.y = Math.min(Math.max(b.y,0), Math.max(0,r.height-b.s)); });
-        });
-        const R = isMobile ? 120 : 200, F = 1.2, DAMP = 0.985, MAXV = 2.0;
-        function tick(t){
-          const r = rect();
-          for(const b of blobs){
-            b.vx += Math.sin((b.y + t*0.06)*0.003)*0.018*b.wob;
-            b.vy += Math.cos((b.x + t*0.05)*0.003)*0.018*b.wob;
-            if(mouse.active){
-              const cx = b.x + b.s/2, cy = b.y + b.s/2;
-              const dx = cx - mouse.x, dy = cy - mouse.y; const dist = Math.hypot(dx,dy);
-              if(dist < R && dist > 0.001){ const m = 1 - dist/R; const f = F*(m*m); b.vx += (dx/dist)*f; b.vy += (dy/dist)*f; }
-            }
-            b.vx = Math.max(-MAXV, Math.min(MAXV, b.vx)) * DAMP;
-            b.vy = Math.max(-MAXV, Math.min(MAXV, b.vy)) * DAMP;
-            b.x += b.vx; b.y += b.vy;
-            if(b.x <= 0){ b.x=0; b.vx = Math.abs(b.vx)*0.8; }
-            if(b.y <= 0){ b.y=0; b.vy = Math.abs(b.vy)*0.8; }
-            if(b.x + b.s >= r.width){ b.x = r.width - b.s; b.vx = -Math.abs(b.vx)*0.8; }
-            if(b.y + b.s >= r.height){ b.y = r.height - b.s; b.vy = -Math.abs(b.vy)*0.8; }
-            b.el.style.transform = `translate3d(${b.x}px, ${b.y}px, 0)`;
-          }
-          requestAnimationFrame(tick);
-        }
-        requestAnimationFrame((ts)=>tick(ts));
-      })();
-
-      // In-view trigger for liquid entry on cards
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('inview'); } });
-      }, { threshold: 0.25 });
-      document.querySelectorAll('.glass-card').forEach(el=>io.observe(el));
-
-      // Liquid cursor highlight center on cards (for ::before)
-      const cardsHi = document.querySelectorAll('.glass-card');
-      document.addEventListener('mousemove', (e)=>{
-        for(const c of cardsHi){
-          const r = c.getBoundingClientRect();
-          const x = e.clientX - r.left; const y = e.clientY - r.top;
-          if(x>=0 && y>=0 && x<=r.width && y<=r.height){
-            c.style.setProperty('--mx', x+'px');
-            c.style.setProperty('--my', y+'px');
-          }
-        }
-      }, {passive:true});
-    })();
-  </script>
-
-  <script>
-    // Global cursor-following liquid blob
-    (function(){
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const coarse = window.matchMedia('(pointer: coarse)').matches;
-      if(reduce || coarse) return;
-      const blob = document.createElement('div');
-      blob.className = 'cursor-blob';
-      document.body.appendChild(blob);
-      function sizeFromVW(){ return Math.min(180, Math.max(100, Math.floor(window.innerWidth*0.08))); }
-      blob.style.setProperty('--cb-size', sizeFromVW()+'px');
-      blob.style.setProperty('--cb-h', '82');
-      let x = window.innerWidth/2, y = window.innerHeight/2;
-      let tx = x, ty = y;
-      const TAU = 0.9; let last = performance.now();
-      function loop(now){
-        const dt = Math.max(0.001, (now - last) / 1000);
-        last = now;
-        const alpha = 1 - Math.exp(-dt / TAU);
-        x += (tx - x) * alpha;
-        y += (ty - y) * alpha;
-        blob.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        requestAnimationFrame(loop);
-      }
-      window.addEventListener('mousemove', e=>{ tx = e.clientX; ty = e.clientY; }, {passive:true});
-      window.addEventListener('mousedown', ()=> blob.classList.add('active'));
-      window.addEventListener('mouseup', ()=> blob.classList.remove('active'));
-      window.addEventListener('resize', ()=> blob.style.setProperty('--cb-size', sizeFromVW()+'px'));
-      document.addEventListener('mouseover', e=>{
-        if(e.target.closest('a,button,[role="button"],.cta')){ blob.style.opacity = .78; blob.style.setProperty('--cb-h','90'); }
-        else { blob.style.opacity = .62; blob.style.setProperty('--cb-h','82'); }
-      });
-      requestAnimationFrame(loop);
-    })();
-  </script>
+  <!-- Removed canvas particles (they can compete with video for GPU/CPU) -->
+  <!-- If you want them back, re-add the script from your original file. -->
 
   <script>
     // Card tilt (3D) + Scroll progress bar + Magnet effects (strong cards)
