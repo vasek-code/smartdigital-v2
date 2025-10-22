@@ -11,11 +11,25 @@
   <!-- Preload hero poster -->
   <link rel="preload" as="image" href="/hero-poster.jpg" imagesrcset="/hero-poster-768.jpg 768w, /hero-poster.jpg 1920w" imagesizes="100vw" fetchpriority="high">
   <!-- PRELOAD hero videa -->
-<link rel="preload" as="video" href="smart digital video background 1.webm" type="video/webm" media="(min-width: 768px)">
-<link rel="preload" as="video" href="smart digital video background 1.mp4" type="video/mp4" media="(max-width: 767px)">
+<link rel="preload" as="video" href="smart%20digital%20video%20background%201.webm" type="video/webm" media="(min-width: 768px)">
+<link rel="preload" as="video" href="smart%20digital%20video%20background%201.mp4" type="video/mp4" media="(max-width: 767px)">
 
   <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com">
+// Autoplay safety for heroVideo
+document.addEventListener('DOMContentLoaded', function(){
+  const v = document.getElementById('heroVideo');
+  if(!v) return;
+  v.muted = true;
+  v.setAttribute('playsinline','');
+  v.setAttribute('webkit-playsinline','');
+  v.setAttribute('autoplay','');
+  v.setAttribute('loop','');
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+});
+</script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,10 +40,38 @@
   <script type="text/plain" data-cookieconsent="statistics">
     (function(w,d,s,u){var j=d.createElement(s);j.async=1;j.src=u;(d.head||d.body).appendChild(j);} )(window,document,'script','https://www.googletagmanager.com/gtag/js?id=G-QN0WT540QY');
     window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);} gtag('js',new Date()); gtag('config','G-QN0WT540QY');
-  </script>
+  
+// Autoplay safety for heroVideo
+document.addEventListener('DOMContentLoaded', function(){
+  const v = document.getElementById('heroVideo');
+  if(!v) return;
+  v.muted = true;
+  v.setAttribute('playsinline','');
+  v.setAttribute('webkit-playsinline','');
+  v.setAttribute('autoplay','');
+  v.setAttribute('loop','');
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+});
+</script>
   <script type="text/plain" data-cookieconsent="marketing">
     (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,'clarity','script','trp4r87v81');
-  </script>
+  
+// Autoplay safety for heroVideo
+document.addEventListener('DOMContentLoaded', function(){
+  const v = document.getElementById('heroVideo');
+  if(!v) return;
+  v.muted = true;
+  v.setAttribute('playsinline','');
+  v.setAttribute('webkit-playsinline','');
+  v.setAttribute('autoplay','');
+  v.setAttribute('loop','');
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+});
+</script>
 
   <style>
     :root{ --sd-cta:#C7F715; --sd-fg:#ffffff; --sd-bg:#000000; --hero-overscan:1.10; }
@@ -118,7 +160,21 @@
   <!-- Structured data -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"Smart Digital","url":"https://www.smartdigital.cz/","sameAs":["https://www.facebook.com/profile.php?id=61580756979219","https://www.instagram.com/smart.dgtl/","https://www.linkedin.com/in/smart-digital-136aa238a/"],"description":"Marketingová agentura zaměřená na automotive byznys – tvorba webů, kampaní, sociálních sítí a SEO."}
-  </script>
+  
+// Autoplay safety for heroVideo
+document.addEventListener('DOMContentLoaded', function(){
+  const v = document.getElementById('heroVideo');
+  if(!v) return;
+  v.muted = true;
+  v.setAttribute('playsinline','');
+  v.setAttribute('webkit-playsinline','');
+  v.setAttribute('autoplay','');
+  v.setAttribute('loop','');
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+});
+</script>
 </head>
 <body>
   <!-- Animated Background (blobs) -->
@@ -133,7 +189,11 @@
   <!-- Hero with VIDEO background -->
   <section class="relative h-[100svh] md:h-screen overflow-hidden" id="hero">
     <div class="hero-video-wrap" aria-hidden="true">
-      <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="none" poster="/hero-poster.jpg"></video>
+      <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="auto" poster="/hero-poster.jpg" webkit-playsinline>
+  <source src="./smart%20digital%20video%20background%201.webm" type="video/webm" media="(min-width:768px)">
+  <source src="./smart%20digital%20video%20background%201.mp4" type="video/mp4" media="(max-width:767px)">
+
+</video>
     </div>
 
     <div class="gradient-hero"></div>
@@ -353,7 +413,21 @@
     // 100vh fix na mobilech
     const setVH=()=>document.documentElement.style.setProperty('--vh', (window.innerHeight*0.01)+'px');
     setVH(); addEventListener('resize', setVH);
-  </script>
+  
+// Autoplay safety for heroVideo
+document.addEventListener('DOMContentLoaded', function(){
+  const v = document.getElementById('heroVideo');
+  if(!v) return;
+  v.muted = true;
+  v.setAttribute('playsinline','');
+  v.setAttribute('webkit-playsinline','');
+  v.setAttribute('autoplay','');
+  v.setAttribute('loop','');
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+});
+</script>
 
   <script>
     // Scroll reveal
@@ -391,57 +465,25 @@
         if(next) next.scrollIntoView({ behavior:'smooth' });
       });
     })();
-  </script>
+  
+// Autoplay safety for heroVideo
+document.addEventListener('DOMContentLoaded', function(){
+  const v = document.getElementById('heroVideo');
+  if(!v) return;
+  v.muted = true;
+  v.setAttribute('playsinline','');
+  v.setAttribute('webkit-playsinline','');
+  v.setAttribute('autoplay','');
+  v.setAttribute('loop','');
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+});
+</script>
 
   <script>
   // HERO video – iOS-safe fallback, zvládne i mezery v názvu
-  document.addEventListener('DOMContentLoaded', function(){
-    const v = document.getElementById('heroVideo');
-    if(!v) return;
-
-    // iOS kompat: muted + (webkit-)playsinline + autoplay
-    v.muted = true;
-    v.setAttribute('playsinline','');
-    v.setAttribute('webkit-playsinline','');
-    v.setAttribute('autoplay','');
-    v.setAttribute('loop','');
-
-    // Název souboru přesně, jak ho máš vedle HTML
-    const baseName = 'smart digital video background 1';
-    const webm = './' + encodeURIComponent(baseName) + '.webm';
-    const mp4  = './' + encodeURIComponent(baseName) + '.mp4'; // přidej tenhle soubor na server
-
-    // Detekce podpory
-    const canWebM = !!v.canPlayType && (
-      v.canPlayType('video/webm; codecs="vp9"') ||
-      v.canPlayType('video/webm; codecs="vp8, vorbis"') ||
-      v.canPlayType('video/webm')
-    );
-    const canMP4 = !!v.canPlayType && (
-      v.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"') ||
-      v.canPlayType('video/mp4')
-    );
-
-    // iOS Safari většinou => MP4, Chrome/Android => WebM
-    const sources = [];
-    if (canWebM) sources.push([webm, 'video/webm']);
-    if (canMP4) sources.push([mp4,  'video/mp4']);
-
-    // Když neumí ani jedno, necháme poster (už je viditelný díky CSS)
-    if (!sources.length) {
-      console.warn('Prohlížeč neumí WebM/MP4 – zůstávám na posteru.');
-      return;
-    }
-
-    // Připojit zdroje
-    for (const [src, type] of sources){
-      const s = document.createElement('source');
-      s.src = src; s.type = type;
-      v.appendChild(s);
-    }
-
-    // Zkusit přehrát hned + fallback po prvním tapu
-    const tryPlay = () => v.play().catch(()=>{});
+  
     v.load();
     tryPlay();
     window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
@@ -489,7 +531,21 @@
         window.addEventListener('scroll', update, {passive:true}); window.addEventListener('resize', update); update();
       }
     })();
-  </script>
+  
+// Autoplay safety for heroVideo
+document.addEventListener('DOMContentLoaded', function(){
+  const v = document.getElementById('heroVideo');
+  if(!v) return;
+  v.muted = true;
+  v.setAttribute('playsinline','');
+  v.setAttribute('webkit-playsinline','');
+  v.setAttribute('autoplay','');
+  v.setAttribute('loop','');
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+});
+</script>
 
   <script>
     // Redirect po odeslání formuláře na Cal.com
@@ -503,6 +559,20 @@
         window.location.href = 'https://cal.com/smartdigital/15min';
       });
     })();
-  </script>
+  
+// Autoplay safety for heroVideo
+document.addEventListener('DOMContentLoaded', function(){
+  const v = document.getElementById('heroVideo');
+  if(!v) return;
+  v.muted = true;
+  v.setAttribute('playsinline','');
+  v.setAttribute('webkit-playsinline','');
+  v.setAttribute('autoplay','');
+  v.setAttribute('loop','');
+  const tryPlay = () => v.play().catch(()=>{});
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once:true, passive:true });
+});
+</script>
 </body>
 </html>
