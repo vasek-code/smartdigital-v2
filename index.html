@@ -568,18 +568,68 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
-  <script>
-    // Redirect po odeslání formuláře na Cal.com
-    (function(){
-      const form = document.getElementById('contactForm');
-      if(!form) return;
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        if(!form.checkValidity()){ form.reportValidity(); return; }
-        try { window.gtag && gtag('event','generate_lead',{event_category:'Contact',event_label:'Contact form'}); } catch(_) {}
-        window.location.href = 'https://cal.com/smartdigital/konzultace';
+ <script>
+(function () {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const btn = form.querySelector('button[type="submit"]');
+  const btnText = form.querySelector('.btn-text');
+  const statusEl = document.getElementById('formStatus');
+
+  function setLoading(on) {
+    btn.disabled = on;
+    btnText.textContent = on ? 'Odesílám…' : 'Odeslat';
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    const payload = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      message: (form.message.value || '').trim(),
+      hp: (form.website.value || '').trim() // honeypot
+    };
+
+    // boty zahodit tiše
+    if (payload.hp) { form.reset(); return; }
+
+    setLoading(true);
+    statusEl.textContent = '';
+
+    try {
+      try { window.gtag && gtag('event','generate_lead',{event_category:'Contact',event_label:'Contact form'}); } catch(_) {}
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
-    })();
+
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt || 'Nepodařilo se odeslat formulář.');
+      }
+
+      form.reset();
+      statusEl.classList.remove('text-red-400');
+      statusEl.classList.add('text-green-400');
+      statusEl.textContent = 'Díky! Ozveme se co nejdřív.';
+    } catch (err) {
+      statusEl.classList.remove('text-green-400');
+      statusEl.classList.add('text-red-400');
+      statusEl.textContent = 'Chyba při odeslání. Zkus to prosím znovu nebo napiš na smdgtl.contact@gmail.com';
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  });
+})();
+</script>
+ <script>
   
 // Autoplay safety for heroVideo
 document.addEventListener('DOMContentLoaded', function(){
