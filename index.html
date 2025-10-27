@@ -342,35 +342,63 @@ document.addEventListener('DOMContentLoaded', function(){
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-24 content-section">
-    <div class="container mx-auto px-4">
-      <div class="max-w-2xl mx-auto">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Zařadíme vyšší rychlost?🚀</h2>
-        <p class="text-center text-gray-300 mb-12 text-lg">Tento formulář slouží k rezervaci online konzultace.</p>
-        <div class="p-8 glass-card rounded-2xl">
-          <form id="contactForm" class="space-y-6">
-            <div>
-              <label for="name" class="block text-sm font-medium mb-2">Jméno a příjmení</label>
-              <input type="text" id="name" placeholder="Jan Novák" required class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
-            </div>
-            <div>
-              <label for="email" class="block text-sm font-medium mb-2">E-mail</label>
-              <input type="email" id="email" placeholder="jan@email.cz" required class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
-            </div>
-            <div>
-              <label for="phone" class="block text-sm font-medium mb-2">Telefon</label>
-              <input type="tel" id="phone" placeholder="+420 123 456 789" required class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
-            </div>
-            <button type="submit" class="w-full neon-glow bg-primary text-black font-semibold text-lg py-4 rounded-full inline-flex items-center justify-center gap-2 cta">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-width="2"></rect><line x1="16" y1="2" x2="16" y2="6" stroke-width="2"></line><line x1="8" y1="2" x2="8" y2="6" stroke-width="2"></line><line x1="3" y1="10" x2="21" y2="10" stroke-width="2"></line></svg>
-              Rezervovat konzultaci
-            </button>
-            <p class="text-sm text-gray-400 text-center">Po odeslání budete přesměrováni do Cal.com pro výběr termínu</p>
-          </form>
-        </div>
+<section id="contact" class="py-24 content-section">
+  <div class="container mx-auto px-4">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-4">Zařadíme vyšší rychlost?🚀</h2>
+      <p class="text-center text-gray-300 mb-12 text-lg">Vyplň a my se ti ozveme zpět e-mailem/telefonem.</p>
+
+      <div class="p-8 glass-card rounded-2xl">
+        <form id="contactForm" class="space-y-6" novalidate>
+          <!-- honeypot (nevyplňovat) -->
+          <div class="hidden" aria-hidden="true">
+            <label for="website">Web</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div>
+            <label for="name" class="block text-sm font-medium mb-2">Jméno a příjmení</label>
+            <input type="text" id="name" name="name" placeholder="Jan Novák" required
+                   class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium mb-2">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="jan@email.cz" required
+                   class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
+          </div>
+
+          <div>
+            <label for="phone" class="block text-sm font-medium mb-2">Telefon</label>
+            <input type="tel" id="phone" name="phone" placeholder="+420 123 456 789" required inputmode="tel"
+                   class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all" />
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium mb-2">Zpráva / dotaz <span class="text-gray-400">(nepovinné)</span></label>
+            <textarea id="message" name="message" rows="5" placeholder="Na co se chceš zeptat? Co tě zajímá o našich službách…"
+                      class="w-full px-4 py-3 rounded-lg focus:outline-none transition-all"></textarea>
+          </div>
+
+          <button type="submit"
+                  class="w-full neon-glow bg-primary text-black font-semibold text-lg py-4 rounded-full inline-flex items-center justify-center gap-2 cta disabled:opacity-60">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-width="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6" stroke-width="2"></line>
+              <line x1="8" y1="2" x2="8" y2="6" stroke-width="2"></line>
+              <line x1="3" y1="10" x2="21" y2="10" stroke-width="2"></line>
+            </svg>
+            <span class="btn-text">Odeslat</span>
+          </button>
+
+          <p id="formNote" class="text-sm text-gray-400 text-center">Po odeslání ti odpovíme z e-mailu a domluvíme termín.</p>
+          <p id="formStatus" class="text-sm text-center mt-2" aria-live="polite"></p>
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer class="bg-[#111] text-white py-12 relative z-10">
