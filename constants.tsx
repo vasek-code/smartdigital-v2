@@ -1,0 +1,155 @@
+
+import { BarChart3, Globe, Layers, Zap } from 'lucide-react';
+import { Service, PortfolioItem, TeamMember, NavLink } from './types';
+
+// Navigation
+export const NAV_LINKS: NavLink[] = [
+  { label: 'Služby', href: '#services' },
+  { label: 'Práce', href: '#portfolio' },
+  { label: 'Reference', href: '#testimonials' },
+  { label: 'Tým', href: '#team' },
+  { label: 'Kontakt', href: '#contact' },
+];
+
+// Hero Section
+export const HERO_CONTENT = {
+  headline: "Digitální růst bez kompromisů.",
+  subheadline: "Jsme Smart Digital. Propojujeme kreativitu s daty a technologií pro maximální výkon vašeho byznysu.",
+  cta: "Zahájit projekt"
+};
+
+// Services Section
+export const SERVICES: Service[] = [
+  {
+    id: 'social',
+    title: 'Social Media',
+    description: 'Budujeme komunity a zvyšujeme povědomí o značce prostřednictvím autentického obsahu.',
+    icon: Layers,
+    features: ['Content Management', 'Influencer Marketing', 'Community Building']
+  },
+  {
+    id: 'ppc',
+    title: 'Reklama', 
+    description: 'Maximalizujeme návratnost investic díky preciznímu cílení a optimalizaci výkonnostních kampaní.',
+    icon: BarChart3,
+    features: ['Google Ads & Sklik', 'Facebook & Instagram Ads', 'Remarketingové strategie']
+  },
+  {
+    id: 'web',
+    title: 'Webový Vývoj',
+    description: 'Tvoříme moderní, rychlé a responzivní weby, které nejen skvěle vypadají, ale především prodávají.',
+    icon: Globe,
+    features: ['React & Next.js', 'E-shopy na míru', 'UX/UI Design']
+  },
+  {
+    id: 'brand',
+    title: 'Brand Identity',
+    description: 'Navrhujeme zapamatovatelné vizuální identity, které vaši značku odliší od konkurence.',
+    icon: Zap,
+    features: ['Logo & Logomanuál', 'Grafický design', 'Brand Strategy']
+  }
+];
+
+// Portfolio Section
+export const PORTFOLIO: PortfolioItem[] = [
+  {
+    id: 'skimpark',
+    client: 'Skimpark Praha',
+    title: 'Web & Rezervační systém',
+    category: 'Web Development',
+    // DŮLEŽITÉ: Uložte fotku projektu jako 'skimpark.jpg' do složky public
+    image: '/skimpark.jpg', 
+    stats: '+45% rezervací',
+    description: 'Kompletní redesign digitální prezentace pro oblíbený sportovní areál. Cílem bylo vytvořit vizuálně atraktivní, rychlý a mobilně optimalizovaný web, který zjednoduší cestu zákazníka od návštěvy až k rezervaci. Implementace moderních technologií zajistila bleskové načítání a intuitivní UX, což vedlo k okamžitému nárůstu online poptávek.'
+  },
+  {
+    id: 'cistevozy',
+    client: 'Čisté vozy Berounsko',
+    title: 'Web & Lokální Marketing',
+    category: 'Web & Ads',
+    // DŮLEŽITÉ: Uložte fotku projektu jako 'cistevozy.jpg' do složky public
+    image: '/cistevozy.jpg', 
+    stats: '12x ROAS',
+    description: 'Vytvoření moderní webové vizitky zaměřené na konverze a spuštění hyper-lokálních PPC kampaní. Projekt zahrnoval nejen design a vývoj, ale i nastavení pokročilé analytiky a optimalizaci pro lokální SEO. Výsledkem je stabilní přísun nových klientů a naprostá dominance ve vyhledávání na klíčová slova v daném regionu.'
+  },
+  {
+    id: 'productionhub',
+    client: 'Production Hub',
+    title: 'Platforma pro filmaře',
+    category: 'App Development',
+    // DŮLEŽITÉ: Uložte fotku projektu jako 'productionhub.jpg' do složky public
+    image: '/productionhub.jpg', 
+    stats: '+2000 uživatelů',
+    description: 'Vývoj komplexní webové aplikace, která centralizuje pronájem filmové techniky a propojuje profesionály v oboru. Řešení zahrnuje pokročilé filtrování, uživatelské profily, systém zpráv a administraci. Důraz byl kladen na škálovatelnost databáze, bezpečnost dat a čisté, funkční UI pro každodenní používání v produkčním prostředí.'
+  }
+];
+
+// Testimonials Section
+export const TESTIMONIALS = [
+  {
+    id: 1,
+    text: "Spolupráce se Smart Digital byla opravdu příjemná. Oceňuju profesionální přístup, kreativitu a hlavně to, jak dobře pochopili moji vizi. Určitě doporučuju!",
+    author: "Radovan Z.",
+    role: "Klient"
+  },
+  {
+    id: 2,
+    text: "Děkuji, ani nevíte, jak rád s Vámi spolupracuji. Vaše úroveň služeb je přesně taková, jakou bych si představoval v ideálním světě.",
+    author: "Jiří D.",
+    role: "Klient"
+  },
+  {
+    id: 3,
+    text: "Smart Digital mi pomohl s prací na webové aplikaci Production Hub, která spojuje filmaře a techniku do jednoho přehledného místa.",
+    author: "Lukáš M.",
+    role: "Founder, Production Hub"
+  }
+];
+
+// Team Section
+export const TEAM: TeamMember[] = [
+  {
+    id: 'julijan',
+    name: 'Julijan Laznik',
+    role: 'Founder, Creativity',
+    // DŮLEŽITÉ: Uložte vaši fotku jako 'julijan.jpg' do složky public
+    image: '/julijan.jpg', 
+    quote: 'Vize bez exekuce je jen halucinace.'
+  },
+  {
+    id: 'matyas',
+    name: 'Matyáš Hartl',
+    role: 'Cofounder, COC',
+    // DŮLEŽITÉ: Uložte Matyášovu fotku jako 'matyas.jpg' do složky public
+    image: '/maytas1.jpg', 
+    quote: 'Kreativita vyhrává pozornost, strategie vyhrává klienty.'
+  },
+  {
+    id: 'marek',
+    name: 'Marek Panoch',
+    role: 'Foto, externist',
+    // Automatický avatar (Iniciály MP, černé pozadí, zelený text)
+    image: '/mara2.jpg', 
+    quote: 'Jeden obraz vydá za tisíc slov. My tvoříme příběhy.'
+  },
+  {
+    id: 'vaclav',
+    name: 'Václav Piroutek',
+    role: 'Production, app dev',
+    // Automatický avatar (Iniciály VP, černé pozadí, zelený text)
+    image: '/vaclav.jpg', 
+    quote: 'Technologie má sloužit lidem, ne naopak.'
+  }
+];
+
+// Contact Section
+export const CONTACT_INFO = {
+  email: 'smdgtl.contact@gmail.com',
+  phone: '+420 777 888 999',
+  address: 'Václavské náměstí 1, Praha 1',
+  social: {
+    linkedin: '#',
+    instagram: '#',
+    facebook: '#'
+  }
+};
