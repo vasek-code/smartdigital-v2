@@ -137,7 +137,7 @@ export const TEAM: TeamMember[] = [
     name: 'Václav Piroutek',
     role: 'Production, app dev',
     // Automatický avatar (Iniciály VP, černé pozadí, zelený text)
-    image: '/vaclav.jpg', 
+    image: '/vaclav1.jpg', 
     quote: 'Technologie má sloužit lidem, ne naopak.'
   }
 ];
