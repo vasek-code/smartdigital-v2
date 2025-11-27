@@ -295,28 +295,7 @@ const Hero: React.FC = () => {
               <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/60 to-transparent transform skew-x-[-20deg] transition-all duration-700 group-hover:animate-shimmer" />
             </motion.a>
             
-            <motion.button 
-              onClick={() => setIsVideoOpen(true)}
-              whileHover="hover"
-              initial="initial"
-              className="group px-8 py-4 rounded-full border border-white/10 text-white bg-white/5 backdrop-blur-sm flex items-center gap-3 transition-all hover:border-white/40 hover:bg-white/10 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] cursor-pointer"
-            >
-              <motion.div
-                variants={{
-                    initial: { scale: 1 },
-                    hover: { scale: 1.1 }
-                }}
-                className="relative"
-              >
-                 <Play size={16} className="fill-current relative z-10" />
-                 <motion.div 
-                    variants={{ hover: { scale: 1.8, opacity: 0 } }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                    className="absolute inset-0 bg-white rounded-full -z-10 opacity-0"
-                 />
-              </motion.div>
-              Showreel
-            </motion.button>
+            
           </motion.div>
         </motion.div>
 
