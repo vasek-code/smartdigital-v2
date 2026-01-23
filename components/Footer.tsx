@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="flex gap-8">
-           <a href="https://www.instagram.com/smart.dgtl/" className="hover:text-primary transition-colors">Instagram</a>
+           <a href="https://www.instagram.com/smartdigital.cz/" className="hover:text-primary transition-colors">Instagram</a>
            <a href="https://www.linkedin.com/in/smart-digital-136aa238a/" className="hover:text-primary transition-colors">LinkedIn</a>
            <a href="https://www.facebook.com/profile.php?id=61580756979219" className="hover:text-primary transition-colors">Facebook</a>
         </div>
