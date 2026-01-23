@@ -111,15 +111,15 @@ export const TEAM: TeamMember[] = [
   {
     id: 'julijan',
     name: 'Julijan Laznik',
-    role: 'Founder, Creativity',
+    role: 'Founder, Videography',
     // DŮLEŽITÉ: Uložte vaši fotku jako 'julijan.jpg' do složky public
     image: '/julijan.jpg', 
-    quote: 'Vize bez exekuce je jen halucinace.'
+    quote: 'Můj cíl je vytvářet originální vizuál'
   },
   {
     id: 'matyas',
     name: 'Matyáš Hartl',
-    role: 'Cofounder, COC',
+    role: 'Cofounder, Communication',
     // DŮLEŽITÉ: Uložte Matyášovu fotku jako 'matyas.jpg' do složky public
     image: '/maytas1.jpg', 
     quote: 'Kreativita vyhrává pozornost, strategie vyhrává klienty.'
@@ -138,7 +138,7 @@ export const TEAM: TeamMember[] = [
     role: 'Production, app dev',
     // Automatický avatar (Iniciály VP, černé pozadí, zelený text)
     image: '/vaclav1.jpg', 
-    quote: 'Technologie má sloužit lidem, ne naopak.'
+    quote: 'Uvedu do provozu Váš nový web'
   }
 ];
 
