@@ -14,8 +14,7 @@ export const NAV_LINKS: NavLink[] = [
 // Hero Section
 export const HERO_CONTENT = {
   headline: "Digitální růst bez kompromisů.",
-  subheadline: "Jsme Smart Digital. Propojujeme kreativitu s daty a technologií pro maximální výkon vašeho byznysu.",
-  cta: "Zahájit projekt"
+  subheadline: "Jsme Smart Digital. Parta kamarádů, kteří vymýšlí a tvoří originální způsoby, jak váš byznys prezentovat online."
 };
 
 // Services Section
