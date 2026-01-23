@@ -251,10 +251,10 @@ const Hero: React.FC = () => {
         >
           <div className="mb-8 relative">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[1.1]">
-              <span className="block">Digitální růst</span>
+              <span className="block">Dáváme byznysům</span>
               {/* Shimmering Gradient Text */}
               <span className="animate-text-shimmer bg-clip-text text-transparent bg-[linear-gradient(110deg,#c7f715,45%,#fff,55%,#c7f715)] block">
-                bez kompromisů.
+                silnou online podobu.
               </span>
             </h1>
           </div>
