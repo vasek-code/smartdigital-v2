@@ -132,14 +132,6 @@ export const TEAM: TeamMember[] = [
     image: '/mara2.jpg', 
     quote: 'Jeden obraz vydá za tisíc slov. My tvoříme příběhy.'
   },
-  {
-    id: 'vaclav',
-    name: 'Václav Piroutek',
-    role: 'Production, app dev',
-    // Automatický avatar (Iniciály VP, černé pozadí, zelený text)
-    image: '/vaclav1.jpg', 
-    quote: 'Uvedu do provozu Váš nový web'
-  }
 ];
 
 // Contact Section
