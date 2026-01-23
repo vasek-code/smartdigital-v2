@@ -102,8 +102,8 @@ const Contact: React.FC = () => {
                 viewport={{ once: true }}
             >
                 <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tight mb-6">
-                    Máte vizi? <br/>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">My máme plán.</span>
+                    Váš byznys už má směr. <br/>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">My máme plán, jak ho online posunout na další level.</span>
                 </h2>
                 <p className="text-gray-400 text-lg max-w-xl mx-auto">
                     Vyberte si oblast, kterou chcete řešit, a společně to posuneme dál.
