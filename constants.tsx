@@ -22,31 +22,31 @@ export const HERO_CONTENT = {
 export const SERVICES: Service[] = [
   {
     id: 'social',
-    title: 'Social Media',
-    description: 'Budujeme komunity a zvyšujeme povědomí o značce prostřednictvím autentického obsahu.',
+    title: 'Cinematic Social Media',
+    description: 'Tvoříme originální cinematic obsah, který vypráví příběh Vašeho byznysu, buduje emoce a přirozeně posiluje Vaší pozici v automotive segmentu.',
     icon: Layers,
-    features: ['Content Management', 'Influencer Marketing', 'Community Building']
+    features: ['Content Management & Brand Storytelling', 'Automotive Cinematic Videography', 'Community Building']
   },
   {
     id: 'ppc',
-    title: 'Reklama', 
-    description: 'Maximalizujeme návratnost investic díky preciznímu cílení a optimalizaci výkonnostních kampaní.',
+    title: 'Reklamní kampaně', 
+    description: 'Navrhujeme a produkujeme reklamní kampaně postavené na vaší službě, silném konceptu a kvalitním vizuálním zpracování. Výkonnost stavíme na datech, ale základ tvoří kreativní nápad, který dává kampani smysl.',
     icon: BarChart3,
-    features: ['Google Ads & Sklik', 'Facebook & Instagram Ads', 'Remarketingové strategie']
+    features: ['Kreativní koncept & produkce kampaní', 'Facebook & Instagram Ads', 'Remarketingové strategie']
   },
   {
     id: 'web',
-    title: 'Webový Vývoj',
-    description: 'Tvoříme moderní, rychlé a responzivní weby, které nejen skvěle vypadají, ale především prodávají.',
+    title: 'Tvorba webů',
+    description: 'Netvoříme jen moderní weby. Navrhujeme webové zážitky, které jasně komunikují hodnotu vaší značky, vypráví váš příběh a přesvědčí uživatele, proč jste v tom, co děláte, nejlepší.',
     icon: Globe,
-    features: ['React & Next.js', 'E-shopy na míru', 'UX/UI Design']
+    features: ['Webové zážitky & Brand storytelling', 'UX/UI Design zaměřený na emoce i konverze', 'UX/UI Design zaměřený na emoce i konverze']
   },
   {
     id: 'brand',
     title: 'Brand Identity',
-    description: 'Navrhujeme zapamatovatelné vizuální identity, které vaši značku odliší od konkurence.',
+    description: 'Pracujeme s vaší stávající identitou a aktivně ji rozvíjíme tak, aby byla zapamatovatelná, emocionální a jasně komunikovala, proč si vás lidé mají vybrat.',
     icon: Zap,
-    features: ['Logo & Logomanuál', 'Grafický design', 'Brand Strategy']
+    features: ['Rozvoj a evoluce značky', 'Vizuální identita & brand storytelling', 'Brand strategie & konzistentní prezentace']
   }
 ];
 
