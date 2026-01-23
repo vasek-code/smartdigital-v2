@@ -54,13 +54,13 @@ export const SERVICES: Service[] = [
 export const PORTFOLIO: PortfolioItem[] = [
 {
     id: 'skimpark',
-    client: 'Skimpark Praha',
+    client: 'Spectra Wash',
     title: 'Web & Rezervační systém',
     category: 'Web Development',
     // DŮLEŽITÉ: Uložte fotku projektu jako 'skimpark.jpg' do složky public
-    image: '/skimpark.jpg', 
-    stats: '+45% rezervací',
-    description: 'Kompletní redesign digitální prezentace pro oblíbený sportovní areál. Cílem bylo vytvořit vizuálně atraktivní, rychlý a mobilně optimalizovaný web, který zjednoduší cestu zákazníka od návštěvy až k rezervaci. Implementace moderních technologií zajistila bleskové načítání a intuitivní UX, což vedlo k okamžitému nárůstu online poptávek.'
+    image: '/spectrawash.jpg', 
+    stats: 'Nový moderní web, silné SEO, Správná prezentace poctivého detailngu',
+    description: 'Kompletní redesign webové prezentace pro Spectra Wash s důrazem na moderní design, přehlednost a silný vizuální dojem. Cílem bylo vytvořit rychlý, mobilně optimalizovaný web, který jasně komunikuje služby a zjednodušuje cestu zákazníka od první návštěvy až po kontakt či objednávku.'
   },
   
   {
