@@ -52,6 +52,17 @@ export const SERVICES: Service[] = [
 
 // Portfolio Section
 export const PORTFOLIO: PortfolioItem[] = [
+{
+    id: 'skimpark',
+    client: 'Skimpark Praha',
+    title: 'Web & Rezervační systém',
+    category: 'Web Development',
+    // DŮLEŽITÉ: Uložte fotku projektu jako 'skimpark.jpg' do složky public
+    image: '/skimpark.jpg', 
+    stats: '+45% rezervací',
+    description: 'Kompletní redesign digitální prezentace pro oblíbený sportovní areál. Cílem bylo vytvořit vizuálně atraktivní, rychlý a mobilně optimalizovaný web, který zjednoduší cestu zákazníka od návštěvy až k rezervaci. Implementace moderních technologií zajistila bleskové načítání a intuitivní UX, což vedlo k okamžitému nárůstu online poptávek.'
+  },
+  
   {
     id: 'skimpark',
     client: 'Skimpark Praha',
