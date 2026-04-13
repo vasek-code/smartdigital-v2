@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
           
           {/* Logo */}
           <a href="#" className="text-lg font-bold text-white tracking-tight flex items-center gap-1">
-            Smart<span className="text-primary">.</span>
+            Ignite<span className="text-primary">.</span>
           </a>
 
           {/* Desktop Menu */}
